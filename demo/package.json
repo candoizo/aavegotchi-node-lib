@@ -1,0 +1,15 @@
+{
+  "name": "aavegotchi-lib-node-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "CC-BY-SA-4.0",
+  "dependencies": {
+    "@candoizo/aavegotchi-lib-node": "../candoizo-aavegotchi-lib-node-v1.0.0.tgz",
+    "graphql": "^15.5.0",
+    "graphql-request": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.5.0",
+    "typescript": "^4.2.3"
+  }
+}

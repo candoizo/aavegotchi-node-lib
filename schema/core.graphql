@@ -1,0 +1,1794 @@
+directive @entity on OBJECT
+
+directive @derivedFrom(field: String) on FIELD_DEFINITION
+
+directive @subgraphId(id: String) on OBJECT
+
+type _Block_ {
+  """The hash of the block"""
+  hash: Bytes
+
+  """The block number"""
+  number: Int!
+}
+
+"""The type for the top-level _meta field"""
+type _Meta_ {
+  """
+  Information about a specific subgraph block. The hash of the block
+  will be null if the _meta field has a block constraint that asks for
+  a block number. It will be filled if the _meta field has no block constraint
+  and therefore asks for the latest  block
+  
+  """
+  block: _Block_!
+
+  """The deployment ID"""
+  deployment: String!
+
+  """If `true`, the subgraph encountered indexing errors at some past block"""
+  hasIndexingErrors: Boolean!
+}
+
+enum _SubgraphErrorPolicy_ {
+  """Data will be returned even if the subgraph has indexing errors"""
+  allow
+
+  """
+  If the subgraph has indexing errors, data will be omitted. The default.
+  """
+  deny
+}
+
+type Aavegotchi {
+  id: ID!
+  owner: User
+  portal: Portal!
+  hauntId: BigInt!
+  name: String!
+  randomNumber: BigInt!
+  status: BigInt!
+  numericTraits: [Int!]!
+  modifiedNumericTraits: [Int!]!
+  equippedWearables: [Int!]!
+  collateral: Bytes!
+  escrow: Bytes!
+  stakedAmount: BigInt!
+  minimumStake: BigInt!
+  kinship: BigInt!
+  lastInteracted: BigInt!
+  timesInteracted: BigInt!
+  experience: BigInt!
+  toNextLevel: BigInt!
+  usedSkillPoints: BigInt!
+  level: BigInt!
+  baseRarityScore: BigInt!
+  modifiedRarityScore: BigInt!
+  locked: Boolean!
+  listings(skip: Int = 0, first: Int = 100, orderBy: ERC721Listing_orderBy, orderDirection: OrderDirection, where: ERC721Listing_filter): [ERC721Listing!]!
+
+  """Block in which the Aavegotchi entity was created"""
+  createdAt: BigInt
+
+  """
+  Block in which the Aavegotchi was claimed. Should coincide with createdAt
+  """
+  claimedAt: BigInt
+}
+
+input Aavegotchi_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  owner: String
+  owner_not: String
+  owner_gt: String
+  owner_lt: String
+  owner_gte: String
+  owner_lte: String
+  owner_in: [String!]
+  owner_not_in: [String!]
+  owner_contains: String
+  owner_not_contains: String
+  owner_starts_with: String
+  owner_not_starts_with: String
+  owner_ends_with: String
+  owner_not_ends_with: String
+  hauntId: BigInt
+  hauntId_not: BigInt
+  hauntId_gt: BigInt
+  hauntId_lt: BigInt
+  hauntId_gte: BigInt
+  hauntId_lte: BigInt
+  hauntId_in: [BigInt!]
+  hauntId_not_in: [BigInt!]
+  name: String
+  name_not: String
+  name_gt: String
+  name_lt: String
+  name_gte: String
+  name_lte: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  randomNumber: BigInt
+  randomNumber_not: BigInt
+  randomNumber_gt: BigInt
+  randomNumber_lt: BigInt
+  randomNumber_gte: BigInt
+  randomNumber_lte: BigInt
+  randomNumber_in: [BigInt!]
+  randomNumber_not_in: [BigInt!]
+  status: BigInt
+  status_not: BigInt
+  status_gt: BigInt
+  status_lt: BigInt
+  status_gte: BigInt
+  status_lte: BigInt
+  status_in: [BigInt!]
+  status_not_in: [BigInt!]
+  numericTraits: [Int!]
+  numericTraits_not: [Int!]
+  numericTraits_contains: [Int!]
+  numericTraits_not_contains: [Int!]
+  modifiedNumericTraits: [Int!]
+  modifiedNumericTraits_not: [Int!]
+  modifiedNumericTraits_contains: [Int!]
+  modifiedNumericTraits_not_contains: [Int!]
+  equippedWearables: [Int!]
+  equippedWearables_not: [Int!]
+  equippedWearables_contains: [Int!]
+  equippedWearables_not_contains: [Int!]
+  collateral: Bytes
+  collateral_not: Bytes
+  collateral_in: [Bytes!]
+  collateral_not_in: [Bytes!]
+  collateral_contains: Bytes
+  collateral_not_contains: Bytes
+  escrow: Bytes
+  escrow_not: Bytes
+  escrow_in: [Bytes!]
+  escrow_not_in: [Bytes!]
+  escrow_contains: Bytes
+  escrow_not_contains: Bytes
+  stakedAmount: BigInt
+  stakedAmount_not: BigInt
+  stakedAmount_gt: BigInt
+  stakedAmount_lt: BigInt
+  stakedAmount_gte: BigInt
+  stakedAmount_lte: BigInt
+  stakedAmount_in: [BigInt!]
+  stakedAmount_not_in: [BigInt!]
+  minimumStake: BigInt
+  minimumStake_not: BigInt
+  minimumStake_gt: BigInt
+  minimumStake_lt: BigInt
+  minimumStake_gte: BigInt
+  minimumStake_lte: BigInt
+  minimumStake_in: [BigInt!]
+  minimumStake_not_in: [BigInt!]
+  kinship: BigInt
+  kinship_not: BigInt
+  kinship_gt: BigInt
+  kinship_lt: BigInt
+  kinship_gte: BigInt
+  kinship_lte: BigInt
+  kinship_in: [BigInt!]
+  kinship_not_in: [BigInt!]
+  lastInteracted: BigInt
+  lastInteracted_not: BigInt
+  lastInteracted_gt: BigInt
+  lastInteracted_lt: BigInt
+  lastInteracted_gte: BigInt
+  lastInteracted_lte: BigInt
+  lastInteracted_in: [BigInt!]
+  lastInteracted_not_in: [BigInt!]
+  timesInteracted: BigInt
+  timesInteracted_not: BigInt
+  timesInteracted_gt: BigInt
+  timesInteracted_lt: BigInt
+  timesInteracted_gte: BigInt
+  timesInteracted_lte: BigInt
+  timesInteracted_in: [BigInt!]
+  timesInteracted_not_in: [BigInt!]
+  experience: BigInt
+  experience_not: BigInt
+  experience_gt: BigInt
+  experience_lt: BigInt
+  experience_gte: BigInt
+  experience_lte: BigInt
+  experience_in: [BigInt!]
+  experience_not_in: [BigInt!]
+  toNextLevel: BigInt
+  toNextLevel_not: BigInt
+  toNextLevel_gt: BigInt
+  toNextLevel_lt: BigInt
+  toNextLevel_gte: BigInt
+  toNextLevel_lte: BigInt
+  toNextLevel_in: [BigInt!]
+  toNextLevel_not_in: [BigInt!]
+  usedSkillPoints: BigInt
+  usedSkillPoints_not: BigInt
+  usedSkillPoints_gt: BigInt
+  usedSkillPoints_lt: BigInt
+  usedSkillPoints_gte: BigInt
+  usedSkillPoints_lte: BigInt
+  usedSkillPoints_in: [BigInt!]
+  usedSkillPoints_not_in: [BigInt!]
+  level: BigInt
+  level_not: BigInt
+  level_gt: BigInt
+  level_lt: BigInt
+  level_gte: BigInt
+  level_lte: BigInt
+  level_in: [BigInt!]
+  level_not_in: [BigInt!]
+  baseRarityScore: BigInt
+  baseRarityScore_not: BigInt
+  baseRarityScore_gt: BigInt
+  baseRarityScore_lt: BigInt
+  baseRarityScore_gte: BigInt
+  baseRarityScore_lte: BigInt
+  baseRarityScore_in: [BigInt!]
+  baseRarityScore_not_in: [BigInt!]
+  modifiedRarityScore: BigInt
+  modifiedRarityScore_not: BigInt
+  modifiedRarityScore_gt: BigInt
+  modifiedRarityScore_lt: BigInt
+  modifiedRarityScore_gte: BigInt
+  modifiedRarityScore_lte: BigInt
+  modifiedRarityScore_in: [BigInt!]
+  modifiedRarityScore_not_in: [BigInt!]
+  locked: Boolean
+  locked_not: Boolean
+  locked_in: [Boolean!]
+  locked_not_in: [Boolean!]
+  createdAt: BigInt
+  createdAt_not: BigInt
+  createdAt_gt: BigInt
+  createdAt_lt: BigInt
+  createdAt_gte: BigInt
+  createdAt_lte: BigInt
+  createdAt_in: [BigInt!]
+  createdAt_not_in: [BigInt!]
+  claimedAt: BigInt
+  claimedAt_not: BigInt
+  claimedAt_gt: BigInt
+  claimedAt_lt: BigInt
+  claimedAt_gte: BigInt
+  claimedAt_lte: BigInt
+  claimedAt_in: [BigInt!]
+  claimedAt_not_in: [BigInt!]
+}
+
+enum Aavegotchi_orderBy {
+  id
+  owner
+  portal
+  hauntId
+  name
+  randomNumber
+  status
+  numericTraits
+  modifiedNumericTraits
+  equippedWearables
+  collateral
+  escrow
+  stakedAmount
+  minimumStake
+  kinship
+  lastInteracted
+  timesInteracted
+  experience
+  toNextLevel
+  usedSkillPoints
+  level
+  baseRarityScore
+  modifiedRarityScore
+  locked
+  listings
+  createdAt
+  claimedAt
+}
+
+type AavegotchiOption {
+  """AavegotchiOption id is composed by <PORTAL-ID>-<GOTCHI-OPTION>"""
+  id: ID!
+  owner: User!
+  portal: Portal!
+  randomNumber: BigInt!
+  numericTraits: [Int!]!
+  collateralType: Bytes!
+  minimumStake: BigInt!
+  baseRarityScore: Int!
+}
+
+input AavegotchiOption_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  owner: String
+  owner_not: String
+  owner_gt: String
+  owner_lt: String
+  owner_gte: String
+  owner_lte: String
+  owner_in: [String!]
+  owner_not_in: [String!]
+  owner_contains: String
+  owner_not_contains: String
+  owner_starts_with: String
+  owner_not_starts_with: String
+  owner_ends_with: String
+  owner_not_ends_with: String
+  portal: String
+  portal_not: String
+  portal_gt: String
+  portal_lt: String
+  portal_gte: String
+  portal_lte: String
+  portal_in: [String!]
+  portal_not_in: [String!]
+  portal_contains: String
+  portal_not_contains: String
+  portal_starts_with: String
+  portal_not_starts_with: String
+  portal_ends_with: String
+  portal_not_ends_with: String
+  randomNumber: BigInt
+  randomNumber_not: BigInt
+  randomNumber_gt: BigInt
+  randomNumber_lt: BigInt
+  randomNumber_gte: BigInt
+  randomNumber_lte: BigInt
+  randomNumber_in: [BigInt!]
+  randomNumber_not_in: [BigInt!]
+  numericTraits: [Int!]
+  numericTraits_not: [Int!]
+  numericTraits_contains: [Int!]
+  numericTraits_not_contains: [Int!]
+  collateralType: Bytes
+  collateralType_not: Bytes
+  collateralType_in: [Bytes!]
+  collateralType_not_in: [Bytes!]
+  collateralType_contains: Bytes
+  collateralType_not_contains: Bytes
+  minimumStake: BigInt
+  minimumStake_not: BigInt
+  minimumStake_gt: BigInt
+  minimumStake_lt: BigInt
+  minimumStake_gte: BigInt
+  minimumStake_lte: BigInt
+  minimumStake_in: [BigInt!]
+  minimumStake_not_in: [BigInt!]
+  baseRarityScore: Int
+  baseRarityScore_not: Int
+  baseRarityScore_gt: Int
+  baseRarityScore_lt: Int
+  baseRarityScore_gte: Int
+  baseRarityScore_lte: Int
+  baseRarityScore_in: [Int!]
+  baseRarityScore_not_in: [Int!]
+}
+
+enum AavegotchiOption_orderBy {
+  id
+  owner
+  portal
+  randomNumber
+  numericTraits
+  collateralType
+  minimumStake
+  baseRarityScore
+}
+
+scalar BigDecimal
+
+scalar BigInt
+
+input Block_height {
+  hash: Bytes
+  number: Int
+}
+
+scalar Bytes
+
+type ERC1155Listing {
+  id: ID!
+  category: BigInt!
+  erc1155TokenAddress: Bytes!
+  erc1155TypeId: BigInt!
+  seller: Bytes!
+  priceInWei: BigInt!
+  quantity: BigInt!
+  cancelled: Boolean!
+  timeCreated: BigInt!
+  timeLastPurchased: BigInt!
+  sold: Boolean!
+  rarityLevel: BigInt
+}
+
+input ERC1155Listing_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  category: BigInt
+  category_not: BigInt
+  category_gt: BigInt
+  category_lt: BigInt
+  category_gte: BigInt
+  category_lte: BigInt
+  category_in: [BigInt!]
+  category_not_in: [BigInt!]
+  erc1155TokenAddress: Bytes
+  erc1155TokenAddress_not: Bytes
+  erc1155TokenAddress_in: [Bytes!]
+  erc1155TokenAddress_not_in: [Bytes!]
+  erc1155TokenAddress_contains: Bytes
+  erc1155TokenAddress_not_contains: Bytes
+  erc1155TypeId: BigInt
+  erc1155TypeId_not: BigInt
+  erc1155TypeId_gt: BigInt
+  erc1155TypeId_lt: BigInt
+  erc1155TypeId_gte: BigInt
+  erc1155TypeId_lte: BigInt
+  erc1155TypeId_in: [BigInt!]
+  erc1155TypeId_not_in: [BigInt!]
+  seller: Bytes
+  seller_not: Bytes
+  seller_in: [Bytes!]
+  seller_not_in: [Bytes!]
+  seller_contains: Bytes
+  seller_not_contains: Bytes
+  priceInWei: BigInt
+  priceInWei_not: BigInt
+  priceInWei_gt: BigInt
+  priceInWei_lt: BigInt
+  priceInWei_gte: BigInt
+  priceInWei_lte: BigInt
+  priceInWei_in: [BigInt!]
+  priceInWei_not_in: [BigInt!]
+  quantity: BigInt
+  quantity_not: BigInt
+  quantity_gt: BigInt
+  quantity_lt: BigInt
+  quantity_gte: BigInt
+  quantity_lte: BigInt
+  quantity_in: [BigInt!]
+  quantity_not_in: [BigInt!]
+  cancelled: Boolean
+  cancelled_not: Boolean
+  cancelled_in: [Boolean!]
+  cancelled_not_in: [Boolean!]
+  timeCreated: BigInt
+  timeCreated_not: BigInt
+  timeCreated_gt: BigInt
+  timeCreated_lt: BigInt
+  timeCreated_gte: BigInt
+  timeCreated_lte: BigInt
+  timeCreated_in: [BigInt!]
+  timeCreated_not_in: [BigInt!]
+  timeLastPurchased: BigInt
+  timeLastPurchased_not: BigInt
+  timeLastPurchased_gt: BigInt
+  timeLastPurchased_lt: BigInt
+  timeLastPurchased_gte: BigInt
+  timeLastPurchased_lte: BigInt
+  timeLastPurchased_in: [BigInt!]
+  timeLastPurchased_not_in: [BigInt!]
+  sold: Boolean
+  sold_not: Boolean
+  sold_in: [Boolean!]
+  sold_not_in: [Boolean!]
+  rarityLevel: BigInt
+  rarityLevel_not: BigInt
+  rarityLevel_gt: BigInt
+  rarityLevel_lt: BigInt
+  rarityLevel_gte: BigInt
+  rarityLevel_lte: BigInt
+  rarityLevel_in: [BigInt!]
+  rarityLevel_not_in: [BigInt!]
+}
+
+enum ERC1155Listing_orderBy {
+  id
+  category
+  erc1155TokenAddress
+  erc1155TypeId
+  seller
+  priceInWei
+  quantity
+  cancelled
+  timeCreated
+  timeLastPurchased
+  sold
+  rarityLevel
+}
+
+type ERC1155Purchase {
+  id: ID!
+  listingID: BigInt!
+  category: BigInt!
+  erc1155TokenAddress: Bytes!
+  erc1155TypeId: BigInt!
+  seller: Bytes!
+  buyer: Bytes!
+  priceInWei: BigInt!
+  quantity: BigInt!
+  cancelled: Boolean!
+  timeCreated: BigInt!
+  timeLastPurchased: BigInt!
+  sold: Boolean!
+  rarityLevel: BigInt
+}
+
+input ERC1155Purchase_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  listingID: BigInt
+  listingID_not: BigInt
+  listingID_gt: BigInt
+  listingID_lt: BigInt
+  listingID_gte: BigInt
+  listingID_lte: BigInt
+  listingID_in: [BigInt!]
+  listingID_not_in: [BigInt!]
+  category: BigInt
+  category_not: BigInt
+  category_gt: BigInt
+  category_lt: BigInt
+  category_gte: BigInt
+  category_lte: BigInt
+  category_in: [BigInt!]
+  category_not_in: [BigInt!]
+  erc1155TokenAddress: Bytes
+  erc1155TokenAddress_not: Bytes
+  erc1155TokenAddress_in: [Bytes!]
+  erc1155TokenAddress_not_in: [Bytes!]
+  erc1155TokenAddress_contains: Bytes
+  erc1155TokenAddress_not_contains: Bytes
+  erc1155TypeId: BigInt
+  erc1155TypeId_not: BigInt
+  erc1155TypeId_gt: BigInt
+  erc1155TypeId_lt: BigInt
+  erc1155TypeId_gte: BigInt
+  erc1155TypeId_lte: BigInt
+  erc1155TypeId_in: [BigInt!]
+  erc1155TypeId_not_in: [BigInt!]
+  seller: Bytes
+  seller_not: Bytes
+  seller_in: [Bytes!]
+  seller_not_in: [Bytes!]
+  seller_contains: Bytes
+  seller_not_contains: Bytes
+  buyer: Bytes
+  buyer_not: Bytes
+  buyer_in: [Bytes!]
+  buyer_not_in: [Bytes!]
+  buyer_contains: Bytes
+  buyer_not_contains: Bytes
+  priceInWei: BigInt
+  priceInWei_not: BigInt
+  priceInWei_gt: BigInt
+  priceInWei_lt: BigInt
+  priceInWei_gte: BigInt
+  priceInWei_lte: BigInt
+  priceInWei_in: [BigInt!]
+  priceInWei_not_in: [BigInt!]
+  quantity: BigInt
+  quantity_not: BigInt
+  quantity_gt: BigInt
+  quantity_lt: BigInt
+  quantity_gte: BigInt
+  quantity_lte: BigInt
+  quantity_in: [BigInt!]
+  quantity_not_in: [BigInt!]
+  cancelled: Boolean
+  cancelled_not: Boolean
+  cancelled_in: [Boolean!]
+  cancelled_not_in: [Boolean!]
+  timeCreated: BigInt
+  timeCreated_not: BigInt
+  timeCreated_gt: BigInt
+  timeCreated_lt: BigInt
+  timeCreated_gte: BigInt
+  timeCreated_lte: BigInt
+  timeCreated_in: [BigInt!]
+  timeCreated_not_in: [BigInt!]
+  timeLastPurchased: BigInt
+  timeLastPurchased_not: BigInt
+  timeLastPurchased_gt: BigInt
+  timeLastPurchased_lt: BigInt
+  timeLastPurchased_gte: BigInt
+  timeLastPurchased_lte: BigInt
+  timeLastPurchased_in: [BigInt!]
+  timeLastPurchased_not_in: [BigInt!]
+  sold: Boolean
+  sold_not: Boolean
+  sold_in: [Boolean!]
+  sold_not_in: [Boolean!]
+  rarityLevel: BigInt
+  rarityLevel_not: BigInt
+  rarityLevel_gt: BigInt
+  rarityLevel_lt: BigInt
+  rarityLevel_gte: BigInt
+  rarityLevel_lte: BigInt
+  rarityLevel_in: [BigInt!]
+  rarityLevel_not_in: [BigInt!]
+}
+
+enum ERC1155Purchase_orderBy {
+  id
+  listingID
+  category
+  erc1155TokenAddress
+  erc1155TypeId
+  seller
+  buyer
+  priceInWei
+  quantity
+  cancelled
+  timeCreated
+  timeLastPurchased
+  sold
+  rarityLevel
+}
+
+type ERC721Listing {
+  id: ID!
+  category: BigInt!
+  erc721TokenAddress: Bytes!
+  tokenId: BigInt!
+  seller: Bytes!
+  buyer: Bytes
+  timeCreated: BigInt!
+  timePurchased: BigInt
+  cancelled: Boolean
+  priceInWei: BigInt!
+  gotchi: Aavegotchi
+  portal: Portal
+  hauntId: BigInt
+}
+
+input ERC721Listing_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  category: BigInt
+  category_not: BigInt
+  category_gt: BigInt
+  category_lt: BigInt
+  category_gte: BigInt
+  category_lte: BigInt
+  category_in: [BigInt!]
+  category_not_in: [BigInt!]
+  erc721TokenAddress: Bytes
+  erc721TokenAddress_not: Bytes
+  erc721TokenAddress_in: [Bytes!]
+  erc721TokenAddress_not_in: [Bytes!]
+  erc721TokenAddress_contains: Bytes
+  erc721TokenAddress_not_contains: Bytes
+  tokenId: BigInt
+  tokenId_not: BigInt
+  tokenId_gt: BigInt
+  tokenId_lt: BigInt
+  tokenId_gte: BigInt
+  tokenId_lte: BigInt
+  tokenId_in: [BigInt!]
+  tokenId_not_in: [BigInt!]
+  seller: Bytes
+  seller_not: Bytes
+  seller_in: [Bytes!]
+  seller_not_in: [Bytes!]
+  seller_contains: Bytes
+  seller_not_contains: Bytes
+  buyer: Bytes
+  buyer_not: Bytes
+  buyer_in: [Bytes!]
+  buyer_not_in: [Bytes!]
+  buyer_contains: Bytes
+  buyer_not_contains: Bytes
+  timeCreated: BigInt
+  timeCreated_not: BigInt
+  timeCreated_gt: BigInt
+  timeCreated_lt: BigInt
+  timeCreated_gte: BigInt
+  timeCreated_lte: BigInt
+  timeCreated_in: [BigInt!]
+  timeCreated_not_in: [BigInt!]
+  timePurchased: BigInt
+  timePurchased_not: BigInt
+  timePurchased_gt: BigInt
+  timePurchased_lt: BigInt
+  timePurchased_gte: BigInt
+  timePurchased_lte: BigInt
+  timePurchased_in: [BigInt!]
+  timePurchased_not_in: [BigInt!]
+  cancelled: Boolean
+  cancelled_not: Boolean
+  cancelled_in: [Boolean!]
+  cancelled_not_in: [Boolean!]
+  priceInWei: BigInt
+  priceInWei_not: BigInt
+  priceInWei_gt: BigInt
+  priceInWei_lt: BigInt
+  priceInWei_gte: BigInt
+  priceInWei_lte: BigInt
+  priceInWei_in: [BigInt!]
+  priceInWei_not_in: [BigInt!]
+  gotchi: String
+  gotchi_not: String
+  gotchi_gt: String
+  gotchi_lt: String
+  gotchi_gte: String
+  gotchi_lte: String
+  gotchi_in: [String!]
+  gotchi_not_in: [String!]
+  gotchi_contains: String
+  gotchi_not_contains: String
+  gotchi_starts_with: String
+  gotchi_not_starts_with: String
+  gotchi_ends_with: String
+  gotchi_not_ends_with: String
+  portal: String
+  portal_not: String
+  portal_gt: String
+  portal_lt: String
+  portal_gte: String
+  portal_lte: String
+  portal_in: [String!]
+  portal_not_in: [String!]
+  portal_contains: String
+  portal_not_contains: String
+  portal_starts_with: String
+  portal_not_starts_with: String
+  portal_ends_with: String
+  portal_not_ends_with: String
+  hauntId: BigInt
+  hauntId_not: BigInt
+  hauntId_gt: BigInt
+  hauntId_lt: BigInt
+  hauntId_gte: BigInt
+  hauntId_lte: BigInt
+  hauntId_in: [BigInt!]
+  hauntId_not_in: [BigInt!]
+}
+
+enum ERC721Listing_orderBy {
+  id
+  category
+  erc721TokenAddress
+  tokenId
+  seller
+  buyer
+  timeCreated
+  timePurchased
+  cancelled
+  priceInWei
+  gotchi
+  portal
+  hauntId
+}
+
+type ItemType {
+  id: ID!
+  name: String!
+  desc: String
+  author: String
+  traitModifiers: [Int!]
+  slotPositions: [Boolean!]
+  ghstPrice: BigInt!
+  maxQuantity: BigInt!
+  totalQuantity: BigInt!
+  rarityScoreModifier: Int!
+  canPurchaseWithGhst: Boolean!
+  minLevel: Int
+  canBeTransferred: Boolean!
+  category: Int!
+  kinshipBonus: Int
+  experienceBonus: BigInt
+}
+
+input ItemType_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  name: String
+  name_not: String
+  name_gt: String
+  name_lt: String
+  name_gte: String
+  name_lte: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  desc: String
+  desc_not: String
+  desc_gt: String
+  desc_lt: String
+  desc_gte: String
+  desc_lte: String
+  desc_in: [String!]
+  desc_not_in: [String!]
+  desc_contains: String
+  desc_not_contains: String
+  desc_starts_with: String
+  desc_not_starts_with: String
+  desc_ends_with: String
+  desc_not_ends_with: String
+  author: String
+  author_not: String
+  author_gt: String
+  author_lt: String
+  author_gte: String
+  author_lte: String
+  author_in: [String!]
+  author_not_in: [String!]
+  author_contains: String
+  author_not_contains: String
+  author_starts_with: String
+  author_not_starts_with: String
+  author_ends_with: String
+  author_not_ends_with: String
+  traitModifiers: [Int!]
+  traitModifiers_not: [Int!]
+  traitModifiers_contains: [Int!]
+  traitModifiers_not_contains: [Int!]
+  slotPositions: [Boolean!]
+  slotPositions_not: [Boolean!]
+  slotPositions_contains: [Boolean!]
+  slotPositions_not_contains: [Boolean!]
+  ghstPrice: BigInt
+  ghstPrice_not: BigInt
+  ghstPrice_gt: BigInt
+  ghstPrice_lt: BigInt
+  ghstPrice_gte: BigInt
+  ghstPrice_lte: BigInt
+  ghstPrice_in: [BigInt!]
+  ghstPrice_not_in: [BigInt!]
+  maxQuantity: BigInt
+  maxQuantity_not: BigInt
+  maxQuantity_gt: BigInt
+  maxQuantity_lt: BigInt
+  maxQuantity_gte: BigInt
+  maxQuantity_lte: BigInt
+  maxQuantity_in: [BigInt!]
+  maxQuantity_not_in: [BigInt!]
+  totalQuantity: BigInt
+  totalQuantity_not: BigInt
+  totalQuantity_gt: BigInt
+  totalQuantity_lt: BigInt
+  totalQuantity_gte: BigInt
+  totalQuantity_lte: BigInt
+  totalQuantity_in: [BigInt!]
+  totalQuantity_not_in: [BigInt!]
+  rarityScoreModifier: Int
+  rarityScoreModifier_not: Int
+  rarityScoreModifier_gt: Int
+  rarityScoreModifier_lt: Int
+  rarityScoreModifier_gte: Int
+  rarityScoreModifier_lte: Int
+  rarityScoreModifier_in: [Int!]
+  rarityScoreModifier_not_in: [Int!]
+  canPurchaseWithGhst: Boolean
+  canPurchaseWithGhst_not: Boolean
+  canPurchaseWithGhst_in: [Boolean!]
+  canPurchaseWithGhst_not_in: [Boolean!]
+  minLevel: Int
+  minLevel_not: Int
+  minLevel_gt: Int
+  minLevel_lt: Int
+  minLevel_gte: Int
+  minLevel_lte: Int
+  minLevel_in: [Int!]
+  minLevel_not_in: [Int!]
+  canBeTransferred: Boolean
+  canBeTransferred_not: Boolean
+  canBeTransferred_in: [Boolean!]
+  canBeTransferred_not_in: [Boolean!]
+  category: Int
+  category_not: Int
+  category_gt: Int
+  category_lt: Int
+  category_gte: Int
+  category_lte: Int
+  category_in: [Int!]
+  category_not_in: [Int!]
+  kinshipBonus: Int
+  kinshipBonus_not: Int
+  kinshipBonus_gt: Int
+  kinshipBonus_lt: Int
+  kinshipBonus_gte: Int
+  kinshipBonus_lte: Int
+  kinshipBonus_in: [Int!]
+  kinshipBonus_not_in: [Int!]
+  experienceBonus: BigInt
+  experienceBonus_not: BigInt
+  experienceBonus_gt: BigInt
+  experienceBonus_lt: BigInt
+  experienceBonus_gte: BigInt
+  experienceBonus_lte: BigInt
+  experienceBonus_in: [BigInt!]
+  experienceBonus_not_in: [BigInt!]
+}
+
+enum ItemType_orderBy {
+  id
+  name
+  desc
+  author
+  traitModifiers
+  slotPositions
+  ghstPrice
+  maxQuantity
+  totalQuantity
+  rarityScoreModifier
+  canPurchaseWithGhst
+  minLevel
+  canBeTransferred
+  category
+  kinshipBonus
+  experienceBonus
+}
+
+enum OrderDirection {
+  asc
+  desc
+}
+
+type Portal {
+  id: ID!
+  buyer: User!
+  hauntId: BigInt!
+  owner: User!
+  options(skip: Int = 0, first: Int = 100, orderBy: AavegotchiOption_orderBy, orderDirection: OrderDirection, where: AavegotchiOption_filter): [AavegotchiOption!]!
+  gotchi: Aavegotchi
+  status: PortalStatus!
+  boughtAt: BigInt
+  openedAt: BigInt
+  claimedAt: BigInt
+}
+
+input Portal_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  buyer: String
+  buyer_not: String
+  buyer_gt: String
+  buyer_lt: String
+  buyer_gte: String
+  buyer_lte: String
+  buyer_in: [String!]
+  buyer_not_in: [String!]
+  buyer_contains: String
+  buyer_not_contains: String
+  buyer_starts_with: String
+  buyer_not_starts_with: String
+  buyer_ends_with: String
+  buyer_not_ends_with: String
+  hauntId: BigInt
+  hauntId_not: BigInt
+  hauntId_gt: BigInt
+  hauntId_lt: BigInt
+  hauntId_gte: BigInt
+  hauntId_lte: BigInt
+  hauntId_in: [BigInt!]
+  hauntId_not_in: [BigInt!]
+  owner: String
+  owner_not: String
+  owner_gt: String
+  owner_lt: String
+  owner_gte: String
+  owner_lte: String
+  owner_in: [String!]
+  owner_not_in: [String!]
+  owner_contains: String
+  owner_not_contains: String
+  owner_starts_with: String
+  owner_not_starts_with: String
+  owner_ends_with: String
+  owner_not_ends_with: String
+  gotchi: String
+  gotchi_not: String
+  gotchi_gt: String
+  gotchi_lt: String
+  gotchi_gte: String
+  gotchi_lte: String
+  gotchi_in: [String!]
+  gotchi_not_in: [String!]
+  gotchi_contains: String
+  gotchi_not_contains: String
+  gotchi_starts_with: String
+  gotchi_not_starts_with: String
+  gotchi_ends_with: String
+  gotchi_not_ends_with: String
+  status: PortalStatus
+  status_not: PortalStatus
+  boughtAt: BigInt
+  boughtAt_not: BigInt
+  boughtAt_gt: BigInt
+  boughtAt_lt: BigInt
+  boughtAt_gte: BigInt
+  boughtAt_lte: BigInt
+  boughtAt_in: [BigInt!]
+  boughtAt_not_in: [BigInt!]
+  openedAt: BigInt
+  openedAt_not: BigInt
+  openedAt_gt: BigInt
+  openedAt_lt: BigInt
+  openedAt_gte: BigInt
+  openedAt_lte: BigInt
+  openedAt_in: [BigInt!]
+  openedAt_not_in: [BigInt!]
+  claimedAt: BigInt
+  claimedAt_not: BigInt
+  claimedAt_gt: BigInt
+  claimedAt_lt: BigInt
+  claimedAt_gte: BigInt
+  claimedAt_lte: BigInt
+  claimedAt_in: [BigInt!]
+  claimedAt_not_in: [BigInt!]
+}
+
+enum Portal_orderBy {
+  id
+  buyer
+  hauntId
+  owner
+  options
+  gotchi
+  status
+  boughtAt
+  openedAt
+  claimedAt
+}
+
+enum PortalStatus {
+  Bought
+  Opened
+  Claimed
+}
+
+type Query {
+  aavegotchiOption(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): AavegotchiOption
+  aavegotchiOptions(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: AavegotchiOption_orderBy
+    orderDirection: OrderDirection
+    where: AavegotchiOption_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [AavegotchiOption!]!
+  aavegotchi(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Aavegotchi
+  aavegotchis(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Aavegotchi_orderBy
+    orderDirection: OrderDirection
+    where: Aavegotchi_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Aavegotchi!]!
+  portal(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Portal
+  portals(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Portal_orderBy
+    orderDirection: OrderDirection
+    where: Portal_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Portal!]!
+  user(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): User
+  users(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: User_orderBy
+    orderDirection: OrderDirection
+    where: User_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [User!]!
+  erc721Listing(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): ERC721Listing
+  erc721Listings(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: ERC721Listing_orderBy
+    orderDirection: OrderDirection
+    where: ERC721Listing_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [ERC721Listing!]!
+  erc1155Listing(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): ERC1155Listing
+  erc1155Listings(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: ERC1155Listing_orderBy
+    orderDirection: OrderDirection
+    where: ERC1155Listing_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [ERC1155Listing!]!
+  erc1155Purchase(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): ERC1155Purchase
+  erc1155Purchases(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: ERC1155Purchase_orderBy
+    orderDirection: OrderDirection
+    where: ERC1155Purchase_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [ERC1155Purchase!]!
+  statistic(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Statistic
+  statistics(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Statistic_orderBy
+    orderDirection: OrderDirection
+    where: Statistic_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Statistic!]!
+  itemType(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): ItemType
+  itemTypes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: ItemType_orderBy
+    orderDirection: OrderDirection
+    where: ItemType_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [ItemType!]!
+  wearableSet(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): WearableSet
+  wearableSets(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: WearableSet_orderBy
+    orderDirection: OrderDirection
+    where: WearableSet_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [WearableSet!]!
+
+  """Access to subgraph metadata"""
+  _meta(block: Block_height): _Meta_
+}
+
+type Statistic {
+  """There will be a single Statistic entity with id = '0'"""
+  id: ID!
+
+  """Total amount of portals that have been bought."""
+  portalsBought: BigInt!
+
+  """Total amount of portals that have been opened"""
+  portalsOpened: BigInt!
+
+  """Total amount of Aavegotchis claimed"""
+  aavegotchisClaimed: BigInt!
+  erc721ActiveListingCount: BigInt!
+  erc1155ActiveListingCount: BigInt!
+  erc721TotalVolume: BigInt!
+  erc1155TotalVolume: BigInt!
+  totalWearablesVolume: BigInt!
+  totalConsumablesVolume: BigInt!
+  totalTicketsVolume: BigInt!
+}
+
+input Statistic_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  portalsBought: BigInt
+  portalsBought_not: BigInt
+  portalsBought_gt: BigInt
+  portalsBought_lt: BigInt
+  portalsBought_gte: BigInt
+  portalsBought_lte: BigInt
+  portalsBought_in: [BigInt!]
+  portalsBought_not_in: [BigInt!]
+  portalsOpened: BigInt
+  portalsOpened_not: BigInt
+  portalsOpened_gt: BigInt
+  portalsOpened_lt: BigInt
+  portalsOpened_gte: BigInt
+  portalsOpened_lte: BigInt
+  portalsOpened_in: [BigInt!]
+  portalsOpened_not_in: [BigInt!]
+  aavegotchisClaimed: BigInt
+  aavegotchisClaimed_not: BigInt
+  aavegotchisClaimed_gt: BigInt
+  aavegotchisClaimed_lt: BigInt
+  aavegotchisClaimed_gte: BigInt
+  aavegotchisClaimed_lte: BigInt
+  aavegotchisClaimed_in: [BigInt!]
+  aavegotchisClaimed_not_in: [BigInt!]
+  erc721ActiveListingCount: BigInt
+  erc721ActiveListingCount_not: BigInt
+  erc721ActiveListingCount_gt: BigInt
+  erc721ActiveListingCount_lt: BigInt
+  erc721ActiveListingCount_gte: BigInt
+  erc721ActiveListingCount_lte: BigInt
+  erc721ActiveListingCount_in: [BigInt!]
+  erc721ActiveListingCount_not_in: [BigInt!]
+  erc1155ActiveListingCount: BigInt
+  erc1155ActiveListingCount_not: BigInt
+  erc1155ActiveListingCount_gt: BigInt
+  erc1155ActiveListingCount_lt: BigInt
+  erc1155ActiveListingCount_gte: BigInt
+  erc1155ActiveListingCount_lte: BigInt
+  erc1155ActiveListingCount_in: [BigInt!]
+  erc1155ActiveListingCount_not_in: [BigInt!]
+  erc721TotalVolume: BigInt
+  erc721TotalVolume_not: BigInt
+  erc721TotalVolume_gt: BigInt
+  erc721TotalVolume_lt: BigInt
+  erc721TotalVolume_gte: BigInt
+  erc721TotalVolume_lte: BigInt
+  erc721TotalVolume_in: [BigInt!]
+  erc721TotalVolume_not_in: [BigInt!]
+  erc1155TotalVolume: BigInt
+  erc1155TotalVolume_not: BigInt
+  erc1155TotalVolume_gt: BigInt
+  erc1155TotalVolume_lt: BigInt
+  erc1155TotalVolume_gte: BigInt
+  erc1155TotalVolume_lte: BigInt
+  erc1155TotalVolume_in: [BigInt!]
+  erc1155TotalVolume_not_in: [BigInt!]
+  totalWearablesVolume: BigInt
+  totalWearablesVolume_not: BigInt
+  totalWearablesVolume_gt: BigInt
+  totalWearablesVolume_lt: BigInt
+  totalWearablesVolume_gte: BigInt
+  totalWearablesVolume_lte: BigInt
+  totalWearablesVolume_in: [BigInt!]
+  totalWearablesVolume_not_in: [BigInt!]
+  totalConsumablesVolume: BigInt
+  totalConsumablesVolume_not: BigInt
+  totalConsumablesVolume_gt: BigInt
+  totalConsumablesVolume_lt: BigInt
+  totalConsumablesVolume_gte: BigInt
+  totalConsumablesVolume_lte: BigInt
+  totalConsumablesVolume_in: [BigInt!]
+  totalConsumablesVolume_not_in: [BigInt!]
+  totalTicketsVolume: BigInt
+  totalTicketsVolume_not: BigInt
+  totalTicketsVolume_gt: BigInt
+  totalTicketsVolume_lt: BigInt
+  totalTicketsVolume_gte: BigInt
+  totalTicketsVolume_lte: BigInt
+  totalTicketsVolume_in: [BigInt!]
+  totalTicketsVolume_not_in: [BigInt!]
+}
+
+enum Statistic_orderBy {
+  id
+  portalsBought
+  portalsOpened
+  aavegotchisClaimed
+  erc721ActiveListingCount
+  erc1155ActiveListingCount
+  erc721TotalVolume
+  erc1155TotalVolume
+  totalWearablesVolume
+  totalConsumablesVolume
+  totalTicketsVolume
+}
+
+type Subscription {
+  aavegotchiOption(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): AavegotchiOption
+  aavegotchiOptions(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: AavegotchiOption_orderBy
+    orderDirection: OrderDirection
+    where: AavegotchiOption_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [AavegotchiOption!]!
+  aavegotchi(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Aavegotchi
+  aavegotchis(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Aavegotchi_orderBy
+    orderDirection: OrderDirection
+    where: Aavegotchi_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Aavegotchi!]!
+  portal(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Portal
+  portals(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Portal_orderBy
+    orderDirection: OrderDirection
+    where: Portal_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Portal!]!
+  user(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): User
+  users(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: User_orderBy
+    orderDirection: OrderDirection
+    where: User_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [User!]!
+  erc721Listing(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): ERC721Listing
+  erc721Listings(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: ERC721Listing_orderBy
+    orderDirection: OrderDirection
+    where: ERC721Listing_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [ERC721Listing!]!
+  erc1155Listing(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): ERC1155Listing
+  erc1155Listings(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: ERC1155Listing_orderBy
+    orderDirection: OrderDirection
+    where: ERC1155Listing_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [ERC1155Listing!]!
+  erc1155Purchase(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): ERC1155Purchase
+  erc1155Purchases(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: ERC1155Purchase_orderBy
+    orderDirection: OrderDirection
+    where: ERC1155Purchase_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [ERC1155Purchase!]!
+  statistic(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Statistic
+  statistics(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Statistic_orderBy
+    orderDirection: OrderDirection
+    where: Statistic_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Statistic!]!
+  itemType(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): ItemType
+  itemTypes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: ItemType_orderBy
+    orderDirection: OrderDirection
+    where: ItemType_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [ItemType!]!
+  wearableSet(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): WearableSet
+  wearableSets(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: WearableSet_orderBy
+    orderDirection: OrderDirection
+    where: WearableSet_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number:
+    Int }` containing the block number or a `{ hash: Bytes }` value containing a
+    block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [WearableSet!]!
+
+  """Access to subgraph metadata"""
+  _meta(block: Block_height): _Meta_
+}
+
+type User {
+  id: ID!
+  portalsBought(skip: Int = 0, first: Int = 100, orderBy: Portal_orderBy, orderDirection: OrderDirection, where: Portal_filter): [Portal!]!
+  gotchisOwned(skip: Int = 0, first: Int = 100, orderBy: Aavegotchi_orderBy, orderDirection: OrderDirection, where: Aavegotchi_filter): [Aavegotchi!]!
+  portalsOwned(skip: Int = 0, first: Int = 100, orderBy: Portal_orderBy, orderDirection: OrderDirection, where: Portal_filter): [Portal!]!
+}
+
+input User_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+}
+
+enum User_orderBy {
+  id
+  portalsBought
+  gotchisOwned
+  portalsOwned
+}
+
+type WearableSet {
+  id: ID!
+  name: String!
+  allowedCollaterals: [Int!]
+  wearableIds: [Int!]
+  traitBonuses: [Int!]
+}
+
+input WearableSet_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  name: String
+  name_not: String
+  name_gt: String
+  name_lt: String
+  name_gte: String
+  name_lte: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  allowedCollaterals: [Int!]
+  allowedCollaterals_not: [Int!]
+  allowedCollaterals_contains: [Int!]
+  allowedCollaterals_not_contains: [Int!]
+  wearableIds: [Int!]
+  wearableIds_not: [Int!]
+  wearableIds_contains: [Int!]
+  wearableIds_not_contains: [Int!]
+  traitBonuses: [Int!]
+  traitBonuses_not: [Int!]
+  traitBonuses_contains: [Int!]
+  traitBonuses_not_contains: [Int!]
+}
+
+enum WearableSet_orderBy {
+  id
+  name
+  allowedCollaterals
+  wearableIds
+  traitBonuses
+}
+

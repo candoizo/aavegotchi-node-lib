@@ -1,0 +1,27 @@
+{
+  "name": "@candoizo/aavegotchi-lib-node",
+  "version": "1.0.0",
+  "description": "awesome aavegotchi node library",
+  "main": "dist/gen.d.ts",
+  "repository": "https://github.com/candoizo/aavegotchi-tailwindcss",
+  "author": "candoizo",
+  "license": "TBD",
+  "dependencies": {
+    "graphql": "^15.5.0",
+    "graphql-tag": "^2.11.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^1.21.3",
+    "@graphql-codegen/graphql-modules-preset": "^1.2.4",
+    "@graphql-codegen/typescript": "^1.21.1",
+    "@graphql-codegen/typescript-generic-sdk": "^1.17.9",
+    "@graphql-codegen/typescript-graphql-request": "^3.1.0",
+    "@graphql-codegen/typescript-operations": "^1.17.15",
+    "@graphql-codegen/typescript-react-query": "^1.2.4",
+    "@graphql-codegen/typescript-resolvers": "^1.19.0",
+    "@types/graphql": "^14.5.0"
+  }
+}

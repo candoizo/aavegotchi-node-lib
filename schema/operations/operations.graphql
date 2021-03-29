@@ -1,0 +1,5 @@
+query MyPortalQuery($first: Int!) {
+  portals(first: $first) {
+   id
+ }
+}
