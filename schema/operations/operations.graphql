@@ -12,27 +12,6 @@ query lastTimePurchased($itemID: BigInt!) {
   }
 }
 
-# query raffleQuery($user: String!) {
-#   users(where:{id:$user}) {
-#     id
-#     totalCommon
-#     totalUncommon
-#     totalRare
-#     totalLegendary
-#     totalMythical
-#     totalGodLike
-#   }
-#   totals {
-#     id
-#     totalCommon
-#     totalUncommon
-#     totalRare
-#     totalLegendary
-#     totalMythical
-#     totalGodLike
-#   }
-# }
-
 query erc721ListingsQuery($category: BigInt!, $orderBy: ERC721Listing_orderBy!, $orderDirection: OrderDirection!, $first: Int!, $skip: Int!) {
     erc721Listings( where:{category:$category,priceInWei_lt: 10000000,cancelled:false, timePurchased:0}, orderBy:$orderBy, orderDirection:$orderDirection, first:$first, skip:$skip) {
 
@@ -269,3 +248,69 @@ query ownerAavegotchisQuery($id: ID!) {
   	}
   }
 }
+
+
+# I believe these use a different api under /cinnabarhorse namespace
+# query raffleQuery($user: String!) {
+#   users(where:{id:$user}) {
+#     id
+#     totalCommon
+#     totalUncommon
+#     totalRare
+#     totalLegendary
+#     totalMythical
+#     totalGodLike
+#   }
+#   totals {
+#     id
+#     totalCommon
+#     totalUncommon
+#     totalRare
+#     totalLegendary
+#     totalMythical
+#     totalGodLike
+#   }
+# }
+
+# export const latestOrders = `
+# {
+#     orders(first:30, orderBy:batchId, orderDirection:desc) {
+# 		id
+# 		txnId
+# 		claimId
+# 		batchId
+# 		type
+# 		createdBy
+# 		status
+# 		price
+# 		value
+# 		reserveRatio
+# 		time
+# 		ghst
+# 		dai
+#     }
+#   }
+# `;
+
+# export function userOrders(userID: string, viewAll: boolean) {
+#     return `
+# {
+#     orders(first:${viewAll ? 1000 : 5}, orderBy:batchId, orderDirection:desc, where:{createdBy:"${userID}"}) {
+#
+#           id
+#           txnId
+#           claimId
+#           batchId
+#           type
+#           createdBy
+#           status
+#           price
+#           value
+#           reserveRatio
+#           time
+#           ghst
+#           dai
+#     }
+#   }
+# `;
+# }
