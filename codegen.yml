@@ -23,7 +23,7 @@ generates:
       # - add:
       #     content: '/* eslint-disable */'
       - typescript
-      # - typescript-operations
+      - typescript-operations
       # - typescript-resolvers
       # - typescript-react-query
       # - typescript-generic-sdk
