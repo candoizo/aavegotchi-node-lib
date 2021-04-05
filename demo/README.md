@@ -1,16 +1,14 @@
-# Aavegotchi-lib-node demo!
+# Aavegotchi-node-lib demo!
 
 A type safe TypeScript SDK for the Aavegotchi subgraph endpoint.
 
 With `@aavegotchi/lib`, queries can be made from any Javascript project.
 
-## Install
-
-With repo access on private registry you'll first need a `.npmrc` file. One is provided.
-
-Use: `yarn add @candoizo/aavegotchi-node-lib`
-
 ## Testing
+
+Use: `yarn && yarn test`. Also check [index.ts](./index.ts). All functions can be found in [the GraphQL operations file](../schema/operations.graphql), which is their fancy term for queries.
+
+## Example
 
 ```
 demo [dev] ⚡ yarn test
