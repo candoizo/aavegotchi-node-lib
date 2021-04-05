@@ -2,11 +2,20 @@
 # yarn lockfile v1
 
 
-"@candoizo/aavegotchi-lib-node@../candoizo-aavegotchi-lib-node-v1.0.0.tgz":
-  version "1.0.0"
-  resolved "../candoizo-aavegotchi-lib-node-v1.0.0.tgz#05b484428c235f5431a8d894f01ac1b67c248019"
+"@candoizo/aavegotchi-lib-node@../candoizo-aavegotchi-lib-node-v1.0.5.tgz":
+  version "1.0.5"
+  resolved "../candoizo-aavegotchi-lib-node-v1.0.5.tgz#fe4ccfc8c0621ab00759e852fe0b84a84508e923"
   dependencies:
     graphql "^15.5.0"
+    graphql-request "^3.4.0"
+    graphql-tag "^2.11.0"
+
+"@candoizo/aavegotchi-lib-node@../candoizo-aavegotchi-lib-node-v1.0.7.tgz":
+  version "1.0.7"
+  resolved "../candoizo-aavegotchi-lib-node-v1.0.7.tgz#67e9b34bb5a994d721177bb8e92703e4c46909e8"
+  dependencies:
+    graphql "^15.5.0"
+    graphql-request "^3.4.0"
     graphql-tag "^2.11.0"
 
 "@types/graphql@^14.5.0":

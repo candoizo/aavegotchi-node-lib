@@ -1,13 +1,12 @@
-# aavegotchi-lib-node
+# aavegotchi-lib-node 👻📦
 
-Automatically generated TypeScript definitions from the GraphQL API.
+A general Node.js SDK with type-safe definitions from the official Aavegotchi GraphQL endpoints!
 
+Clone and try the `demo/` with: `cd demo/ && yarn && yarn test`
 
+Peek the Javascript code in [demo/index.ts](./demo/index.ts).
 
-
-
-
-## Extra
+# Usage
 
 
 ```

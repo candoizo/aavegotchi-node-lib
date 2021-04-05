@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "CC-BY-SA-4.0",
   "dependencies": {
-    "@candoizo/aavegotchi-lib-node": "../candoizo-aavegotchi-lib-node-v1.0.0.tgz",
+    "@candoizo/aavegotchi-lib-node": "../candoizo-aavegotchi-lib-node-v1.0.7.tgz",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0"
   },
