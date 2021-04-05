@@ -4,6 +4,15 @@ query MyPortalQuery($first: Int!) {
  }
 }
 
+query User($id: ID!) {
+  user(id:$id) {
+    gotchisOwned {
+      id,
+      name
+    }
+  }
+}
+
 query lastTimePurchased($itemID: BigInt!) {
   erc1155Listings(first:1, where:{erc1155TypeId:$itemID, sold:true}, orderBy:timeLastPurchased, orderDirection:desc) {
     id

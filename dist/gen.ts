@@ -657,6 +657,10 @@ export type Erc721Listing = {
   gotchi?: Maybe<Aavegotchi>;
   portal?: Maybe<Portal>;
   hauntId?: Maybe<Scalars['BigInt']>;
+  kinship?: Maybe<Scalars['BigInt']>;
+  baseRarityScore?: Maybe<Scalars['BigInt']>;
+  modifiedRarityScore?: Maybe<Scalars['BigInt']>;
+  equippedWearables?: Maybe<Array<Scalars['Int']>>;
 };
 
 export type Erc721Listing_Filter = {
@@ -766,6 +770,34 @@ export type Erc721Listing_Filter = {
   hauntId_lte?: Maybe<Scalars['BigInt']>;
   hauntId_in?: Maybe<Array<Scalars['BigInt']>>;
   hauntId_not_in?: Maybe<Array<Scalars['BigInt']>>;
+  kinship?: Maybe<Scalars['BigInt']>;
+  kinship_not?: Maybe<Scalars['BigInt']>;
+  kinship_gt?: Maybe<Scalars['BigInt']>;
+  kinship_lt?: Maybe<Scalars['BigInt']>;
+  kinship_gte?: Maybe<Scalars['BigInt']>;
+  kinship_lte?: Maybe<Scalars['BigInt']>;
+  kinship_in?: Maybe<Array<Scalars['BigInt']>>;
+  kinship_not_in?: Maybe<Array<Scalars['BigInt']>>;
+  baseRarityScore?: Maybe<Scalars['BigInt']>;
+  baseRarityScore_not?: Maybe<Scalars['BigInt']>;
+  baseRarityScore_gt?: Maybe<Scalars['BigInt']>;
+  baseRarityScore_lt?: Maybe<Scalars['BigInt']>;
+  baseRarityScore_gte?: Maybe<Scalars['BigInt']>;
+  baseRarityScore_lte?: Maybe<Scalars['BigInt']>;
+  baseRarityScore_in?: Maybe<Array<Scalars['BigInt']>>;
+  baseRarityScore_not_in?: Maybe<Array<Scalars['BigInt']>>;
+  modifiedRarityScore?: Maybe<Scalars['BigInt']>;
+  modifiedRarityScore_not?: Maybe<Scalars['BigInt']>;
+  modifiedRarityScore_gt?: Maybe<Scalars['BigInt']>;
+  modifiedRarityScore_lt?: Maybe<Scalars['BigInt']>;
+  modifiedRarityScore_gte?: Maybe<Scalars['BigInt']>;
+  modifiedRarityScore_lte?: Maybe<Scalars['BigInt']>;
+  modifiedRarityScore_in?: Maybe<Array<Scalars['BigInt']>>;
+  modifiedRarityScore_not_in?: Maybe<Array<Scalars['BigInt']>>;
+  equippedWearables?: Maybe<Array<Scalars['Int']>>;
+  equippedWearables_not?: Maybe<Array<Scalars['Int']>>;
+  equippedWearables_contains?: Maybe<Array<Scalars['Int']>>;
+  equippedWearables_not_contains?: Maybe<Array<Scalars['Int']>>;
 };
 
 export type Erc721Listing_OrderBy =
@@ -781,11 +813,16 @@ export type Erc721Listing_OrderBy =
   | 'priceInWei'
   | 'gotchi'
   | 'portal'
-  | 'hauntId';
+  | 'hauntId'
+  | 'kinship'
+  | 'baseRarityScore'
+  | 'modifiedRarityScore'
+  | 'equippedWearables';
 
 export type ItemType = {
   __typename?: 'ItemType';
   id: Scalars['ID'];
+  svgId: Scalars['BigInt'];
   name: Scalars['String'];
   desc?: Maybe<Scalars['String']>;
   author?: Maybe<Scalars['String']>;
@@ -812,6 +849,14 @@ export type ItemType_Filter = {
   id_lte?: Maybe<Scalars['ID']>;
   id_in?: Maybe<Array<Scalars['ID']>>;
   id_not_in?: Maybe<Array<Scalars['ID']>>;
+  svgId?: Maybe<Scalars['BigInt']>;
+  svgId_not?: Maybe<Scalars['BigInt']>;
+  svgId_gt?: Maybe<Scalars['BigInt']>;
+  svgId_lt?: Maybe<Scalars['BigInt']>;
+  svgId_gte?: Maybe<Scalars['BigInt']>;
+  svgId_lte?: Maybe<Scalars['BigInt']>;
+  svgId_in?: Maybe<Array<Scalars['BigInt']>>;
+  svgId_not_in?: Maybe<Array<Scalars['BigInt']>>;
   name?: Maybe<Scalars['String']>;
   name_not?: Maybe<Scalars['String']>;
   name_gt?: Maybe<Scalars['String']>;
@@ -938,6 +983,7 @@ export type ItemType_Filter = {
 
 export type ItemType_OrderBy =
   | 'id'
+  | 'svgId'
   | 'name'
   | 'desc'
   | 'author'
@@ -1738,6 +1784,22 @@ export type MyPortalQueryQuery = (
   )> }
 );
 
+export type UserQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type UserQuery = (
+  { __typename?: 'Query' }
+  & { user?: Maybe<(
+    { __typename?: 'User' }
+    & { gotchisOwned: Array<(
+      { __typename?: 'Aavegotchi' }
+      & Pick<Aavegotchi, 'id' | 'name'>
+    )> }
+  )> }
+);
+
 export type LastTimePurchasedQueryVariables = Exact<{
   itemID: Scalars['BigInt'];
 }>;
@@ -1932,6 +1994,16 @@ export const MyPortalQueryDocument = gql`
     query MyPortalQuery($first: Int!) {
   portals(first: $first) {
     id
+  }
+}
+    `;
+export const UserDocument = gql`
+    query User($id: ID!) {
+  user(id: $id) {
+    gotchisOwned {
+      id
+      name
+    }
   }
 }
     `;
@@ -2252,6 +2324,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     MyPortalQuery(variables: MyPortalQueryQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<MyPortalQueryQuery> {
       return withWrapper(() => client.request<MyPortalQueryQuery>(MyPortalQueryDocument, variables, requestHeaders));
+    },
+    User(variables: UserQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UserQuery> {
+      return withWrapper(() => client.request<UserQuery>(UserDocument, variables, requestHeaders));
     },
     lastTimePurchased(variables: LastTimePurchasedQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LastTimePurchasedQuery> {
       return withWrapper(() => client.request<LastTimePurchasedQuery>(LastTimePurchasedDocument, variables, requestHeaders));
