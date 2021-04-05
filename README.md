@@ -1,6 +1,6 @@
 # aavegotchi-lib-node 👻📦
 
-A general Node.js SDK with type-safe definitions from the official Aavegotchi GraphQL endpoints!
+A Node.js package for type-safe definitions from the official Aavegotchi GraphQL endpoints!
 
 Clone and try the `demo/` with: `cd demo/ && yarn && yarn test`
 
@@ -12,7 +12,7 @@ Peek the Javascript code in [demo/index.ts](./demo/index.ts).
 
 ```js
 import { defaultSdk } from "candoizo/aavegotchi-node-lib"
-const { lastTimePurchased, aavegotchiLeaderboard } = defaultSdk();
+const { lastTimePurchased, aavegotchiLeaderboard } = defaultSdk(); // Pixelcraft's queries
 
 export async function example() {
   let res = await lastTimePurchased({
@@ -28,7 +28,7 @@ export async function example() {
 
 ```
 
-Functions originally sourced from `web3/graphQueries.tsx`.
+Functions were 1 = 1 sourced from `web3/graphQueries.tsx` in `bonding-curve`.
 
 # Installation
 
@@ -47,7 +47,7 @@ Create a `.npmrc` in the repo. Contents like:
 
 Then install with
 
-    yarn add @aavegotchi/lib --dev --registry https://npm.pkg.github.com/
+    yarn add @aavegotchi/lib --registry https://npm.pkg.github.com/
 
 ## Publishing New Package
 

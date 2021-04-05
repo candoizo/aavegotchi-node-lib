@@ -1,41 +1,14 @@
 schema: https://api.thegraph.com/subgraphs/name/aavegotchi/aavegotchi-core-matic
-# generates:
-#   ./src/types.d.ts:
-#     # documents: ["query", "mutation"]
-#     plugins:
-#       - typescript
-#       - typescript-generic-sdk
-#       - typescript-operations
-#       - typescript-react-query
-#     config:
-#       fetcher: graphql-request
-# schema: 'schema/*.graphql'
 generates:
   ./dist/:
-    documents: schema/operations/*
-    # config:
-      # defaultMapper: any
+    documents: schema/operations.graphql # pixelcraft specific sdk
     preset: graphql-modules
     presetConfig:
       baseTypesPath: gen.ts # Where to create the complete schema types
-      # filename: generated-types/module-types.ts # Where to create each module types
     plugins:
-      # - add:
-      #     content: '/* eslint-disable */'
       - typescript
       - typescript-operations
-      # - typescript-resolvers
-      # - typescript-react-query
-      # - typescript-generic-sdk
       - typescript-graphql-request
     config:
       fetcher: graphql-request
       defaultMapper: any
-      # contextType: ./#Context
-  # ./client/src/gen-types.tsx:
-  #     # documents: schema/core.graphql
-  #     plugins:
-  #       # - add: /* eslint-disable */
-  #       - typescript
-  #       - typescript-operations
-  #       - typescript-react-query

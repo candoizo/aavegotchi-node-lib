@@ -1,5 +1,5 @@
-import { getClient, getSdk } from "@candoizo/aavegotchi-lib-node"
-const { lastTimePurchased, aavegotchiLeaderboard } = getSdk(getClient());
+import { defaultSdk } from "@candoizo/aavegotchi-lib-node"
+const { lastTimePurchased, aavegotchiLeaderboard } = defaultSdk();
 
 async function main() {
 
