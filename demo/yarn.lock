@@ -2,9 +2,10 @@
 # yarn lockfile v1
 
 
-"@candoizo/aavegotchi-lib-node@../candoizo-aavegotchi-lib-node-v1.0.9.tgz":
-  version "1.0.9"
-  resolved "../candoizo-aavegotchi-lib-node-v1.0.9.tgz#5cb8482c7be4c7c617c26e564434874bc7fbcbf5"
+"@candoizo/aavegotchi-node-lib@^1.0.17":
+  version "1.0.17"
+  resolved "https://npm.pkg.github.com/download/@candoizo/aavegotchi-node-lib/1.0.17/fc8c36bfdcd2281c8775b8ec98d53eaf811a225b0091c548c5f19e65da3916c6#6fd0a1987151c5e2787306037cc2a0a72a2fbc34"
+  integrity sha512-nKhTB7ey9889voHvTDGMibhEDJfXvUyFBVitOSmIatgk48qNTDAuhqTpxS22vXjR2Yon550CAdEZP1lDxe2m/A==
   dependencies:
     graphql "^15.5.0"
     graphql-request "^3.4.0"
