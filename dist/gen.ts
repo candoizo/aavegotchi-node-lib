@@ -1771,25 +1771,12 @@ export type _SubgraphErrorPolicy_ =
   /** If the subgraph has indexing errors, data will be omitted. The default. */
   | 'deny';
 
-export type MyPortalQueryQueryVariables = Exact<{
-  first: Scalars['Int'];
-}>;
-
-
-export type MyPortalQueryQuery = (
-  { __typename?: 'Query' }
-  & { portals: Array<(
-    { __typename?: 'Portal' }
-    & Pick<Portal, 'id'>
-  )> }
-);
-
-export type UserQueryVariables = Exact<{
+export type UserGotchisOwnedQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type UserQuery = (
+export type UserGotchisOwnedQuery = (
   { __typename?: 'Query' }
   & { user?: Maybe<(
     { __typename?: 'User' }
@@ -1990,15 +1977,8 @@ export type OwnerAavegotchisQueryQuery = (
 );
 
 
-export const MyPortalQueryDocument = gql`
-    query MyPortalQuery($first: Int!) {
-  portals(first: $first) {
-    id
-  }
-}
-    `;
-export const UserDocument = gql`
-    query User($id: ID!) {
+export const UserGotchisOwnedDocument = gql`
+    query userGotchisOwned($id: ID!) {
   user(id: $id) {
     gotchisOwned {
       id
@@ -2322,11 +2302,8 @@ export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    MyPortalQuery(variables: MyPortalQueryQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<MyPortalQueryQuery> {
-      return withWrapper(() => client.request<MyPortalQueryQuery>(MyPortalQueryDocument, variables, requestHeaders));
-    },
-    User(variables: UserQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UserQuery> {
-      return withWrapper(() => client.request<UserQuery>(UserDocument, variables, requestHeaders));
+    userGotchisOwned(variables: UserGotchisOwnedQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UserGotchisOwnedQuery> {
+      return withWrapper(() => client.request<UserGotchisOwnedQuery>(UserGotchisOwnedDocument, variables, requestHeaders));
     },
     lastTimePurchased(variables: LastTimePurchasedQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LastTimePurchasedQuery> {
       return withWrapper(() => client.request<LastTimePurchasedQuery>(LastTimePurchasedDocument, variables, requestHeaders));

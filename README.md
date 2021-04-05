@@ -4,7 +4,7 @@ A Node.js package for type-safe definitions from the official Aavegotchi GraphQL
 
 Clone this repo and try the `demo/` with: `cd demo/ && yarn && yarn test`
 
-Peek some example Javascript code in [demo/index.ts](./demo/index.ts). Find functions in [the GraphQL operations file](../schema/operations.graphql), which is their fancy term for queries.
+Peek some example Javascript code in [demo/index.ts](./demo/index.ts). Find where the functions come from in [the GraphQL operations file](../schema/operations.graphql), which is their fancy term for queries.
 
 # Usage
 

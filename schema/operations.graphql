@@ -1,10 +1,4 @@
-query MyPortalQuery($first: Int!) {
-  portals(first: $first) {
-   id
- }
-}
-
-query User($id: ID!) {
+query userGotchisOwned($id: ID!) {
   user(id:$id) {
     gotchisOwned {
       id,
