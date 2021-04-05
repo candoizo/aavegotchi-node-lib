@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@candoizo/aavegotchi-node-lib@^1.0.17":
+"@candoizo/aavegotchi-node-lib@^1.0.20":
   version "1.0.20"
   resolved "https://npm.pkg.github.com/download/@candoizo/aavegotchi-node-lib/1.0.20/df76c370208a4bc34b17bcb733193a0d533be372f288bd347e2dd1c9c3d2f069#941284889abd3c144b9da698b982aeda3fd0ed33"
   integrity sha512-YiBj+mt2d78oWbcXILJ+/gRzZVHG95sETot3fTT4COZQhTybRg7SQX7Kvz5aeKMqkXMkXOqFOVcqQz8jXmvIzw==
