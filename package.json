@@ -1,13 +1,13 @@
 {
-  "name": "@candoizo/aavegotchi-lib-node",
-  "version": "1.0.12",
+  "name": "@candoizo/aavegotchi-node-lib",
+  "version": "1.0.17",
   "description": "awesome aavegotchi node library",
   "main": "src/index.js",
   "scripts": {
     "bundle": "rm -rf dist/ && yarn graphql-codegen && tsc dist/gen.ts",
     "release": "yarn bundle && yarn publish"
   },
-  "repository": "https://github.com/candoizo/aavegotchi-tailwindcss",
+  "repository": "https://github.com/candoizo/aavegotchi-node-lib",
   "author": "candoizo",
   "license": "TBD",
   "dependencies": {

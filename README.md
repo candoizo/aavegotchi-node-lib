@@ -51,7 +51,7 @@ Then install with
 
 ## Publishing New Package
 
-Run publishing workflow action.
+Run publishing workflow action (@TODO), or `yarn release` works.
 
 # External
 
