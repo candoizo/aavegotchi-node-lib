@@ -4,7 +4,7 @@ A Node.js package for type-safe definitions from the official Aavegotchi GraphQL
 
 Clone and try the `demo/` with: `cd demo/ && yarn && yarn test`
 
-Peek the Javascript code in [demo/index.ts](./demo/index.ts).
+Peek some example Javascript code in [demo/index.ts](./demo/index.ts).
 
 # Usage
 
@@ -31,6 +31,8 @@ export async function example() {
 Functions were 1 = 1 sourced from `web3/graphQueries.tsx` in `bonding-curve`.
 
 # Installation
+
+**important:** While this package is hosted privately, in some cases (like new projects) it can be unusually difficult to install directly due to conflicts with the registry. We need to migrate to registry.npmjs.org for public consumption.
 
 note: replace instances of `@aavegotchi/lib` with `@candoizo/aavegotchi-lib-node` until on main npm registry.
 

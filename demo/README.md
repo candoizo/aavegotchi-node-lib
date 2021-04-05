@@ -5,8 +5,7 @@ A type safe TypeScript SDK for the Aavegotchi subgraph endpoint.
 With `@aavegotchi/lib-node`, queries can be made from any Javascript project.
 
 ```
-  demo [dev] ⚡ npx ts-node index.ts
-npx: installed 9 in 12.758s
+demo [dev] ⚡ yarn test
 { portals: [ { id: '0' } ] }
 {
   erc1155Listings: [
