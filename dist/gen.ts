@@ -1800,7 +1800,7 @@ export type LastTimePurchasedQuery = (
   )> }
 );
 
-export type Erc721ListingsQueryQueryVariables = Exact<{
+export type Erc721ListingsQueryVariables = Exact<{
   category: Scalars['BigInt'];
   orderBy: Erc721Listing_OrderBy;
   orderDirection: OrderDirection;
@@ -1809,7 +1809,7 @@ export type Erc721ListingsQueryQueryVariables = Exact<{
 }>;
 
 
-export type Erc721ListingsQueryQuery = (
+export type Erc721ListingsQuery = (
   { __typename?: 'Query' }
   & { erc721Listings: Array<(
     { __typename?: 'ERC721Listing' }
@@ -1825,7 +1825,7 @@ export type Erc721ListingsQueryQuery = (
   )> }
 );
 
-export type Erc1155ListingsQueryQueryVariables = Exact<{
+export type Erc1155ListingsQueryVariables = Exact<{
   category: Scalars['BigInt'];
   rarityFilter: Scalars['BigInt'];
   orderBy: Erc1155Listing_OrderBy;
@@ -1835,7 +1835,7 @@ export type Erc1155ListingsQueryQueryVariables = Exact<{
 }>;
 
 
-export type Erc1155ListingsQueryQuery = (
+export type Erc1155ListingsQuery = (
   { __typename?: 'Query' }
   & { erc1155Listings: Array<(
     { __typename?: 'ERC1155Listing' }
@@ -1843,14 +1843,14 @@ export type Erc1155ListingsQueryQuery = (
   )> }
 );
 
-export type Erc1155RelatedQueryQueryVariables = Exact<{
+export type Erc1155RelatedQueryVariables = Exact<{
   category: Scalars['BigInt'];
   id: Scalars['BigInt'];
   first: Scalars['Int'];
 }>;
 
 
-export type Erc1155RelatedQueryQuery = (
+export type Erc1155RelatedQuery = (
   { __typename?: 'Query' }
   & { erc1155Listings: Array<(
     { __typename?: 'ERC1155Listing' }
@@ -1858,13 +1858,13 @@ export type Erc1155RelatedQueryQuery = (
   )> }
 );
 
-export type Erc721OwnerPurchasesQueryQueryVariables = Exact<{
+export type Erc721OwnerPurchasesQueryVariables = Exact<{
   category: Scalars['BigInt'];
   buyer: Scalars['Bytes'];
 }>;
 
 
-export type Erc721OwnerPurchasesQueryQuery = (
+export type Erc721OwnerPurchasesQuery = (
   { __typename?: 'Query' }
   & { erc721Listings: Array<(
     { __typename?: 'ERC721Listing' }
@@ -1880,13 +1880,13 @@ export type Erc721OwnerPurchasesQueryQuery = (
   )> }
 );
 
-export type Erc1155OwnerPurchasesQueryQueryVariables = Exact<{
+export type Erc1155OwnerPurchasesQueryVariables = Exact<{
   category: Scalars['BigInt'];
   buyer: Scalars['Bytes'];
 }>;
 
 
-export type Erc1155OwnerPurchasesQueryQuery = (
+export type Erc1155OwnerPurchasesQuery = (
   { __typename?: 'Query' }
   & { erc1155Purchases: Array<(
     { __typename?: 'ERC1155Purchase' }
@@ -1913,13 +1913,13 @@ export type AavegotchiLeaderboardQuery = (
   )> }
 );
 
-export type TopAaavegotchiQueryQueryVariables = Exact<{
+export type TopAaavegotchiQueryVariables = Exact<{
   orderBy: Aavegotchi_OrderBy;
   orderDirection: OrderDirection;
 }>;
 
 
-export type TopAaavegotchiQueryQuery = (
+export type TopAaavegotchiQuery = (
   { __typename?: 'Query' }
   & { top1000: Array<(
     { __typename?: 'Aavegotchi' }
@@ -1959,12 +1959,12 @@ export type TopAaavegotchiQueryQuery = (
   )> }
 );
 
-export type OwnerAavegotchisQueryQueryVariables = Exact<{
+export type OwnerAavegotchisQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type OwnerAavegotchisQueryQuery = (
+export type OwnerAavegotchisQuery = (
   { __typename?: 'Query' }
   & { users: Array<(
     { __typename?: 'User' }
@@ -2001,8 +2001,8 @@ export const LastTimePurchasedDocument = gql`
   }
 }
     `;
-export const Erc721ListingsQueryDocument = gql`
-    query erc721ListingsQuery($category: BigInt!, $orderBy: ERC721Listing_orderBy!, $orderDirection: OrderDirection!, $first: Int!, $skip: Int!) {
+export const Erc721ListingsDocument = gql`
+    query erc721Listings($category: BigInt!, $orderBy: ERC721Listing_orderBy!, $orderDirection: OrderDirection!, $first: Int!, $skip: Int!) {
   erc721Listings(
     where: {category: $category, priceInWei_lt: 10000000, cancelled: false, timePurchased: 0}
     orderBy: $orderBy
@@ -2034,8 +2034,8 @@ export const Erc721ListingsQueryDocument = gql`
   }
 }
     `;
-export const Erc1155ListingsQueryDocument = gql`
-    query erc1155ListingsQuery($category: BigInt!, $rarityFilter: BigInt!, $orderBy: ERC1155Listing_orderBy!, $orderDirection: OrderDirection!, $first: Int!, $skip: Int!) {
+export const Erc1155ListingsDocument = gql`
+    query erc1155Listings($category: BigInt!, $rarityFilter: BigInt!, $orderBy: ERC1155Listing_orderBy!, $orderDirection: OrderDirection!, $first: Int!, $skip: Int!) {
   erc1155Listings(
     where: {category: $category, rarityLevel: $rarityFilter, priceInWei_lt: 10000000, cancelled: false, sold: false}
     orderBy: $orderBy
@@ -2058,8 +2058,8 @@ export const Erc1155ListingsQueryDocument = gql`
   }
 }
     `;
-export const Erc1155RelatedQueryDocument = gql`
-    query erc1155RelatedQuery($category: BigInt!, $id: BigInt!, $first: Int!) {
+export const Erc1155RelatedDocument = gql`
+    query erc1155Related($category: BigInt!, $id: BigInt!, $first: Int!) {
   erc1155Listings(
     where: {erc1155TypeId: $id, category: $category, cancelled: false, sold: false}
     orderBy: priceInWei
@@ -2081,8 +2081,8 @@ export const Erc1155RelatedQueryDocument = gql`
   }
 }
     `;
-export const Erc721OwnerPurchasesQueryDocument = gql`
-    query erc721OwnerPurchasesQuery($category: BigInt!, $buyer: Bytes!) {
+export const Erc721OwnerPurchasesDocument = gql`
+    query erc721OwnerPurchases($category: BigInt!, $buyer: Bytes!) {
   erc721Listings(
     where: {buyer: $buyer, category: $category, cancelled: false, timePurchased_gt: 0}
     orderBy: timeCreated
@@ -2112,8 +2112,8 @@ export const Erc721OwnerPurchasesQueryDocument = gql`
   }
 }
     `;
-export const Erc1155OwnerPurchasesQueryDocument = gql`
-    query erc1155OwnerPurchasesQuery($category: BigInt!, $buyer: Bytes!) {
+export const Erc1155OwnerPurchasesDocument = gql`
+    query erc1155OwnerPurchases($category: BigInt!, $buyer: Bytes!) {
   erc1155Purchases(
     where: {buyer: $buyer, category: $category, cancelled: false, sold: true}
     orderBy: timeCreated
@@ -2156,8 +2156,8 @@ export const AavegotchiLeaderboardDocument = gql`
   }
 }
     `;
-export const TopAaavegotchiQueryDocument = gql`
-    query topAaavegotchiQuery($orderBy: Aavegotchi_orderBy!, $orderDirection: OrderDirection!) {
+export const TopAaavegotchiDocument = gql`
+    query topAaavegotchi($orderBy: Aavegotchi_orderBy!, $orderDirection: OrderDirection!) {
   top1000: aavegotchis(
     orderBy: $orderBy
     orderDirection: $orderDirection
@@ -2274,8 +2274,8 @@ export const TopAaavegotchiQueryDocument = gql`
   }
 }
     `;
-export const OwnerAavegotchisQueryDocument = gql`
-    query ownerAavegotchisQuery($id: ID!) {
+export const OwnerAavegotchisDocument = gql`
+    query ownerAavegotchis($id: ID!) {
   users(where: {id: $id}) {
     id
     gotchisOwned {
@@ -2308,29 +2308,29 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     lastTimePurchased(variables: LastTimePurchasedQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LastTimePurchasedQuery> {
       return withWrapper(() => client.request<LastTimePurchasedQuery>(LastTimePurchasedDocument, variables, requestHeaders));
     },
-    erc721ListingsQuery(variables: Erc721ListingsQueryQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc721ListingsQueryQuery> {
-      return withWrapper(() => client.request<Erc721ListingsQueryQuery>(Erc721ListingsQueryDocument, variables, requestHeaders));
+    erc721Listings(variables: Erc721ListingsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc721ListingsQuery> {
+      return withWrapper(() => client.request<Erc721ListingsQuery>(Erc721ListingsDocument, variables, requestHeaders));
     },
-    erc1155ListingsQuery(variables: Erc1155ListingsQueryQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc1155ListingsQueryQuery> {
-      return withWrapper(() => client.request<Erc1155ListingsQueryQuery>(Erc1155ListingsQueryDocument, variables, requestHeaders));
+    erc1155Listings(variables: Erc1155ListingsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc1155ListingsQuery> {
+      return withWrapper(() => client.request<Erc1155ListingsQuery>(Erc1155ListingsDocument, variables, requestHeaders));
     },
-    erc1155RelatedQuery(variables: Erc1155RelatedQueryQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc1155RelatedQueryQuery> {
-      return withWrapper(() => client.request<Erc1155RelatedQueryQuery>(Erc1155RelatedQueryDocument, variables, requestHeaders));
+    erc1155Related(variables: Erc1155RelatedQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc1155RelatedQuery> {
+      return withWrapper(() => client.request<Erc1155RelatedQuery>(Erc1155RelatedDocument, variables, requestHeaders));
     },
-    erc721OwnerPurchasesQuery(variables: Erc721OwnerPurchasesQueryQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc721OwnerPurchasesQueryQuery> {
-      return withWrapper(() => client.request<Erc721OwnerPurchasesQueryQuery>(Erc721OwnerPurchasesQueryDocument, variables, requestHeaders));
+    erc721OwnerPurchases(variables: Erc721OwnerPurchasesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc721OwnerPurchasesQuery> {
+      return withWrapper(() => client.request<Erc721OwnerPurchasesQuery>(Erc721OwnerPurchasesDocument, variables, requestHeaders));
     },
-    erc1155OwnerPurchasesQuery(variables: Erc1155OwnerPurchasesQueryQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc1155OwnerPurchasesQueryQuery> {
-      return withWrapper(() => client.request<Erc1155OwnerPurchasesQueryQuery>(Erc1155OwnerPurchasesQueryDocument, variables, requestHeaders));
+    erc1155OwnerPurchases(variables: Erc1155OwnerPurchasesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc1155OwnerPurchasesQuery> {
+      return withWrapper(() => client.request<Erc1155OwnerPurchasesQuery>(Erc1155OwnerPurchasesDocument, variables, requestHeaders));
     },
     aavegotchiLeaderboard(variables: AavegotchiLeaderboardQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AavegotchiLeaderboardQuery> {
       return withWrapper(() => client.request<AavegotchiLeaderboardQuery>(AavegotchiLeaderboardDocument, variables, requestHeaders));
     },
-    topAaavegotchiQuery(variables: TopAaavegotchiQueryQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TopAaavegotchiQueryQuery> {
-      return withWrapper(() => client.request<TopAaavegotchiQueryQuery>(TopAaavegotchiQueryDocument, variables, requestHeaders));
+    topAaavegotchi(variables: TopAaavegotchiQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TopAaavegotchiQuery> {
+      return withWrapper(() => client.request<TopAaavegotchiQuery>(TopAaavegotchiDocument, variables, requestHeaders));
     },
-    ownerAavegotchisQuery(variables: OwnerAavegotchisQueryQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<OwnerAavegotchisQueryQuery> {
-      return withWrapper(() => client.request<OwnerAavegotchisQueryQuery>(OwnerAavegotchisQueryDocument, variables, requestHeaders));
+    ownerAavegotchis(variables: OwnerAavegotchisQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<OwnerAavegotchisQuery> {
+      return withWrapper(() => client.request<OwnerAavegotchisQuery>(OwnerAavegotchisDocument, variables, requestHeaders));
     }
   };
 }

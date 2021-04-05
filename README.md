@@ -27,7 +27,6 @@ export async function example() {
   //   itemID: "145" // string should have been a number
   // });
 }
-
 ```
 
 These functions are sourced from `web3/graphQueries.tsx` in `bonding-curve`.

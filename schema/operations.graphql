@@ -20,7 +20,7 @@ query lastTimePurchased($itemID: BigInt!) {
   }
 }
 
-query erc721ListingsQuery(
+query erc721Listings(
   $category: BigInt!
   $orderBy: ERC721Listing_orderBy!
   $orderDirection: OrderDirection!
@@ -63,7 +63,7 @@ query erc721ListingsQuery(
   }
 }
 
-query erc1155ListingsQuery(
+query erc1155Listings(
   $category: BigInt!
   $rarityFilter: BigInt!
   $orderBy: ERC1155Listing_orderBy!
@@ -99,7 +99,7 @@ query erc1155ListingsQuery(
   }
 }
 
-query erc1155RelatedQuery($category: BigInt!, $id: BigInt!, $first: Int!) {
+query erc1155Related($category: BigInt!, $id: BigInt!, $first: Int!) {
   erc1155Listings(
     where: {
       erc1155TypeId: $id
@@ -126,7 +126,7 @@ query erc1155RelatedQuery($category: BigInt!, $id: BigInt!, $first: Int!) {
   }
 }
 
-query erc721OwnerPurchasesQuery($category: BigInt!, $buyer: Bytes!) {
+query erc721OwnerPurchases($category: BigInt!, $buyer: Bytes!) {
   erc721Listings(
     where: {
       buyer: $buyer
@@ -161,7 +161,7 @@ query erc721OwnerPurchasesQuery($category: BigInt!, $buyer: Bytes!) {
   }
 }
 
-query erc1155OwnerPurchasesQuery($category: BigInt!, $buyer: Bytes!) {
+query erc1155OwnerPurchases($category: BigInt!, $buyer: Bytes!) {
   erc1155Purchases(
     where: { buyer: $buyer, category: $category, cancelled: false, sold: true }
     orderBy: timeCreated
@@ -207,7 +207,7 @@ query aavegotchiLeaderboard(
   }
 }
 
-query topAaavegotchiQuery(
+query topAaavegotchi(
   $orderBy: Aavegotchi_orderBy!
   $orderDirection: OrderDirection!
 ) {
@@ -327,7 +327,7 @@ query topAaavegotchiQuery(
   }
 }
 
-query ownerAavegotchisQuery($id: ID!) {
+query ownerAavegotchis($id: ID!) {
   users(where: { id: $id }) {
     id
     gotchisOwned {
@@ -348,7 +348,7 @@ query ownerAavegotchisQuery($id: ID!) {
 }
 
 # I believe these use a different api under /cinnabarhorse namespace
-# query raffleQuery($user: String!) {
+# query raffle($user: String!) {
 #   users(where:{id:$user}) {
 #     id
 #     totalCommon
