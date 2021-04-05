@@ -1,4 +1,4 @@
-import { defaultSdk } from "@candoizo/aavegotchi-lib-node"
+import { defaultSdk } from "@candoizo/aavegotchi-node-lib"
 const { lastTimePurchased, aavegotchiLeaderboard } = defaultSdk();
 
 async function main() {
