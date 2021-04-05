@@ -1,8 +1,8 @@
-# aavegotchi-node-lib👻📦
+# aavegotchi-node-lib 👻📦
 
 A Node.js package for type-safe definitions from the official Aavegotchi GraphQL endpoints.
 
-Clone this repo and try the `demo/` with: `cd demo/ && yarn && yarn test`
+Clone this repo and test the [`demo`](./demo/) with: `cd demo/ && yarn && yarn test`
 
 Peek some example Javascript code in [demo/index.ts](./demo/index.ts). Find where the functions come from in [the GraphQL operations file](../schema/operations.graphql), which is their fancy term for queries.
 
@@ -16,6 +16,7 @@ import { defaultSdk } from "candoizo/aavegotchi-node-lib"
 const { lastTimePurchased, aavegotchiLeaderboard } = defaultSdk();
 
 export async function example() {
+  // https://github.com/aavegotchi/bonding-curve/blob/master/web3/graphQueries.tsx#L267
   let res = await lastTimePurchased({
     itemID: 145
   });
@@ -29,7 +30,7 @@ export async function example() {
 
 ```
 
-These functions are 1 = 1 sourced from `web3/graphQueries.tsx` in `bonding-curve`.
+These functions are sourced from `web3/graphQueries.tsx` in `bonding-curve`.
 
 # Installation
 
@@ -40,16 +41,15 @@ If private, see [Packaging](#packaging) section.
 
 # Packaging
 
-## Install from private package registry
+## Installing while on private package registry
 
 Create a `.npmrc` in the repo. Contents like:
 
-    @candoizo:registry=https://npm.pkg.github.com
+    @aavegotchi:registry=https://npm.pkg.github.com
 
 Then install with
 
     yarn add @aavegotchi/lib
-
 
 # External
 

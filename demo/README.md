@@ -1,8 +1,8 @@
 # Aavegotchi-node-lib demo!
 
-A type safe TypeScript SDK for the Aavegotchi subgraph endpoint.
+An example of our type safe TypeScript SDK for the Aavegotchi subgraph endpoint.
 
-With `@aavegotchi/lib`, queries can be made from any Javascript project.
+With `@aavegotchi/lib`, it's easy to add in any Javascript project.
 
 ## Testing
 
@@ -12,7 +12,6 @@ Use: `yarn && yarn test`. Also check [index.ts](./index.ts). All functions can b
 
 ```
 demo [dev] ⚡ yarn test
-{ portals: [ { id: '0' } ] }
 {
   erc1155Listings: [
     {

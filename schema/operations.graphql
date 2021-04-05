@@ -1,68 +1,116 @@
 query userGotchisOwned($id: ID!) {
-  user(id:$id) {
+  user(id: $id) {
     gotchisOwned {
-      id,
+      id
       name
     }
   }
 }
 
 query lastTimePurchased($itemID: BigInt!) {
-  erc1155Listings(first:1, where:{erc1155TypeId:$itemID, sold:true}, orderBy:timeLastPurchased, orderDirection:desc) {
+  erc1155Listings(
+    first: 1
+    where: { erc1155TypeId: $itemID, sold: true }
+    orderBy: timeLastPurchased
+    orderDirection: desc
+  ) {
     id
     priceInWei
     timeLastPurchased
   }
 }
 
-query erc721ListingsQuery($category: BigInt!, $orderBy: ERC721Listing_orderBy!, $orderDirection: OrderDirection!, $first: Int!, $skip: Int!) {
-    erc721Listings( where:{category:$category,priceInWei_lt: 10000000,cancelled:false, timePurchased:0}, orderBy:$orderBy, orderDirection:$orderDirection, first:$first, skip:$skip) {
-
-        id
-        tokenId
-        category
-        priceInWei
-        seller
-        timePurchased
-        hauntId
-        gotchi {
-			id
-			name
-			collateral
-			modifiedNumericTraits
-			stakedAmount
-			modifiedRarityScore
-			baseRarityScore
-			level
+query erc721ListingsQuery(
+  $category: BigInt!
+  $orderBy: ERC721Listing_orderBy!
+  $orderDirection: OrderDirection!
+  $first: Int!
+  $skip: Int!
+) {
+  erc721Listings(
+    where: {
+      category: $category
+      priceInWei_lt: 10000000
+      cancelled: false
+      timePurchased: 0
+    }
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    first: $first
+    skip: $skip
+  ) {
+    id
+    tokenId
+    category
+    priceInWei
+    seller
+    timePurchased
+    hauntId
+    gotchi {
+      id
+      name
+      collateral
+      modifiedNumericTraits
+      stakedAmount
+      modifiedRarityScore
+      baseRarityScore
+      level
       experience
-			owner {
-				id
-			}
-        }
-	}
+      owner {
+        id
+      }
+    }
+  }
 }
 
-query erc1155ListingsQuery($category: BigInt!, $rarityFilter: BigInt!, $orderBy: ERC1155Listing_orderBy!, $orderDirection: OrderDirection!, $first: Int!, $skip: Int!) {
-    erc1155Listings( where:{category:$category,
+query erc1155ListingsQuery(
+  $category: BigInt!
+  $rarityFilter: BigInt!
+  $orderBy: ERC1155Listing_orderBy!
+  $orderDirection: OrderDirection!
+  $first: Int!
+  $skip: Int!
+) {
+  erc1155Listings(
+    where: {
+      category: $category
       rarityLevel: $rarityFilter
-      ,priceInWei_lt: 10000000,cancelled:false, sold:false}, orderBy:$orderBy, orderDirection:$orderDirection, first:$first, skip:$skip) {
-		id
-		cancelled
-		sold
-		erc1155TypeId
-		erc1155TokenAddress
-		category
-		quantity
-		category
-		priceInWei
-		timeCreated
-		seller
-		rarityLevel
+      priceInWei_lt: 10000000
+      cancelled: false
+      sold: false
     }
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    first: $first
+    skip: $skip
+  ) {
+    id
+    cancelled
+    sold
+    erc1155TypeId
+    erc1155TokenAddress
+    category
+    quantity
+    category
+    priceInWei
+    timeCreated
+    seller
+    rarityLevel
+  }
 }
 
 query erc1155RelatedQuery($category: BigInt!, $id: BigInt!, $first: Int!) {
-  erc1155Listings(where:{erc1155TypeId:$id,category:$category,cancelled:false, sold:false}, orderBy:priceInWei, orderDirection:asc, first:$first) {
+  erc1155Listings(
+    where: {
+      erc1155TypeId: $id
+      category: $category
+      cancelled: false
+      sold: false
+    }
+    orderBy: priceInWei
+    orderDirection: asc
+    first: $first
+  ) {
     id
     cancelled
     sold
@@ -79,7 +127,16 @@ query erc1155RelatedQuery($category: BigInt!, $id: BigInt!, $first: Int!) {
 }
 
 query erc721OwnerPurchasesQuery($category: BigInt!, $buyer: Bytes!) {
-  erc721Listings( where:{buyer:$buyer,category:$category,cancelled:false,timePurchased_gt:0}, orderBy:timeCreated, orderDirection:desc) {
+  erc721Listings(
+    where: {
+      buyer: $buyer
+      category: $category
+      cancelled: false
+      timePurchased_gt: 0
+    }
+    orderBy: timeCreated
+    orderDirection: desc
+  ) {
     id
     buyer
     tokenId
@@ -98,7 +155,7 @@ query erc721OwnerPurchasesQuery($category: BigInt!, $buyer: Bytes!) {
       baseRarityScore
       level
       owner {
-          id
+        id
       }
     }
   }
@@ -106,7 +163,10 @@ query erc721OwnerPurchasesQuery($category: BigInt!, $buyer: Bytes!) {
 
 query erc1155OwnerPurchasesQuery($category: BigInt!, $buyer: Bytes!) {
   erc1155Purchases(
-    where:{buyer:$buyer,category:$category, cancelled:false, sold:true}, orderBy:timeCreated, orderDirection:desc) {
+    where: { buyer: $buyer, category: $category, cancelled: false, sold: true }
+    orderBy: timeCreated
+    orderDirection: desc
+  ) {
     listingID
     buyer
     erc1155TypeId
@@ -118,12 +178,16 @@ query erc1155OwnerPurchasesQuery($category: BigInt!, $buyer: Bytes!) {
   }
 }
 
-query aavegotchiLeaderboard($orderBy: Aavegotchi_orderBy!, $orderDirection: OrderDirection!, $first: Int!) {
+query aavegotchiLeaderboard(
+  $orderBy: Aavegotchi_orderBy!
+  $orderDirection: OrderDirection!
+  $first: Int!
+) {
   aavegotchis(
-    orderBy:$orderBy,
-    orderDirection:$orderDirection,
-    first:$first,
-    where:{baseRarityScore_gt:0}
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    first: $first
+    where: { baseRarityScore_gt: 0 }
   ) {
     id
     name
@@ -143,8 +207,16 @@ query aavegotchiLeaderboard($orderBy: Aavegotchi_orderBy!, $orderDirection: Orde
   }
 }
 
-query topAaavegotchiQuery($orderBy: Aavegotchi_orderBy!, $orderDirection: OrderDirection!) {
-  top1000: aavegotchis(orderBy:$orderBy,orderDirection:$orderDirection, first:1000, where:{baseRarityScore_gt:0}) {
+query topAaavegotchiQuery(
+  $orderBy: Aavegotchi_orderBy!
+  $orderDirection: OrderDirection!
+) {
+  top1000: aavegotchis(
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    first: 1000
+    where: { baseRarityScore_gt: 0 }
+  ) {
     id
     name
     baseRarityScore
@@ -158,10 +230,16 @@ query topAaavegotchiQuery($orderBy: Aavegotchi_orderBy!, $orderDirection: OrderD
     collateral
     hauntId
     owner {
-        id
+      id
     }
   }
-  top2000: aavegotchis(orderBy:$orderBy,orderDirection:$orderDirection, first:1000, skip:1000, where:{baseRarityScore_gt:0}) {
+  top2000: aavegotchis(
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    first: 1000
+    skip: 1000
+    where: { baseRarityScore_gt: 0 }
+  ) {
     id
     name
     baseRarityScore
@@ -175,10 +253,16 @@ query topAaavegotchiQuery($orderBy: Aavegotchi_orderBy!, $orderDirection: OrderD
     collateral
     hauntId
     owner {
-        id
+      id
     }
   }
-  top3000: aavegotchis(orderBy:$orderBy,orderDirection:$orderDirection, first:1000, skip:2000, where:{baseRarityScore_gt:0}) {
+  top3000: aavegotchis(
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    first: 1000
+    skip: 2000
+    where: { baseRarityScore_gt: 0 }
+  ) {
     id
     name
     baseRarityScore
@@ -192,10 +276,16 @@ query topAaavegotchiQuery($orderBy: Aavegotchi_orderBy!, $orderDirection: OrderD
     collateral
     hauntId
     owner {
-        id
+      id
     }
   }
-  top4000: aavegotchis(orderBy:$orderBy,orderDirection:$orderDirection, first:1000, skip:3000, where:{baseRarityScore_gt:0}) {
+  top4000: aavegotchis(
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    first: 1000
+    skip: 3000
+    where: { baseRarityScore_gt: 0 }
+  ) {
     id
     name
     baseRarityScore
@@ -209,10 +299,16 @@ query topAaavegotchiQuery($orderBy: Aavegotchi_orderBy!, $orderDirection: OrderD
     collateral
     hauntId
     owner {
-        id
+      id
     }
   }
-  top5000: aavegotchis(orderBy:$orderBy,orderDirection:$orderDirection, first:1000, skip:4000, where:{baseRarityScore_gt:0}) {
+  top5000: aavegotchis(
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    first: 1000
+    skip: 4000
+    where: { baseRarityScore_gt: 0 }
+  ) {
     id
     name
     baseRarityScore
@@ -226,32 +322,30 @@ query topAaavegotchiQuery($orderBy: Aavegotchi_orderBy!, $orderDirection: OrderD
     collateral
     hauntId
     owner {
-        id
+      id
     }
-
   }
 }
 
 query ownerAavegotchisQuery($id: ID!) {
-  users(where:{id:$id}) {
-  	id
-  	gotchisOwned {
-  	  id
-  		name
-  		baseRarityScore
-  		modifiedRarityScore
-  		numericTraits
-  		modifiedNumericTraits
-  		stakedAmount
-  		kinship
-  		experience
-  		level
-  		collateral
-  		hauntId
-  	}
+  users(where: { id: $id }) {
+    id
+    gotchisOwned {
+      id
+      name
+      baseRarityScore
+      modifiedRarityScore
+      numericTraits
+      modifiedNumericTraits
+      stakedAmount
+      kinship
+      experience
+      level
+      collateral
+      hauntId
+    }
   }
 }
-
 
 # I believe these use a different api under /cinnabarhorse namespace
 # query raffleQuery($user: String!) {
