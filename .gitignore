@@ -5,3 +5,4 @@ graphQueries.tsx
 *.tgz
 dist/*.js
 blank_demo/
+*.bak
