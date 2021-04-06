@@ -16,26 +16,25 @@ import { defaultSdk } from "candoizo/aavegotchi-node-lib"
 const { lastTimePurchased, aavegotchiLeaderboard } = defaultSdk();
 
 export async function example() {
-  // https://github.com/aavegotchi/bonding-curve/blob/master/web3/graphQueries.tsx#L267
+  // same as bonding-c urveweb3/graphQueries.tsx#L267
   let res = await lastTimePurchased({
     itemID: 145
   });
   console.log(res);
 
-  // commented out because it wouldnt compile in the first place
+  // commented out because it couldnt compile in the first place
   // let res2 = await lastTimePurchased({
   //   itemID: "145" // string should have been a number
   // });
 }
 ```
 
-These functions are sourced from `web3/graphQueries.tsx` in `bonding-curve`.
-
 # Installation
 
 note: replace instances of `@aavegotchi/lib` with `@candoizo/aavegotchi-node-lib` if not on aavegotchi namespace.
 
 If public: `yarn add @aavegotchi/lib`
+
 If private, see [Packaging](#packaging) section.
 
 # Packaging
