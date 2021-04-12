@@ -1,7 +1,7 @@
 schema: https://api.thegraph.com/subgraphs/name/aavegotchi/aavegotchi-core-matic
 generates:
   ./dist/:
-    documents: schema/operations.graphql # pixelcraft specific sdk
+    documents: schema/*.graphql # pixelcraft specific sdk
     preset: graphql-modules
     presetConfig:
       baseTypesPath: gen.ts # Where to create the complete schema types

@@ -1771,6 +1771,82 @@ export type _SubgraphErrorPolicy_ =
   /** If the subgraph has indexing errors, data will be omitted. The default. */
   | 'deny';
 
+export type GetUserAavegotchisQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetUserAavegotchisQuery = (
+  { __typename?: 'Query' }
+  & { user?: Maybe<(
+    { __typename?: 'User' }
+    & { gotchisOwned: Array<(
+      { __typename?: 'Aavegotchi' }
+      & Pick<Aavegotchi, 'id' | 'name'>
+    )> }
+  )> }
+);
+
+export type GetAavegotchiQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetAavegotchiQuery = (
+  { __typename?: 'Query' }
+  & { aavegotchi?: Maybe<(
+    { __typename?: 'Aavegotchi' }
+    & Pick<Aavegotchi, 'id' | 'name'>
+  )> }
+);
+
+export type GetAavegotchiStatsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetAavegotchiStatsQuery = (
+  { __typename?: 'Query' }
+  & { aavegotchi?: Maybe<(
+    { __typename?: 'Aavegotchi' }
+    & Pick<Aavegotchi, 'id' | 'name' | 'baseRarityScore' | 'modifiedRarityScore' | 'numericTraits' | 'modifiedNumericTraits' | 'stakedAmount' | 'kinship' | 'experience' | 'level' | 'collateral' | 'hauntId'>
+    & { owner?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id'>
+    )> }
+  )> }
+);
+
+export type SortedAavegotchisQueryVariables = Exact<{
+  orderBy: Aavegotchi_OrderBy;
+  orderDirection: OrderDirection;
+  first: Scalars['Int'];
+}>;
+
+
+export type SortedAavegotchisQuery = (
+  { __typename?: 'Query' }
+  & { aavegotchis: Array<(
+    { __typename?: 'Aavegotchi' }
+    & Pick<Aavegotchi, 'id' | 'name' | 'baseRarityScore' | 'modifiedRarityScore' | 'numericTraits' | 'modifiedNumericTraits' | 'stakedAmount' | 'kinship' | 'experience' | 'level' | 'collateral' | 'hauntId'>
+    & { owner?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id'>
+    )> }
+  )> }
+);
+
+export type ItemTypesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ItemTypesQuery = (
+  { __typename?: 'Query' }
+  & { itemTypes: Array<(
+    { __typename?: 'ItemType' }
+    & Pick<ItemType, 'author' | 'canBeTransferred' | 'canPurchaseWithGhst' | 'category' | 'experienceBonus' | 'ghstPrice' | 'kinshipBonus' | 'maxQuantity' | 'minLevel' | 'name' | 'rarityScoreModifier' | 'slotPositions' | 'svgId' | 'totalQuantity' | 'traitModifiers'>
+  )> }
+);
+
 export type UserGotchisOwnedQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -1977,6 +2053,92 @@ export type OwnerAavegotchisQuery = (
 );
 
 
+export const GetUserAavegotchisDocument = gql`
+    query getUserAavegotchis($id: ID!) {
+  user(id: $id) {
+    gotchisOwned {
+      id
+      name
+    }
+  }
+}
+    `;
+export const GetAavegotchiDocument = gql`
+    query getAavegotchi($id: ID!) {
+  aavegotchi(id: $id) {
+    id
+    name
+  }
+}
+    `;
+export const GetAavegotchiStatsDocument = gql`
+    query getAavegotchiStats($id: ID!) {
+  aavegotchi(id: $id) {
+    id
+    name
+    baseRarityScore
+    modifiedRarityScore
+    numericTraits
+    modifiedNumericTraits
+    stakedAmount
+    kinship
+    experience
+    level
+    collateral
+    hauntId
+    owner {
+      id
+    }
+  }
+}
+    `;
+export const SortedAavegotchisDocument = gql`
+    query sortedAavegotchis($orderBy: Aavegotchi_orderBy!, $orderDirection: OrderDirection!, $first: Int!) {
+  aavegotchis(
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    first: $first
+    where: {baseRarityScore_gt: 0}
+  ) {
+    id
+    name
+    baseRarityScore
+    modifiedRarityScore
+    numericTraits
+    modifiedNumericTraits
+    stakedAmount
+    kinship
+    experience
+    level
+    collateral
+    hauntId
+    owner {
+      id
+    }
+  }
+}
+    `;
+export const ItemTypesDocument = gql`
+    query itemTypes {
+  itemTypes(first: 1000) {
+    author
+    canBeTransferred
+    canPurchaseWithGhst
+    category
+    experienceBonus
+    ghstPrice
+    kinshipBonus
+    maxQuantity
+    minLevel
+    name
+    rarityScoreModifier
+    slotPositions
+    svgId
+    totalQuantity
+    traitModifiers
+  }
+}
+    `;
 export const UserGotchisOwnedDocument = gql`
     query userGotchisOwned($id: ID!) {
   user(id: $id) {
@@ -2302,6 +2464,21 @@ export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    getUserAavegotchis(variables: GetUserAavegotchisQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetUserAavegotchisQuery> {
+      return withWrapper(() => client.request<GetUserAavegotchisQuery>(GetUserAavegotchisDocument, variables, requestHeaders));
+    },
+    getAavegotchi(variables: GetAavegotchiQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAavegotchiQuery> {
+      return withWrapper(() => client.request<GetAavegotchiQuery>(GetAavegotchiDocument, variables, requestHeaders));
+    },
+    getAavegotchiStats(variables: GetAavegotchiStatsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAavegotchiStatsQuery> {
+      return withWrapper(() => client.request<GetAavegotchiStatsQuery>(GetAavegotchiStatsDocument, variables, requestHeaders));
+    },
+    sortedAavegotchis(variables: SortedAavegotchisQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SortedAavegotchisQuery> {
+      return withWrapper(() => client.request<SortedAavegotchisQuery>(SortedAavegotchisDocument, variables, requestHeaders));
+    },
+    itemTypes(variables?: ItemTypesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ItemTypesQuery> {
+      return withWrapper(() => client.request<ItemTypesQuery>(ItemTypesDocument, variables, requestHeaders));
+    },
     userGotchisOwned(variables: UserGotchisOwnedQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UserGotchisOwnedQuery> {
       return withWrapper(() => client.request<UserGotchisOwnedQuery>(UserGotchisOwnedDocument, variables, requestHeaders));
     },
