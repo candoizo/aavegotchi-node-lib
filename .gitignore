@@ -6,3 +6,5 @@ graphQueries.tsx
 dist/*.js
 blank_demo/
 *.bak
+*.lock
+src/*.js

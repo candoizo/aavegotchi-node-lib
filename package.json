@@ -1,13 +1,17 @@
 {
   "name": "@candoizo/aavegotchi-node-lib",
-  "version": "1.0.1-2",
+  "version": "1.0.0-5",
   "description": "awesome aavegotchi node library",
   "main": "src/index.js",
+  "types": "dist/gen.d.ts",
   "scripts": {
-    "bundle": "rm -rf dist/ && yarn graphql-codegen && tsc dist/gen.ts",
-    "release": "yarn bundle && yarn publish"
+    "bundle": "rm -rf dist/ && yarn graphql-codegen && tsc src/index.ts",
+    "release": "yarn bundle && yarn publish --access=public"
   },
-  "repository": "https://github.com/candoizo/aavegotchi-node-lib",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/candoizo/aavegotchi-node-lib.git"
+  },
   "author": "candoizo",
   "license": "TBD",
   "dependencies": {
@@ -28,5 +32,12 @@
     "@graphql-codegen/typescript-react-query": "^1.2.4",
     "@graphql-codegen/typescript-resolvers": "^1.19.0",
     "@types/graphql": "^14.5.0"
+  },
+  "homepage": "https://github.com/candoizo/aavegotchi-node-lib",
+  "bugs": {
+    "url": "https://github.com/candoizo/aavegotchi-node-lib/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

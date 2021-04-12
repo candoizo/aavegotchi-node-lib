@@ -35,20 +35,6 @@ note: replace instances of `@aavegotchi/lib` with `@candoizo/aavegotchi-node-lib
 
 If public: `yarn add @aavegotchi/lib`
 
-If private, see [Packaging](#packaging) section.
-
-# Packaging
-
-## Installing while on private package registry
-
-Create a `.npmrc` in the repo. Contents like:
-
-    @aavegotchi:registry=https://npm.pkg.github.com
-
-Then install with
-
-    yarn add @aavegotchi/lib
-
 # External
 
 <https://thegraph.com/explorer/subgraph/aavegotchi/aavegotchi-core-matic?version=current>
