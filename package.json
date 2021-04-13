@@ -17,6 +17,7 @@
   "author": "candoizo",
   "license": "TBD",
   "dependencies": {
+    "@candoizo/aavegotchi-node-lib": "../candoizo-aavegotchi-node-lib-v1.0.0-6.tgz",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
     "graphql-tag": "^2.11.0"

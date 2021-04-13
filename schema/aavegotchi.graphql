@@ -1,5 +1,5 @@
 # information about an aavegotchi / portal
-query getAavegotchiStats($id: ID!) {
+query aavegotchiStats($id: ID!) {
   aavegotchi(id: $id) {
     id,
     name,
@@ -19,38 +19,38 @@ query getAavegotchiStats($id: ID!) {
   }
 }
 
-query getAavegotchiName($id: ID!) {
+query aavegotchiName($id: ID!) {
   aavegotchi(id: $id) {
     name,
   }
 }
 
-query getAavegotchiBirthBlock($id: ID!) {
+query aavegotchiBirthBlock($id: ID!) {
   aavegotchi(id: $id) {
     claimedAt
   }
 }
 
-query getAavegotchiLevel($id: ID!) {
+query aavegotchiLevel($id: ID!) {
   aavegotchi(id: $id) {
     level
   }
 }
 
-query getAavegotchiKinship($id: ID!) {
+query aavegotchiKinship($id: ID!) {
   aavegotchi(id: $id) {
     kinship
   }
 }
 
-query getAavegotchiRarity($id: ID!) {
+query aavegotchiRarity($id: ID!) {
   aavegotchi(id: $id) {
     baseRarityScore,
     modifiedRarityScore
   }
 }
 
-query getAavegotchiEquipped($id: ID!) {
+query aavegotchiEquipped($id: ID!) {
   aavegotchi(id: $id) {
     equippedWearables
   }

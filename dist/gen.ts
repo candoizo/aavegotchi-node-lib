@@ -1771,12 +1771,12 @@ export type _SubgraphErrorPolicy_ =
   /** If the subgraph has indexing errors, data will be omitted. The default. */
   | 'deny';
 
-export type GetAavegotchiStatsQueryVariables = Exact<{
+export type AavegotchiStatsQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetAavegotchiStatsQuery = (
+export type AavegotchiStatsQuery = (
   { __typename?: 'Query' }
   & { aavegotchi?: Maybe<(
     { __typename?: 'Aavegotchi' }
@@ -1788,25 +1788,25 @@ export type GetAavegotchiStatsQuery = (
   )> }
 );
 
-export type GetAavegotchiNameQueryVariables = Exact<{
+export type AavegotchiNameQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetAavegotchiNameQuery = (
+export type AavegotchiNameQuery = (
   { __typename?: 'Query' }
   & { aavegotchi?: Maybe<(
     { __typename?: 'Aavegotchi' }
-    & Pick<Aavegotchi, 'id' | 'name'>
+    & Pick<Aavegotchi, 'name'>
   )> }
 );
 
-export type GetAavegotchiBirthBlockQueryVariables = Exact<{
+export type AavegotchiBirthBlockQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetAavegotchiBirthBlockQuery = (
+export type AavegotchiBirthBlockQuery = (
   { __typename?: 'Query' }
   & { aavegotchi?: Maybe<(
     { __typename?: 'Aavegotchi' }
@@ -1814,12 +1814,12 @@ export type GetAavegotchiBirthBlockQuery = (
   )> }
 );
 
-export type GetAavegotchiLevelQueryVariables = Exact<{
+export type AavegotchiLevelQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetAavegotchiLevelQuery = (
+export type AavegotchiLevelQuery = (
   { __typename?: 'Query' }
   & { aavegotchi?: Maybe<(
     { __typename?: 'Aavegotchi' }
@@ -1827,12 +1827,12 @@ export type GetAavegotchiLevelQuery = (
   )> }
 );
 
-export type GetAavegotchiKinshipQueryVariables = Exact<{
+export type AavegotchiKinshipQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetAavegotchiKinshipQuery = (
+export type AavegotchiKinshipQuery = (
   { __typename?: 'Query' }
   & { aavegotchi?: Maybe<(
     { __typename?: 'Aavegotchi' }
@@ -1840,12 +1840,12 @@ export type GetAavegotchiKinshipQuery = (
   )> }
 );
 
-export type GetAavegotchiRarityQueryVariables = Exact<{
+export type AavegotchiRarityQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetAavegotchiRarityQuery = (
+export type AavegotchiRarityQuery = (
   { __typename?: 'Query' }
   & { aavegotchi?: Maybe<(
     { __typename?: 'Aavegotchi' }
@@ -1853,12 +1853,12 @@ export type GetAavegotchiRarityQuery = (
   )> }
 );
 
-export type GetAavegotchiEquippedQueryVariables = Exact<{
+export type AavegotchiEquippedQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetAavegotchiEquippedQuery = (
+export type AavegotchiEquippedQuery = (
   { __typename?: 'Query' }
   & { aavegotchi?: Maybe<(
     { __typename?: 'Aavegotchi' }
@@ -1866,10 +1866,10 @@ export type GetAavegotchiEquippedQuery = (
   )> }
 );
 
-export type AllItemsQueryVariables = Exact<{ [key: string]: never; }>;
+export type ItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllItemsQuery = (
+export type ItemsQuery = (
   { __typename?: 'Query' }
   & { itemTypes: Array<(
     { __typename?: 'ItemType' }
@@ -1877,12 +1877,12 @@ export type AllItemsQuery = (
   )> }
 );
 
-export type InfoForItemQueryVariables = Exact<{
+export type ItemInfoQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type InfoForItemQuery = (
+export type ItemInfoQuery = (
   { __typename?: 'Query' }
   & { itemType?: Maybe<(
     { __typename?: 'ItemType' }
@@ -1890,12 +1890,12 @@ export type InfoForItemQuery = (
   )> }
 );
 
-export type MetadataForItemQueryVariables = Exact<{
+export type ItemMetadataQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type MetadataForItemQuery = (
+export type ItemMetadataQuery = (
   { __typename?: 'Query' }
   & { itemType?: Maybe<(
     { __typename?: 'ItemType' }
@@ -2127,12 +2127,12 @@ export type SortedAavegotchisQuery = (
   )> }
 );
 
-export type GetUserAavegotchisQueryVariables = Exact<{
+export type UserAavegotchisQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetUserAavegotchisQuery = (
+export type UserAavegotchisQuery = (
   { __typename?: 'Query' }
   & { user?: Maybe<(
     { __typename?: 'User' }
@@ -2144,8 +2144,8 @@ export type GetUserAavegotchisQuery = (
 );
 
 
-export const GetAavegotchiStatsDocument = gql`
-    query getAavegotchiStats($id: ID!) {
+export const AavegotchiStatsDocument = gql`
+    query aavegotchiStats($id: ID!) {
   aavegotchi(id: $id) {
     id
     name
@@ -2165,52 +2165,51 @@ export const GetAavegotchiStatsDocument = gql`
   }
 }
     `;
-export const GetAavegotchiNameDocument = gql`
-    query getAavegotchiName($id: ID!) {
+export const AavegotchiNameDocument = gql`
+    query aavegotchiName($id: ID!) {
   aavegotchi(id: $id) {
-    id
     name
   }
 }
     `;
-export const GetAavegotchiBirthBlockDocument = gql`
-    query getAavegotchiBirthBlock($id: ID!) {
+export const AavegotchiBirthBlockDocument = gql`
+    query aavegotchiBirthBlock($id: ID!) {
   aavegotchi(id: $id) {
     claimedAt
   }
 }
     `;
-export const GetAavegotchiLevelDocument = gql`
-    query getAavegotchiLevel($id: ID!) {
+export const AavegotchiLevelDocument = gql`
+    query aavegotchiLevel($id: ID!) {
   aavegotchi(id: $id) {
     level
   }
 }
     `;
-export const GetAavegotchiKinshipDocument = gql`
-    query getAavegotchiKinship($id: ID!) {
+export const AavegotchiKinshipDocument = gql`
+    query aavegotchiKinship($id: ID!) {
   aavegotchi(id: $id) {
     kinship
   }
 }
     `;
-export const GetAavegotchiRarityDocument = gql`
-    query getAavegotchiRarity($id: ID!) {
+export const AavegotchiRarityDocument = gql`
+    query aavegotchiRarity($id: ID!) {
   aavegotchi(id: $id) {
     baseRarityScore
     modifiedRarityScore
   }
 }
     `;
-export const GetAavegotchiEquippedDocument = gql`
-    query getAavegotchiEquipped($id: ID!) {
+export const AavegotchiEquippedDocument = gql`
+    query aavegotchiEquipped($id: ID!) {
   aavegotchi(id: $id) {
     equippedWearables
   }
 }
     `;
-export const AllItemsDocument = gql`
-    query allItems {
+export const ItemsDocument = gql`
+    query items {
   itemTypes(first: 1000) {
     author
     canBeTransferred
@@ -2230,8 +2229,8 @@ export const AllItemsDocument = gql`
   }
 }
     `;
-export const InfoForItemDocument = gql`
-    query infoForItem($id: ID!) {
+export const ItemInfoDocument = gql`
+    query itemInfo($id: ID!) {
   itemType(id: $id) {
     id
     name
@@ -2241,8 +2240,8 @@ export const InfoForItemDocument = gql`
   }
 }
     `;
-export const MetadataForItemDocument = gql`
-    query metadataForItem($id: ID!) {
+export const ItemMetadataDocument = gql`
+    query itemMetadata($id: ID!) {
   itemType(id: $id) {
     author
     canBeTransferred
@@ -2606,8 +2605,8 @@ export const SortedAavegotchisDocument = gql`
   }
 }
     `;
-export const GetUserAavegotchisDocument = gql`
-    query getUserAavegotchis($id: ID!) {
+export const UserAavegotchisDocument = gql`
+    query userAavegotchis($id: ID!) {
   user(id: $id) {
     gotchisOwned {
       id
@@ -2627,35 +2626,35 @@ export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    getAavegotchiStats(variables: GetAavegotchiStatsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAavegotchiStatsQuery> {
-      return withWrapper(() => client.request<GetAavegotchiStatsQuery>(GetAavegotchiStatsDocument, variables, requestHeaders));
+    aavegotchiStats(variables: AavegotchiStatsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AavegotchiStatsQuery> {
+      return withWrapper(() => client.request<AavegotchiStatsQuery>(AavegotchiStatsDocument, variables, requestHeaders));
     },
-    getAavegotchiName(variables: GetAavegotchiNameQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAavegotchiNameQuery> {
-      return withWrapper(() => client.request<GetAavegotchiNameQuery>(GetAavegotchiNameDocument, variables, requestHeaders));
+    aavegotchiName(variables: AavegotchiNameQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AavegotchiNameQuery> {
+      return withWrapper(() => client.request<AavegotchiNameQuery>(AavegotchiNameDocument, variables, requestHeaders));
     },
-    getAavegotchiBirthBlock(variables: GetAavegotchiBirthBlockQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAavegotchiBirthBlockQuery> {
-      return withWrapper(() => client.request<GetAavegotchiBirthBlockQuery>(GetAavegotchiBirthBlockDocument, variables, requestHeaders));
+    aavegotchiBirthBlock(variables: AavegotchiBirthBlockQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AavegotchiBirthBlockQuery> {
+      return withWrapper(() => client.request<AavegotchiBirthBlockQuery>(AavegotchiBirthBlockDocument, variables, requestHeaders));
     },
-    getAavegotchiLevel(variables: GetAavegotchiLevelQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAavegotchiLevelQuery> {
-      return withWrapper(() => client.request<GetAavegotchiLevelQuery>(GetAavegotchiLevelDocument, variables, requestHeaders));
+    aavegotchiLevel(variables: AavegotchiLevelQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AavegotchiLevelQuery> {
+      return withWrapper(() => client.request<AavegotchiLevelQuery>(AavegotchiLevelDocument, variables, requestHeaders));
     },
-    getAavegotchiKinship(variables: GetAavegotchiKinshipQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAavegotchiKinshipQuery> {
-      return withWrapper(() => client.request<GetAavegotchiKinshipQuery>(GetAavegotchiKinshipDocument, variables, requestHeaders));
+    aavegotchiKinship(variables: AavegotchiKinshipQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AavegotchiKinshipQuery> {
+      return withWrapper(() => client.request<AavegotchiKinshipQuery>(AavegotchiKinshipDocument, variables, requestHeaders));
     },
-    getAavegotchiRarity(variables: GetAavegotchiRarityQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAavegotchiRarityQuery> {
-      return withWrapper(() => client.request<GetAavegotchiRarityQuery>(GetAavegotchiRarityDocument, variables, requestHeaders));
+    aavegotchiRarity(variables: AavegotchiRarityQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AavegotchiRarityQuery> {
+      return withWrapper(() => client.request<AavegotchiRarityQuery>(AavegotchiRarityDocument, variables, requestHeaders));
     },
-    getAavegotchiEquipped(variables: GetAavegotchiEquippedQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAavegotchiEquippedQuery> {
-      return withWrapper(() => client.request<GetAavegotchiEquippedQuery>(GetAavegotchiEquippedDocument, variables, requestHeaders));
+    aavegotchiEquipped(variables: AavegotchiEquippedQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AavegotchiEquippedQuery> {
+      return withWrapper(() => client.request<AavegotchiEquippedQuery>(AavegotchiEquippedDocument, variables, requestHeaders));
     },
-    allItems(variables?: AllItemsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllItemsQuery> {
-      return withWrapper(() => client.request<AllItemsQuery>(AllItemsDocument, variables, requestHeaders));
+    items(variables?: ItemsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ItemsQuery> {
+      return withWrapper(() => client.request<ItemsQuery>(ItemsDocument, variables, requestHeaders));
     },
-    infoForItem(variables: InfoForItemQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<InfoForItemQuery> {
-      return withWrapper(() => client.request<InfoForItemQuery>(InfoForItemDocument, variables, requestHeaders));
+    itemInfo(variables: ItemInfoQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ItemInfoQuery> {
+      return withWrapper(() => client.request<ItemInfoQuery>(ItemInfoDocument, variables, requestHeaders));
     },
-    metadataForItem(variables: MetadataForItemQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<MetadataForItemQuery> {
-      return withWrapper(() => client.request<MetadataForItemQuery>(MetadataForItemDocument, variables, requestHeaders));
+    itemMetadata(variables: ItemMetadataQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ItemMetadataQuery> {
+      return withWrapper(() => client.request<ItemMetadataQuery>(ItemMetadataDocument, variables, requestHeaders));
     },
     userGotchisOwned(variables: UserGotchisOwnedQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UserGotchisOwnedQuery> {
       return withWrapper(() => client.request<UserGotchisOwnedQuery>(UserGotchisOwnedDocument, variables, requestHeaders));
@@ -2690,8 +2689,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     sortedAavegotchis(variables: SortedAavegotchisQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SortedAavegotchisQuery> {
       return withWrapper(() => client.request<SortedAavegotchisQuery>(SortedAavegotchisDocument, variables, requestHeaders));
     },
-    getUserAavegotchis(variables: GetUserAavegotchisQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetUserAavegotchisQuery> {
-      return withWrapper(() => client.request<GetUserAavegotchisQuery>(GetUserAavegotchisDocument, variables, requestHeaders));
+    userAavegotchis(variables: UserAavegotchisQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UserAavegotchisQuery> {
+      return withWrapper(() => client.request<UserAavegotchisQuery>(UserAavegotchisDocument, variables, requestHeaders));
     }
   };
 }

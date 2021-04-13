@@ -1,4 +1,4 @@
-query allItems {
+query items {
   itemTypes(first:1000) {
     author
     canBeTransferred
@@ -19,7 +19,7 @@ query allItems {
 }
 
 # more game-centrict
-query infoForItem($id: ID!) {
+query itemInfo($id: ID!) {
   itemType(id: $id) {
     id,
     name,
@@ -30,7 +30,7 @@ query infoForItem($id: ID!) {
 }
 
 # full field request
-query metadataForItem($id: ID!) {
+query itemMetadata($id: ID!) {
   itemType(id: $id) {
     author
     canBeTransferred
@@ -49,9 +49,3 @@ query metadataForItem($id: ID!) {
     traitModifiers
   }
 }
-
-
-# # could help calculate a gotchi's added outfit value
-# query getItemValue($id: ID!) {
-#
-# }
