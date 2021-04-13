@@ -1,13 +1,3 @@
-# potentially for character selection screens
-query getUserAavegotchis($id: ID!) {
-  user(id: $id) {
-    gotchisOwned {
-      id
-      name
-    }
-  }
-}
-
 # information about an aavegotchi / portal
 query getAavegotchi($id: ID!) {
   aavegotchi(id: $id) {
@@ -37,37 +27,39 @@ query getAavegotchiStats($id: ID!) {
   }
 }
 
-# leaderboards
-query sortedAavegotchis(
-  $orderBy: Aavegotchi_orderBy!
-  $orderDirection: OrderDirection!
-  $first: Int!
-) {
-  aavegotchis(
-    orderBy: $orderBy
-    orderDirection: $orderDirection
-    first: $first
-    where: { baseRarityScore_gt: 0 }
-  ) {
-    id
-    name
-    baseRarityScore
-    modifiedRarityScore
-    numericTraits
-    modifiedNumericTraits
-    stakedAmount
-    kinship
-    experience
-    level
-    collateral
-    hauntId
-    owner {
-      id
-    }
-  }
-}
-
 # # could help calculate a gotchi's added outfit value
 # query getItemValue($id: ID!) {
 #
 # }
+
+query getAavegotchiBirthBlock($id: ID!) {
+  aavegotchi(id: $id) {
+    claimedAt
+  }
+}
+
+query getAavegotchiLevel($id: ID!) {
+  aavegotchi(id: $id) {
+    level
+  }
+}
+
+query getAavegotchiKinship($id: ID!) {
+  aavegotchi(id: $id) {
+    kinship
+  }
+}
+
+query getAavegotchiRarity($id: ID!) {
+  aavegotchi(id: $id) {
+    baseRarityScore,
+    modifiedRarityScore
+  }
+}
+
+query getAavegotchiEquipped($id: ID!) {
+  aavegotchi(id: $id) {
+    baseRarityScore,
+    modifiedRarityScore
+  }
+}

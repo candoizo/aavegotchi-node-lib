@@ -8,3 +8,4 @@ blank_demo/
 *.bak
 *.lock
 src/*.js
+docs/

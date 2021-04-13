@@ -1,6 +1,37 @@
-query itemTypes {
-
+query allItems {
   itemTypes(first:1000) {
+    author
+    canBeTransferred
+    canPurchaseWithGhst
+    category
+    experienceBonus
+    ghstPrice
+    kinshipBonus
+    maxQuantity
+    minLevel
+    name
+    rarityScoreModifier
+    slotPositions
+    svgId
+    totalQuantity
+    traitModifiers
+  }
+}
+
+# more game-centrict
+query infoForItem($id: ID!) {
+  itemType(id: $id) {
+    id,
+    name,
+    ghstPrice,
+    rarityScoreModifier,
+    slotPositions
+  }
+}
+
+# full field request
+query metadataForItem($id: ID!) {
+  itemType(id: $id) {
     author
     canBeTransferred
     canPurchaseWithGhst

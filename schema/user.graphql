@@ -1,0 +1,9 @@
+# potentially for character selection screens
+query getUserAavegotchis($id: ID!) {
+  user(id: $id) {
+    gotchisOwned {
+      id
+      name
+    }
+  }
+}
