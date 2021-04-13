@@ -8,5 +8,5 @@ blank_demo/
 *.bak
 *.lock
 src/*.js
-docs/
 schema/staging
+scripts/

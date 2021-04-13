@@ -1,5 +1,8 @@
-query allItems {
-  itemTypes(first:1000) {
+query items {
+  itemTypes(
+    first:1000
+    orderBy: svgId
+  ) {
     author
     canBeTransferred
     canPurchaseWithGhst
@@ -19,7 +22,7 @@ query allItems {
 }
 
 # more game-centrict
-query infoForItem($id: ID!) {
+query itemInfo($id: ID!) {
   itemType(id: $id) {
     id,
     name,
@@ -30,7 +33,7 @@ query infoForItem($id: ID!) {
 }
 
 # full field request
-query metadataForItem($id: ID!) {
+query itemMetadata($id: ID!) {
   itemType(id: $id) {
     author
     canBeTransferred
@@ -50,8 +53,12 @@ query metadataForItem($id: ID!) {
   }
 }
 
-
-# # could help calculate a gotchi's added outfit value
-# query getItemValue($id: ID!) {
-#
-# }
+query itemsNameSearch($string: String!) {
+  itemTypes(where: {name_contains: $string}) {
+    id,
+    name,
+    ghstPrice,
+    rarityScoreModifier,
+    slotPositions
+  }
+}

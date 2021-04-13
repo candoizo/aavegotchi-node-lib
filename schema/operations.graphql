@@ -30,7 +30,7 @@ query erc721Listings(
   erc721Listings(
     where: {
       category: $category
-      priceInWei_lt: 10000000
+      # priceInWei_lt: 1000000000
       cancelled: false
       timePurchased: 0
     }
@@ -46,6 +46,7 @@ query erc721Listings(
     seller
     timePurchased
     hauntId
+    kinship
     gotchi {
       id
       name
@@ -68,6 +69,7 @@ query erc1155Listings(
   $rarityFilter: BigInt!
   $orderBy: ERC1155Listing_orderBy!
   $orderDirection: OrderDirection!
+  # $itemTypes: erc1155TypeId_in
   $first: Int!
   $skip: Int!
 ) {
@@ -75,6 +77,7 @@ query erc1155Listings(
     where: {
       category: $category
       rarityLevel: $rarityFilter
+      erc1155TypeId_in: $itemTypes
       priceInWei_lt: 10000000
       cancelled: false
       sold: false
@@ -121,6 +124,7 @@ query erc1155Related($category: BigInt!, $id: BigInt!, $first: Int!) {
     category
     priceInWei
     timeCreated
+    timeLastPurchased
     seller
     rarityLevel
   }
@@ -207,7 +211,7 @@ query aavegotchiLeaderboard(
   }
 }
 
-query topAaavegotchi(
+query topAavegotchis(
   $orderBy: Aavegotchi_orderBy!
   $orderDirection: OrderDirection!
 ) {
@@ -346,6 +350,120 @@ query ownerAavegotchis($id: ID!) {
     }
   }
 }
+
+query erc721ActivityListings($category: BigInt!) {
+    erc721Listings(
+      first:150,
+      where:{
+        category: $category,
+        timePurchased_gt:0
+      },
+      orderBy:timePurchased,
+      orderDirection:desc
+    ) {
+    id
+    tokenId
+    category
+    priceInWei
+    seller
+    timePurchased
+    hauntId
+    kinship
+    gotchi {
+      id
+      name
+      collateral
+      modifiedNumericTraits
+      stakedAmount
+      modifiedRarityScore
+      baseRarityScore
+      level
+      experience
+      owner {
+        id
+      }
+    }
+  }
+}
+
+query erc1155ActivityListings($category: BigInt!) {
+  erc1155Purchases(
+    first:150,
+    where:{
+      category:$category,
+      sold:true,
+      cancelled:false
+    },
+    orderBy:timeLastPurchased,
+    orderDirection:desc
+  ) {
+    listingID
+    buyer
+    erc1155TypeId
+    category
+    quantity
+    timeLastPurchased
+    priceInWei
+    seller
+  }
+
+  itemTypes(
+    first: 1000,
+    orderBy: svgId
+  ) {
+      id
+      author
+      canBeTransferred
+      canPurchaseWithGhst
+      category
+      experienceBonus
+      ghstPrice
+      kinshipBonus
+      maxQuantity
+      minLevel
+      name
+      rarityScoreModifier
+      slotPositions
+      svgId
+      totalQuantity
+      traitModifiers
+  }
+
+}
+
+# query erc1155ActivityListing(category: BigInt!) {
+#     return `
+#   {
+#     erc1155Purchases(first:150, where:{category:"${type}", sold:true, cancelled:false}, orderBy:timeLastPurchased, orderDirection:desc) {
+#       listingID
+#       buyer
+#       erc1155TypeId
+#       category
+#       quantity
+#       timeLastPurchased
+#       priceInWei
+#       seller
+#   }
+#   itemTypes(first:1000, orderBy:svgId) {
+#     id
+#     author
+#     canBeTransferred
+#     canPurchaseWithGhst
+#     category
+#     experienceBonus
+#     ghstPrice
+#     kinshipBonus
+#     maxQuantity
+#     minLevel
+#     name
+#     rarityScoreModifier
+#     slotPositions
+#     svgId
+#     totalQuantity
+#     traitModifiers
+#   }}
+# `;
+# }
 
 # I believe these use a different api under /cinnabarhorse namespace
 # query raffle($user: String!) {
