@@ -1,12 +1,4 @@
 # information about an aavegotchi / portal
-query getAavegotchi($id: ID!) {
-  aavegotchi(id: $id) {
-    id,
-    name,
-  }
-}
-
-# information about an aavegotchi / portal
 query getAavegotchiStats($id: ID!) {
   aavegotchi(id: $id) {
     id,
@@ -27,10 +19,11 @@ query getAavegotchiStats($id: ID!) {
   }
 }
 
-# # could help calculate a gotchi's added outfit value
-# query getItemValue($id: ID!) {
-#
-# }
+query getAavegotchiName($id: ID!) {
+  aavegotchi(id: $id) {
+    name,
+  }
+}
 
 query getAavegotchiBirthBlock($id: ID!) {
   aavegotchi(id: $id) {
@@ -59,7 +52,6 @@ query getAavegotchiRarity($id: ID!) {
 
 query getAavegotchiEquipped($id: ID!) {
   aavegotchi(id: $id) {
-    baseRarityScore,
-    modifiedRarityScore
+    equippedWearables
   }
 }

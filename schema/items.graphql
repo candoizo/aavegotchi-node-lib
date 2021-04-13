@@ -49,3 +49,9 @@ query metadataForItem($id: ID!) {
     traitModifiers
   }
 }
+
+
+# # could help calculate a gotchi's added outfit value
+# query getItemValue($id: ID!) {
+#
+# }

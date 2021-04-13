@@ -4,19 +4,17 @@ A Node.js package for type-safe definitions from the official Aavegotchi GraphQL
 
 Clone this repo and test the [`demo`](./demo/) with: `cd demo/ && yarn && yarn test`
 
-Peek some example Javascript code in [demo/index.ts](./demo/index.ts). Find where the functions come from in [the GraphQL operations file](../schema/operations.graphql), which is their fancy term for queries.
+Peek some example Javascript code in [demo/index.ts](./demo/index.ts).
 
 # Usage
 
 `@aavegotchi/lib` exposes type-safe bindings to the regular GraphQL API.
-
-```js
+### Typescript
+```ts
 import { defaultSdk } from "candoizo/aavegotchi-node-lib"
-// atm defaultSdk is filled with Pixelcraft's queries from web3/graphQueries.tsx
 const { lastTimePurchased, aavegotchiLeaderboard } = defaultSdk();
 
-export async function example() {
-  // same as bonding-c urveweb3/graphQueries.tsx#L267
+async function example() {
   let res = await lastTimePurchased({
     itemID: 145
   });
@@ -28,12 +26,24 @@ export async function example() {
   // });
 }
 ```
+### Javascript
+```js
+const aavegotchiNodeLib = require("@candoizo/aavegotchi-node-lib");
+const { lastTimePurchased, aavegotchiLeaderboard } = aavegotchiNodeLib.defaultSdk();
+
+const example = async () => {
+  let res = await lastTimePurchased({
+    itemID: 145
+  });
+  console.log(res);
+}
+```
 
 # Installation
 
-note: replace instances of `@aavegotchi/lib` with `@candoizo/aavegotchi-node-lib` if not on aavegotchi namespace.
+note: replace instances of `@aavegotchi/sdk` with `@candoizo/aavegotchi-node-lib` if not on aavegotchi namespace.
 
-If public: `yarn add @aavegotchi/lib`
+If public: `yarn add @aavegotchi/sdk`
 
 # External
 

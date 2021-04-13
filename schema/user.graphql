@@ -4,6 +4,10 @@ query getUserAavegotchis($id: ID!) {
     gotchisOwned {
       id
       name
+      level
+      baseRarityScore
+      modifiedRarityScore
+      numericTraits
     }
   }
 }
