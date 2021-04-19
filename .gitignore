@@ -9,3 +9,4 @@ blank_demo/
 *.lock
 src/*.js
 schema/staging
+scripts/

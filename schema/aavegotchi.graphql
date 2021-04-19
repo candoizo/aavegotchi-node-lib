@@ -55,3 +55,23 @@ query aavegotchiEquipped($id: ID!) {
     equippedWearables
   }
 }
+
+query aavegotchisNameSearch($string: String!) {
+  aavegotchis(where: {name_contains: $string}) {
+    id,
+    name,
+    baseRarityScore,
+    modifiedRarityScore,
+    numericTraits,
+    modifiedNumericTraits,
+    stakedAmount,
+    kinship,
+    experience,
+    level
+    collateral
+    hauntId
+    owner {
+      id
+    }
+  }
+}
