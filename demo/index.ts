@@ -1,5 +1,5 @@
 import { defaultSdk } from "@candoizo/aavegotchi-node-lib"
-const { lastTimePurchased, aavegotchiLeaderboard } = defaultSdk();
+const { items, lastTimePurchased, aavegotchiLeaderboard } = defaultSdk();
 
 async function main() {
 
@@ -15,6 +15,8 @@ async function main() {
   });
   console.log(res2);
 
+  let ty = await items();
+  console.log(ty);
 }
 
 main()

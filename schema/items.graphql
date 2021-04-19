@@ -1,5 +1,8 @@
 query items {
-  itemTypes(first:1000) {
+  itemTypes(
+    first:1000
+    orderBy: svgId
+  ) {
     author
     canBeTransferred
     canPurchaseWithGhst
@@ -47,5 +50,15 @@ query itemMetadata($id: ID!) {
     svgId
     totalQuantity
     traitModifiers
+  }
+}
+
+query itemsNameSearch($string: String!) {
+  itemTypes(where: {name_contains: $string}) {
+    id,
+    name,
+    ghstPrice,
+    rarityScoreModifier,
+    slotPositions
   }
 }

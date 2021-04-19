@@ -31,7 +31,10 @@ export type Aavegotchi = {
   status: Scalars['BigInt'];
   numericTraits: Array<Scalars['Int']>;
   modifiedNumericTraits: Array<Scalars['Int']>;
+  withSetsNumericTraits: Array<Scalars['Int']>;
   equippedWearables: Array<Scalars['Int']>;
+  equippedSet?: Maybe<Scalars['BigInt']>;
+  possibleSets?: Maybe<Scalars['BigInt']>;
   collateral: Scalars['Bytes'];
   escrow: Scalars['Bytes'];
   stakedAmount: Scalars['BigInt'];
@@ -45,6 +48,7 @@ export type Aavegotchi = {
   level: Scalars['BigInt'];
   baseRarityScore: Scalars['BigInt'];
   modifiedRarityScore: Scalars['BigInt'];
+  withSetsRarityScore: Scalars['BigInt'];
   locked: Scalars['Boolean'];
   listings: Array<Erc721Listing>;
   /** Block in which the Aavegotchi entity was created */
@@ -227,10 +231,30 @@ export type Aavegotchi_Filter = {
   modifiedNumericTraits_not?: Maybe<Array<Scalars['Int']>>;
   modifiedNumericTraits_contains?: Maybe<Array<Scalars['Int']>>;
   modifiedNumericTraits_not_contains?: Maybe<Array<Scalars['Int']>>;
+  withSetsNumericTraits?: Maybe<Array<Scalars['Int']>>;
+  withSetsNumericTraits_not?: Maybe<Array<Scalars['Int']>>;
+  withSetsNumericTraits_contains?: Maybe<Array<Scalars['Int']>>;
+  withSetsNumericTraits_not_contains?: Maybe<Array<Scalars['Int']>>;
   equippedWearables?: Maybe<Array<Scalars['Int']>>;
   equippedWearables_not?: Maybe<Array<Scalars['Int']>>;
   equippedWearables_contains?: Maybe<Array<Scalars['Int']>>;
   equippedWearables_not_contains?: Maybe<Array<Scalars['Int']>>;
+  equippedSet?: Maybe<Scalars['BigInt']>;
+  equippedSet_not?: Maybe<Scalars['BigInt']>;
+  equippedSet_gt?: Maybe<Scalars['BigInt']>;
+  equippedSet_lt?: Maybe<Scalars['BigInt']>;
+  equippedSet_gte?: Maybe<Scalars['BigInt']>;
+  equippedSet_lte?: Maybe<Scalars['BigInt']>;
+  equippedSet_in?: Maybe<Array<Scalars['BigInt']>>;
+  equippedSet_not_in?: Maybe<Array<Scalars['BigInt']>>;
+  possibleSets?: Maybe<Scalars['BigInt']>;
+  possibleSets_not?: Maybe<Scalars['BigInt']>;
+  possibleSets_gt?: Maybe<Scalars['BigInt']>;
+  possibleSets_lt?: Maybe<Scalars['BigInt']>;
+  possibleSets_gte?: Maybe<Scalars['BigInt']>;
+  possibleSets_lte?: Maybe<Scalars['BigInt']>;
+  possibleSets_in?: Maybe<Array<Scalars['BigInt']>>;
+  possibleSets_not_in?: Maybe<Array<Scalars['BigInt']>>;
   collateral?: Maybe<Scalars['Bytes']>;
   collateral_not?: Maybe<Scalars['Bytes']>;
   collateral_in?: Maybe<Array<Scalars['Bytes']>>;
@@ -331,6 +355,14 @@ export type Aavegotchi_Filter = {
   modifiedRarityScore_lte?: Maybe<Scalars['BigInt']>;
   modifiedRarityScore_in?: Maybe<Array<Scalars['BigInt']>>;
   modifiedRarityScore_not_in?: Maybe<Array<Scalars['BigInt']>>;
+  withSetsRarityScore?: Maybe<Scalars['BigInt']>;
+  withSetsRarityScore_not?: Maybe<Scalars['BigInt']>;
+  withSetsRarityScore_gt?: Maybe<Scalars['BigInt']>;
+  withSetsRarityScore_lt?: Maybe<Scalars['BigInt']>;
+  withSetsRarityScore_gte?: Maybe<Scalars['BigInt']>;
+  withSetsRarityScore_lte?: Maybe<Scalars['BigInt']>;
+  withSetsRarityScore_in?: Maybe<Array<Scalars['BigInt']>>;
+  withSetsRarityScore_not_in?: Maybe<Array<Scalars['BigInt']>>;
   locked?: Maybe<Scalars['Boolean']>;
   locked_not?: Maybe<Scalars['Boolean']>;
   locked_in?: Maybe<Array<Scalars['Boolean']>>;
@@ -363,7 +395,10 @@ export type Aavegotchi_OrderBy =
   | 'status'
   | 'numericTraits'
   | 'modifiedNumericTraits'
+  | 'withSetsNumericTraits'
   | 'equippedWearables'
+  | 'equippedSet'
+  | 'possibleSets'
   | 'collateral'
   | 'escrow'
   | 'stakedAmount'
@@ -377,6 +412,7 @@ export type Aavegotchi_OrderBy =
   | 'level'
   | 'baseRarityScore'
   | 'modifiedRarityScore'
+  | 'withSetsRarityScore'
   | 'locked'
   | 'listings'
   | 'createdAt'
@@ -1866,6 +1902,23 @@ export type AavegotchiEquippedQuery = (
   )> }
 );
 
+export type AavegotchisNameSearchQueryVariables = Exact<{
+  string: Scalars['String'];
+}>;
+
+
+export type AavegotchisNameSearchQuery = (
+  { __typename?: 'Query' }
+  & { aavegotchis: Array<(
+    { __typename?: 'Aavegotchi' }
+    & Pick<Aavegotchi, 'id' | 'name' | 'baseRarityScore' | 'modifiedRarityScore' | 'numericTraits' | 'modifiedNumericTraits' | 'stakedAmount' | 'kinship' | 'experience' | 'level' | 'collateral' | 'hauntId'>
+    & { owner?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id'>
+    )> }
+  )> }
+);
+
 export type ItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1900,6 +1953,19 @@ export type ItemMetadataQuery = (
   & { itemType?: Maybe<(
     { __typename?: 'ItemType' }
     & Pick<ItemType, 'author' | 'canBeTransferred' | 'canPurchaseWithGhst' | 'category' | 'experienceBonus' | 'ghstPrice' | 'kinshipBonus' | 'maxQuantity' | 'minLevel' | 'name' | 'rarityScoreModifier' | 'slotPositions' | 'svgId' | 'totalQuantity' | 'traitModifiers'>
+  )> }
+);
+
+export type ItemsNameSearchQueryVariables = Exact<{
+  string: Scalars['String'];
+}>;
+
+
+export type ItemsNameSearchQuery = (
+  { __typename?: 'Query' }
+  & { itemTypes: Array<(
+    { __typename?: 'ItemType' }
+    & Pick<ItemType, 'id' | 'name' | 'ghstPrice' | 'rarityScoreModifier' | 'slotPositions'>
   )> }
 );
 
@@ -1945,7 +2011,7 @@ export type Erc721ListingsQuery = (
   { __typename?: 'Query' }
   & { erc721Listings: Array<(
     { __typename?: 'ERC721Listing' }
-    & Pick<Erc721Listing, 'id' | 'tokenId' | 'category' | 'priceInWei' | 'seller' | 'timePurchased' | 'hauntId'>
+    & Pick<Erc721Listing, 'id' | 'tokenId' | 'category' | 'priceInWei' | 'seller' | 'timePurchased' | 'hauntId' | 'kinship'>
     & { gotchi?: Maybe<(
       { __typename?: 'Aavegotchi' }
       & Pick<Aavegotchi, 'id' | 'name' | 'collateral' | 'modifiedNumericTraits' | 'stakedAmount' | 'modifiedRarityScore' | 'baseRarityScore' | 'level' | 'experience'>
@@ -1986,7 +2052,7 @@ export type Erc1155RelatedQuery = (
   { __typename?: 'Query' }
   & { erc1155Listings: Array<(
     { __typename?: 'ERC1155Listing' }
-    & Pick<Erc1155Listing, 'id' | 'cancelled' | 'sold' | 'erc1155TypeId' | 'erc1155TokenAddress' | 'category' | 'quantity' | 'priceInWei' | 'timeCreated' | 'seller' | 'rarityLevel'>
+    & Pick<Erc1155Listing, 'id' | 'cancelled' | 'sold' | 'erc1155TypeId' | 'erc1155TokenAddress' | 'category' | 'quantity' | 'priceInWei' | 'timeCreated' | 'timeLastPurchased' | 'seller' | 'rarityLevel'>
   )> }
 );
 
@@ -2045,13 +2111,13 @@ export type AavegotchiLeaderboardQuery = (
   )> }
 );
 
-export type TopAaavegotchiQueryVariables = Exact<{
+export type TopAavegotchisQueryVariables = Exact<{
   orderBy: Aavegotchi_OrderBy;
   orderDirection: OrderDirection;
 }>;
 
 
-export type TopAaavegotchiQuery = (
+export type TopAavegotchisQuery = (
   { __typename?: 'Query' }
   & { top1000: Array<(
     { __typename?: 'Aavegotchi' }
@@ -2108,6 +2174,43 @@ export type OwnerAavegotchisQuery = (
   )> }
 );
 
+export type Erc721ActivityListingsQueryVariables = Exact<{
+  category: Scalars['BigInt'];
+}>;
+
+
+export type Erc721ActivityListingsQuery = (
+  { __typename?: 'Query' }
+  & { erc721Listings: Array<(
+    { __typename?: 'ERC721Listing' }
+    & Pick<Erc721Listing, 'id' | 'tokenId' | 'category' | 'priceInWei' | 'seller' | 'timePurchased' | 'hauntId' | 'kinship'>
+    & { gotchi?: Maybe<(
+      { __typename?: 'Aavegotchi' }
+      & Pick<Aavegotchi, 'id' | 'name' | 'collateral' | 'modifiedNumericTraits' | 'stakedAmount' | 'modifiedRarityScore' | 'baseRarityScore' | 'level' | 'experience'>
+      & { owner?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id'>
+      )> }
+    )> }
+  )> }
+);
+
+export type Erc1155ActivityListingsQueryVariables = Exact<{
+  category: Scalars['BigInt'];
+}>;
+
+
+export type Erc1155ActivityListingsQuery = (
+  { __typename?: 'Query' }
+  & { erc1155Purchases: Array<(
+    { __typename?: 'ERC1155Purchase' }
+    & Pick<Erc1155Purchase, 'listingID' | 'buyer' | 'erc1155TypeId' | 'category' | 'quantity' | 'timeLastPurchased' | 'priceInWei' | 'seller'>
+  )>, itemTypes: Array<(
+    { __typename?: 'ItemType' }
+    & Pick<ItemType, 'id' | 'author' | 'canBeTransferred' | 'canPurchaseWithGhst' | 'category' | 'experienceBonus' | 'ghstPrice' | 'kinshipBonus' | 'maxQuantity' | 'minLevel' | 'name' | 'rarityScoreModifier' | 'slotPositions' | 'svgId' | 'totalQuantity' | 'traitModifiers'>
+  )> }
+);
+
 export type SortedAavegotchisQueryVariables = Exact<{
   orderBy: Aavegotchi_OrderBy;
   orderDirection: OrderDirection;
@@ -2133,6 +2236,38 @@ export type UserAavegotchisQueryVariables = Exact<{
 
 
 export type UserAavegotchisQuery = (
+  { __typename?: 'Query' }
+  & { user?: Maybe<(
+    { __typename?: 'User' }
+    & { gotchisOwned: Array<(
+      { __typename?: 'Aavegotchi' }
+      & Pick<Aavegotchi, 'id' | 'name' | 'level' | 'baseRarityScore' | 'modifiedRarityScore' | 'numericTraits'>
+    )> }
+  )> }
+);
+
+export type UserRarestAavegotchiQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type UserRarestAavegotchiQuery = (
+  { __typename?: 'Query' }
+  & { user?: Maybe<(
+    { __typename?: 'User' }
+    & { gotchisOwned: Array<(
+      { __typename?: 'Aavegotchi' }
+      & Pick<Aavegotchi, 'id' | 'name' | 'level' | 'baseRarityScore' | 'modifiedRarityScore' | 'numericTraits'>
+    )> }
+  )> }
+);
+
+export type UserLovedAavegotchiQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type UserLovedAavegotchiQuery = (
   { __typename?: 'Query' }
   & { user?: Maybe<(
     { __typename?: 'User' }
@@ -2208,9 +2343,30 @@ export const AavegotchiEquippedDocument = gql`
   }
 }
     `;
+export const AavegotchisNameSearchDocument = gql`
+    query aavegotchisNameSearch($string: String!) {
+  aavegotchis(where: {name_contains: $string}) {
+    id
+    name
+    baseRarityScore
+    modifiedRarityScore
+    numericTraits
+    modifiedNumericTraits
+    stakedAmount
+    kinship
+    experience
+    level
+    collateral
+    hauntId
+    owner {
+      id
+    }
+  }
+}
+    `;
 export const ItemsDocument = gql`
     query items {
-  itemTypes(first: 1000) {
+  itemTypes(first: 1000, orderBy: svgId) {
     author
     canBeTransferred
     canPurchaseWithGhst
@@ -2261,6 +2417,17 @@ export const ItemMetadataDocument = gql`
   }
 }
     `;
+export const ItemsNameSearchDocument = gql`
+    query itemsNameSearch($string: String!) {
+  itemTypes(where: {name_contains: $string}) {
+    id
+    name
+    ghstPrice
+    rarityScoreModifier
+    slotPositions
+  }
+}
+    `;
 export const UserGotchisOwnedDocument = gql`
     query userGotchisOwned($id: ID!) {
   user(id: $id) {
@@ -2288,7 +2455,7 @@ export const LastTimePurchasedDocument = gql`
 export const Erc721ListingsDocument = gql`
     query erc721Listings($category: BigInt!, $orderBy: ERC721Listing_orderBy!, $orderDirection: OrderDirection!, $first: Int!, $skip: Int!) {
   erc721Listings(
-    where: {category: $category, priceInWei_lt: 10000000, cancelled: false, timePurchased: 0}
+    where: {category: $category, cancelled: false, timePurchased: 0}
     orderBy: $orderBy
     orderDirection: $orderDirection
     first: $first
@@ -2301,6 +2468,7 @@ export const Erc721ListingsDocument = gql`
     seller
     timePurchased
     hauntId
+    kinship
     gotchi {
       id
       name
@@ -2360,6 +2528,7 @@ export const Erc1155RelatedDocument = gql`
     category
     priceInWei
     timeCreated
+    timeLastPurchased
     seller
     rarityLevel
   }
@@ -2440,8 +2609,8 @@ export const AavegotchiLeaderboardDocument = gql`
   }
 }
     `;
-export const TopAaavegotchiDocument = gql`
-    query topAaavegotchi($orderBy: Aavegotchi_orderBy!, $orderDirection: OrderDirection!) {
+export const TopAavegotchisDocument = gql`
+    query topAavegotchis($orderBy: Aavegotchi_orderBy!, $orderDirection: OrderDirection!) {
   top1000: aavegotchis(
     orderBy: $orderBy
     orderDirection: $orderDirection
@@ -2579,6 +2748,76 @@ export const OwnerAavegotchisDocument = gql`
   }
 }
     `;
+export const Erc721ActivityListingsDocument = gql`
+    query erc721ActivityListings($category: BigInt!) {
+  erc721Listings(
+    first: 150
+    where: {category: $category, timePurchased_gt: 0}
+    orderBy: timePurchased
+    orderDirection: desc
+  ) {
+    id
+    tokenId
+    category
+    priceInWei
+    seller
+    timePurchased
+    hauntId
+    kinship
+    gotchi {
+      id
+      name
+      collateral
+      modifiedNumericTraits
+      stakedAmount
+      modifiedRarityScore
+      baseRarityScore
+      level
+      experience
+      owner {
+        id
+      }
+    }
+  }
+}
+    `;
+export const Erc1155ActivityListingsDocument = gql`
+    query erc1155ActivityListings($category: BigInt!) {
+  erc1155Purchases(
+    first: 150
+    where: {category: $category, sold: true, cancelled: false}
+    orderBy: timeLastPurchased
+    orderDirection: desc
+  ) {
+    listingID
+    buyer
+    erc1155TypeId
+    category
+    quantity
+    timeLastPurchased
+    priceInWei
+    seller
+  }
+  itemTypes(first: 1000, orderBy: svgId) {
+    id
+    author
+    canBeTransferred
+    canPurchaseWithGhst
+    category
+    experienceBonus
+    ghstPrice
+    kinshipBonus
+    maxQuantity
+    minLevel
+    name
+    rarityScoreModifier
+    slotPositions
+    svgId
+    totalQuantity
+    traitModifiers
+  }
+}
+    `;
 export const SortedAavegotchisDocument = gql`
     query sortedAavegotchis($orderBy: Aavegotchi_orderBy!, $orderDirection: OrderDirection!, $first: Int!) {
   aavegotchis(
@@ -2619,6 +2858,34 @@ export const UserAavegotchisDocument = gql`
   }
 }
     `;
+export const UserRarestAavegotchiDocument = gql`
+    query userRarestAavegotchi($id: ID!) {
+  user(id: $id) {
+    gotchisOwned {
+      id
+      name
+      level
+      baseRarityScore
+      modifiedRarityScore
+      numericTraits
+    }
+  }
+}
+    `;
+export const UserLovedAavegotchiDocument = gql`
+    query userLovedAavegotchi($id: ID!) {
+  user(id: $id) {
+    gotchisOwned {
+      id
+      name
+      level
+      baseRarityScore
+      modifiedRarityScore
+      numericTraits
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 
@@ -2647,6 +2914,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     aavegotchiEquipped(variables: AavegotchiEquippedQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AavegotchiEquippedQuery> {
       return withWrapper(() => client.request<AavegotchiEquippedQuery>(AavegotchiEquippedDocument, variables, requestHeaders));
     },
+    aavegotchisNameSearch(variables: AavegotchisNameSearchQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AavegotchisNameSearchQuery> {
+      return withWrapper(() => client.request<AavegotchisNameSearchQuery>(AavegotchisNameSearchDocument, variables, requestHeaders));
+    },
     items(variables?: ItemsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ItemsQuery> {
       return withWrapper(() => client.request<ItemsQuery>(ItemsDocument, variables, requestHeaders));
     },
@@ -2655,6 +2925,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     itemMetadata(variables: ItemMetadataQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ItemMetadataQuery> {
       return withWrapper(() => client.request<ItemMetadataQuery>(ItemMetadataDocument, variables, requestHeaders));
+    },
+    itemsNameSearch(variables: ItemsNameSearchQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ItemsNameSearchQuery> {
+      return withWrapper(() => client.request<ItemsNameSearchQuery>(ItemsNameSearchDocument, variables, requestHeaders));
     },
     userGotchisOwned(variables: UserGotchisOwnedQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UserGotchisOwnedQuery> {
       return withWrapper(() => client.request<UserGotchisOwnedQuery>(UserGotchisOwnedDocument, variables, requestHeaders));
@@ -2680,17 +2953,29 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     aavegotchiLeaderboard(variables: AavegotchiLeaderboardQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AavegotchiLeaderboardQuery> {
       return withWrapper(() => client.request<AavegotchiLeaderboardQuery>(AavegotchiLeaderboardDocument, variables, requestHeaders));
     },
-    topAaavegotchi(variables: TopAaavegotchiQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TopAaavegotchiQuery> {
-      return withWrapper(() => client.request<TopAaavegotchiQuery>(TopAaavegotchiDocument, variables, requestHeaders));
+    topAavegotchis(variables: TopAavegotchisQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TopAavegotchisQuery> {
+      return withWrapper(() => client.request<TopAavegotchisQuery>(TopAavegotchisDocument, variables, requestHeaders));
     },
     ownerAavegotchis(variables: OwnerAavegotchisQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<OwnerAavegotchisQuery> {
       return withWrapper(() => client.request<OwnerAavegotchisQuery>(OwnerAavegotchisDocument, variables, requestHeaders));
+    },
+    erc721ActivityListings(variables: Erc721ActivityListingsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc721ActivityListingsQuery> {
+      return withWrapper(() => client.request<Erc721ActivityListingsQuery>(Erc721ActivityListingsDocument, variables, requestHeaders));
+    },
+    erc1155ActivityListings(variables: Erc1155ActivityListingsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc1155ActivityListingsQuery> {
+      return withWrapper(() => client.request<Erc1155ActivityListingsQuery>(Erc1155ActivityListingsDocument, variables, requestHeaders));
     },
     sortedAavegotchis(variables: SortedAavegotchisQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SortedAavegotchisQuery> {
       return withWrapper(() => client.request<SortedAavegotchisQuery>(SortedAavegotchisDocument, variables, requestHeaders));
     },
     userAavegotchis(variables: UserAavegotchisQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UserAavegotchisQuery> {
       return withWrapper(() => client.request<UserAavegotchisQuery>(UserAavegotchisDocument, variables, requestHeaders));
+    },
+    userRarestAavegotchi(variables: UserRarestAavegotchiQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UserRarestAavegotchiQuery> {
+      return withWrapper(() => client.request<UserRarestAavegotchiQuery>(UserRarestAavegotchiDocument, variables, requestHeaders));
+    },
+    userLovedAavegotchi(variables: UserLovedAavegotchiQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UserLovedAavegotchiQuery> {
+      return withWrapper(() => client.request<UserLovedAavegotchiQuery>(UserLovedAavegotchiDocument, variables, requestHeaders));
     }
   };
 }
