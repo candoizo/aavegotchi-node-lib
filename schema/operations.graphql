@@ -64,12 +64,23 @@ query erc721Listings(
   }
 }
 
+query erc1155ListingFilter(
+  $filter: ERC1155Listing_filter
+  ) {
+    erc1155Listings(
+      where: $filter
+    ) {
+      id
+    }
+
+}
+
 query erc1155Listings(
   $category: BigInt!
   $rarityFilter: BigInt!
   $orderBy: ERC1155Listing_orderBy!
   $orderDirection: OrderDirection!
-  # $itemTypes: erc1155TypeId_in
+  $itemTypes: [BigInt!]
   $first: Int!
   $skip: Int!
 ) {

@@ -23,6 +23,7 @@ export type Scalars = {
 export type Aavegotchi = {
   __typename?: 'Aavegotchi';
   id: Scalars['ID'];
+  gotchiId?: Maybe<Scalars['BigInt']>;
   owner?: Maybe<User>;
   portal: Portal;
   hauntId: Scalars['BigInt'];
@@ -33,7 +34,8 @@ export type Aavegotchi = {
   modifiedNumericTraits: Array<Scalars['Int']>;
   withSetsNumericTraits: Array<Scalars['Int']>;
   equippedWearables: Array<Scalars['Int']>;
-  equippedSet?: Maybe<Scalars['BigInt']>;
+  equippedSetID?: Maybe<Scalars['BigInt']>;
+  equippedSetName?: Maybe<Scalars['String']>;
   possibleSets?: Maybe<Scalars['BigInt']>;
   collateral: Scalars['Bytes'];
   escrow: Scalars['Bytes'];
@@ -171,6 +173,14 @@ export type Aavegotchi_Filter = {
   id_lte?: Maybe<Scalars['ID']>;
   id_in?: Maybe<Array<Scalars['ID']>>;
   id_not_in?: Maybe<Array<Scalars['ID']>>;
+  gotchiId?: Maybe<Scalars['BigInt']>;
+  gotchiId_not?: Maybe<Scalars['BigInt']>;
+  gotchiId_gt?: Maybe<Scalars['BigInt']>;
+  gotchiId_lt?: Maybe<Scalars['BigInt']>;
+  gotchiId_gte?: Maybe<Scalars['BigInt']>;
+  gotchiId_lte?: Maybe<Scalars['BigInt']>;
+  gotchiId_in?: Maybe<Array<Scalars['BigInt']>>;
+  gotchiId_not_in?: Maybe<Array<Scalars['BigInt']>>;
   owner?: Maybe<Scalars['String']>;
   owner_not?: Maybe<Scalars['String']>;
   owner_gt?: Maybe<Scalars['String']>;
@@ -239,14 +249,28 @@ export type Aavegotchi_Filter = {
   equippedWearables_not?: Maybe<Array<Scalars['Int']>>;
   equippedWearables_contains?: Maybe<Array<Scalars['Int']>>;
   equippedWearables_not_contains?: Maybe<Array<Scalars['Int']>>;
-  equippedSet?: Maybe<Scalars['BigInt']>;
-  equippedSet_not?: Maybe<Scalars['BigInt']>;
-  equippedSet_gt?: Maybe<Scalars['BigInt']>;
-  equippedSet_lt?: Maybe<Scalars['BigInt']>;
-  equippedSet_gte?: Maybe<Scalars['BigInt']>;
-  equippedSet_lte?: Maybe<Scalars['BigInt']>;
-  equippedSet_in?: Maybe<Array<Scalars['BigInt']>>;
-  equippedSet_not_in?: Maybe<Array<Scalars['BigInt']>>;
+  equippedSetID?: Maybe<Scalars['BigInt']>;
+  equippedSetID_not?: Maybe<Scalars['BigInt']>;
+  equippedSetID_gt?: Maybe<Scalars['BigInt']>;
+  equippedSetID_lt?: Maybe<Scalars['BigInt']>;
+  equippedSetID_gte?: Maybe<Scalars['BigInt']>;
+  equippedSetID_lte?: Maybe<Scalars['BigInt']>;
+  equippedSetID_in?: Maybe<Array<Scalars['BigInt']>>;
+  equippedSetID_not_in?: Maybe<Array<Scalars['BigInt']>>;
+  equippedSetName?: Maybe<Scalars['String']>;
+  equippedSetName_not?: Maybe<Scalars['String']>;
+  equippedSetName_gt?: Maybe<Scalars['String']>;
+  equippedSetName_lt?: Maybe<Scalars['String']>;
+  equippedSetName_gte?: Maybe<Scalars['String']>;
+  equippedSetName_lte?: Maybe<Scalars['String']>;
+  equippedSetName_in?: Maybe<Array<Scalars['String']>>;
+  equippedSetName_not_in?: Maybe<Array<Scalars['String']>>;
+  equippedSetName_contains?: Maybe<Scalars['String']>;
+  equippedSetName_not_contains?: Maybe<Scalars['String']>;
+  equippedSetName_starts_with?: Maybe<Scalars['String']>;
+  equippedSetName_not_starts_with?: Maybe<Scalars['String']>;
+  equippedSetName_ends_with?: Maybe<Scalars['String']>;
+  equippedSetName_not_ends_with?: Maybe<Scalars['String']>;
   possibleSets?: Maybe<Scalars['BigInt']>;
   possibleSets_not?: Maybe<Scalars['BigInt']>;
   possibleSets_gt?: Maybe<Scalars['BigInt']>;
@@ -387,6 +411,7 @@ export type Aavegotchi_Filter = {
 
 export type Aavegotchi_OrderBy =
   | 'id'
+  | 'gotchiId'
   | 'owner'
   | 'portal'
   | 'hauntId'
@@ -397,7 +422,8 @@ export type Aavegotchi_OrderBy =
   | 'modifiedNumericTraits'
   | 'withSetsNumericTraits'
   | 'equippedWearables'
-  | 'equippedSet'
+  | 'equippedSetID'
+  | 'equippedSetName'
   | 'possibleSets'
   | 'collateral'
   | 'escrow'
@@ -1043,6 +1069,7 @@ export type OrderDirection =
 export type Portal = {
   __typename?: 'Portal';
   id: Scalars['ID'];
+  gotchiId?: Maybe<Scalars['BigInt']>;
   buyer: User;
   hauntId: Scalars['BigInt'];
   owner: User;
@@ -1077,6 +1104,14 @@ export type Portal_Filter = {
   id_lte?: Maybe<Scalars['ID']>;
   id_in?: Maybe<Array<Scalars['ID']>>;
   id_not_in?: Maybe<Array<Scalars['ID']>>;
+  gotchiId?: Maybe<Scalars['BigInt']>;
+  gotchiId_not?: Maybe<Scalars['BigInt']>;
+  gotchiId_gt?: Maybe<Scalars['BigInt']>;
+  gotchiId_lt?: Maybe<Scalars['BigInt']>;
+  gotchiId_gte?: Maybe<Scalars['BigInt']>;
+  gotchiId_lte?: Maybe<Scalars['BigInt']>;
+  gotchiId_in?: Maybe<Array<Scalars['BigInt']>>;
+  gotchiId_not_in?: Maybe<Array<Scalars['BigInt']>>;
   buyer?: Maybe<Scalars['String']>;
   buyer_not?: Maybe<Scalars['String']>;
   buyer_gt?: Maybe<Scalars['String']>;
@@ -1157,6 +1192,7 @@ export type Portal_Filter = {
 
 export type Portal_OrderBy =
   | 'id'
+  | 'gotchiId'
   | 'buyer'
   | 'hauntId'
   | 'owner'
@@ -2023,11 +2059,25 @@ export type Erc721ListingsQuery = (
   )> }
 );
 
+export type Erc1155ListingFilterQueryVariables = Exact<{
+  filter?: Maybe<Erc1155Listing_Filter>;
+}>;
+
+
+export type Erc1155ListingFilterQuery = (
+  { __typename?: 'Query' }
+  & { erc1155Listings: Array<(
+    { __typename?: 'ERC1155Listing' }
+    & Pick<Erc1155Listing, 'id'>
+  )> }
+);
+
 export type Erc1155ListingsQueryVariables = Exact<{
   category: Scalars['BigInt'];
   rarityFilter: Scalars['BigInt'];
   orderBy: Erc1155Listing_OrderBy;
   orderDirection: OrderDirection;
+  itemTypes?: Maybe<Array<Scalars['BigInt']> | Scalars['BigInt']>;
   first: Scalars['Int'];
   skip: Scalars['Int'];
 }>;
@@ -2486,10 +2536,17 @@ export const Erc721ListingsDocument = gql`
   }
 }
     `;
+export const Erc1155ListingFilterDocument = gql`
+    query erc1155ListingFilter($filter: ERC1155Listing_filter) {
+  erc1155Listings(where: $filter) {
+    id
+  }
+}
+    `;
 export const Erc1155ListingsDocument = gql`
-    query erc1155Listings($category: BigInt!, $rarityFilter: BigInt!, $orderBy: ERC1155Listing_orderBy!, $orderDirection: OrderDirection!, $first: Int!, $skip: Int!) {
+    query erc1155Listings($category: BigInt!, $rarityFilter: BigInt!, $orderBy: ERC1155Listing_orderBy!, $orderDirection: OrderDirection!, $itemTypes: [BigInt!], $first: Int!, $skip: Int!) {
   erc1155Listings(
-    where: {category: $category, rarityLevel: $rarityFilter, priceInWei_lt: 10000000, cancelled: false, sold: false}
+    where: {category: $category, rarityLevel: $rarityFilter, erc1155TypeId_in: $itemTypes, priceInWei_lt: 10000000, cancelled: false, sold: false}
     orderBy: $orderBy
     orderDirection: $orderDirection
     first: $first
@@ -2937,6 +2994,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     erc721Listings(variables: Erc721ListingsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc721ListingsQuery> {
       return withWrapper(() => client.request<Erc721ListingsQuery>(Erc721ListingsDocument, variables, requestHeaders));
+    },
+    erc1155ListingFilter(variables?: Erc1155ListingFilterQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc1155ListingFilterQuery> {
+      return withWrapper(() => client.request<Erc1155ListingFilterQuery>(Erc1155ListingFilterDocument, variables, requestHeaders));
     },
     erc1155Listings(variables: Erc1155ListingsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc1155ListingsQuery> {
       return withWrapper(() => client.request<Erc1155ListingsQuery>(Erc1155ListingsDocument, variables, requestHeaders));
