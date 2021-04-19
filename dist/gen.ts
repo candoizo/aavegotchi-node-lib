@@ -23,6 +23,7 @@ export type Scalars = {
 export type Aavegotchi = {
   __typename?: 'Aavegotchi';
   id: Scalars['ID'];
+  gotchiId?: Maybe<Scalars['BigInt']>;
   owner?: Maybe<User>;
   portal: Portal;
   hauntId: Scalars['BigInt'];
@@ -31,9 +32,10 @@ export type Aavegotchi = {
   status: Scalars['BigInt'];
   numericTraits: Array<Scalars['Int']>;
   modifiedNumericTraits: Array<Scalars['Int']>;
-  withSetsNumericTraits: Array<Scalars['Int']>;
+  withSetsNumericTraits?: Maybe<Array<Scalars['Int']>>;
   equippedWearables: Array<Scalars['Int']>;
-  equippedSet?: Maybe<Scalars['BigInt']>;
+  equippedSetID?: Maybe<Scalars['BigInt']>;
+  equippedSetName?: Maybe<Scalars['String']>;
   possibleSets?: Maybe<Scalars['BigInt']>;
   collateral: Scalars['Bytes'];
   escrow: Scalars['Bytes'];
@@ -48,13 +50,14 @@ export type Aavegotchi = {
   level: Scalars['BigInt'];
   baseRarityScore: Scalars['BigInt'];
   modifiedRarityScore: Scalars['BigInt'];
-  withSetsRarityScore: Scalars['BigInt'];
+  withSetsRarityScore?: Maybe<Scalars['BigInt']>;
   locked: Scalars['Boolean'];
   listings: Array<Erc721Listing>;
   /** Block in which the Aavegotchi entity was created */
   createdAt?: Maybe<Scalars['BigInt']>;
   /** Block in which the Aavegotchi was claimed. Should coincide with createdAt */
   claimedAt?: Maybe<Scalars['BigInt']>;
+  timesTraded: Scalars['BigInt'];
 };
 
 
@@ -171,6 +174,14 @@ export type Aavegotchi_Filter = {
   id_lte?: Maybe<Scalars['ID']>;
   id_in?: Maybe<Array<Scalars['ID']>>;
   id_not_in?: Maybe<Array<Scalars['ID']>>;
+  gotchiId?: Maybe<Scalars['BigInt']>;
+  gotchiId_not?: Maybe<Scalars['BigInt']>;
+  gotchiId_gt?: Maybe<Scalars['BigInt']>;
+  gotchiId_lt?: Maybe<Scalars['BigInt']>;
+  gotchiId_gte?: Maybe<Scalars['BigInt']>;
+  gotchiId_lte?: Maybe<Scalars['BigInt']>;
+  gotchiId_in?: Maybe<Array<Scalars['BigInt']>>;
+  gotchiId_not_in?: Maybe<Array<Scalars['BigInt']>>;
   owner?: Maybe<Scalars['String']>;
   owner_not?: Maybe<Scalars['String']>;
   owner_gt?: Maybe<Scalars['String']>;
@@ -239,14 +250,28 @@ export type Aavegotchi_Filter = {
   equippedWearables_not?: Maybe<Array<Scalars['Int']>>;
   equippedWearables_contains?: Maybe<Array<Scalars['Int']>>;
   equippedWearables_not_contains?: Maybe<Array<Scalars['Int']>>;
-  equippedSet?: Maybe<Scalars['BigInt']>;
-  equippedSet_not?: Maybe<Scalars['BigInt']>;
-  equippedSet_gt?: Maybe<Scalars['BigInt']>;
-  equippedSet_lt?: Maybe<Scalars['BigInt']>;
-  equippedSet_gte?: Maybe<Scalars['BigInt']>;
-  equippedSet_lte?: Maybe<Scalars['BigInt']>;
-  equippedSet_in?: Maybe<Array<Scalars['BigInt']>>;
-  equippedSet_not_in?: Maybe<Array<Scalars['BigInt']>>;
+  equippedSetID?: Maybe<Scalars['BigInt']>;
+  equippedSetID_not?: Maybe<Scalars['BigInt']>;
+  equippedSetID_gt?: Maybe<Scalars['BigInt']>;
+  equippedSetID_lt?: Maybe<Scalars['BigInt']>;
+  equippedSetID_gte?: Maybe<Scalars['BigInt']>;
+  equippedSetID_lte?: Maybe<Scalars['BigInt']>;
+  equippedSetID_in?: Maybe<Array<Scalars['BigInt']>>;
+  equippedSetID_not_in?: Maybe<Array<Scalars['BigInt']>>;
+  equippedSetName?: Maybe<Scalars['String']>;
+  equippedSetName_not?: Maybe<Scalars['String']>;
+  equippedSetName_gt?: Maybe<Scalars['String']>;
+  equippedSetName_lt?: Maybe<Scalars['String']>;
+  equippedSetName_gte?: Maybe<Scalars['String']>;
+  equippedSetName_lte?: Maybe<Scalars['String']>;
+  equippedSetName_in?: Maybe<Array<Scalars['String']>>;
+  equippedSetName_not_in?: Maybe<Array<Scalars['String']>>;
+  equippedSetName_contains?: Maybe<Scalars['String']>;
+  equippedSetName_not_contains?: Maybe<Scalars['String']>;
+  equippedSetName_starts_with?: Maybe<Scalars['String']>;
+  equippedSetName_not_starts_with?: Maybe<Scalars['String']>;
+  equippedSetName_ends_with?: Maybe<Scalars['String']>;
+  equippedSetName_not_ends_with?: Maybe<Scalars['String']>;
   possibleSets?: Maybe<Scalars['BigInt']>;
   possibleSets_not?: Maybe<Scalars['BigInt']>;
   possibleSets_gt?: Maybe<Scalars['BigInt']>;
@@ -383,10 +408,19 @@ export type Aavegotchi_Filter = {
   claimedAt_lte?: Maybe<Scalars['BigInt']>;
   claimedAt_in?: Maybe<Array<Scalars['BigInt']>>;
   claimedAt_not_in?: Maybe<Array<Scalars['BigInt']>>;
+  timesTraded?: Maybe<Scalars['BigInt']>;
+  timesTraded_not?: Maybe<Scalars['BigInt']>;
+  timesTraded_gt?: Maybe<Scalars['BigInt']>;
+  timesTraded_lt?: Maybe<Scalars['BigInt']>;
+  timesTraded_gte?: Maybe<Scalars['BigInt']>;
+  timesTraded_lte?: Maybe<Scalars['BigInt']>;
+  timesTraded_in?: Maybe<Array<Scalars['BigInt']>>;
+  timesTraded_not_in?: Maybe<Array<Scalars['BigInt']>>;
 };
 
 export type Aavegotchi_OrderBy =
   | 'id'
+  | 'gotchiId'
   | 'owner'
   | 'portal'
   | 'hauntId'
@@ -397,7 +431,8 @@ export type Aavegotchi_OrderBy =
   | 'modifiedNumericTraits'
   | 'withSetsNumericTraits'
   | 'equippedWearables'
-  | 'equippedSet'
+  | 'equippedSetID'
+  | 'equippedSetName'
   | 'possibleSets'
   | 'collateral'
   | 'escrow'
@@ -416,7 +451,8 @@ export type Aavegotchi_OrderBy =
   | 'locked'
   | 'listings'
   | 'createdAt'
-  | 'claimedAt';
+  | 'claimedAt'
+  | 'timesTraded';
 
 
 
@@ -554,10 +590,7 @@ export type Erc1155Purchase = {
   buyer: Scalars['Bytes'];
   priceInWei: Scalars['BigInt'];
   quantity: Scalars['BigInt'];
-  cancelled: Scalars['Boolean'];
-  timeCreated: Scalars['BigInt'];
   timeLastPurchased: Scalars['BigInt'];
-  sold: Scalars['Boolean'];
   rarityLevel?: Maybe<Scalars['BigInt']>;
 };
 
@@ -628,18 +661,6 @@ export type Erc1155Purchase_Filter = {
   quantity_lte?: Maybe<Scalars['BigInt']>;
   quantity_in?: Maybe<Array<Scalars['BigInt']>>;
   quantity_not_in?: Maybe<Array<Scalars['BigInt']>>;
-  cancelled?: Maybe<Scalars['Boolean']>;
-  cancelled_not?: Maybe<Scalars['Boolean']>;
-  cancelled_in?: Maybe<Array<Scalars['Boolean']>>;
-  cancelled_not_in?: Maybe<Array<Scalars['Boolean']>>;
-  timeCreated?: Maybe<Scalars['BigInt']>;
-  timeCreated_not?: Maybe<Scalars['BigInt']>;
-  timeCreated_gt?: Maybe<Scalars['BigInt']>;
-  timeCreated_lt?: Maybe<Scalars['BigInt']>;
-  timeCreated_gte?: Maybe<Scalars['BigInt']>;
-  timeCreated_lte?: Maybe<Scalars['BigInt']>;
-  timeCreated_in?: Maybe<Array<Scalars['BigInt']>>;
-  timeCreated_not_in?: Maybe<Array<Scalars['BigInt']>>;
   timeLastPurchased?: Maybe<Scalars['BigInt']>;
   timeLastPurchased_not?: Maybe<Scalars['BigInt']>;
   timeLastPurchased_gt?: Maybe<Scalars['BigInt']>;
@@ -648,10 +669,6 @@ export type Erc1155Purchase_Filter = {
   timeLastPurchased_lte?: Maybe<Scalars['BigInt']>;
   timeLastPurchased_in?: Maybe<Array<Scalars['BigInt']>>;
   timeLastPurchased_not_in?: Maybe<Array<Scalars['BigInt']>>;
-  sold?: Maybe<Scalars['Boolean']>;
-  sold_not?: Maybe<Scalars['Boolean']>;
-  sold_in?: Maybe<Array<Scalars['Boolean']>>;
-  sold_not_in?: Maybe<Array<Scalars['Boolean']>>;
   rarityLevel?: Maybe<Scalars['BigInt']>;
   rarityLevel_not?: Maybe<Scalars['BigInt']>;
   rarityLevel_gt?: Maybe<Scalars['BigInt']>;
@@ -672,10 +689,7 @@ export type Erc1155Purchase_OrderBy =
   | 'buyer'
   | 'priceInWei'
   | 'quantity'
-  | 'cancelled'
-  | 'timeCreated'
   | 'timeLastPurchased'
-  | 'sold'
   | 'rarityLevel';
 
 export type Erc721Listing = {
@@ -1043,6 +1057,7 @@ export type OrderDirection =
 export type Portal = {
   __typename?: 'Portal';
   id: Scalars['ID'];
+  gotchiId?: Maybe<Scalars['BigInt']>;
   buyer: User;
   hauntId: Scalars['BigInt'];
   owner: User;
@@ -1052,6 +1067,7 @@ export type Portal = {
   boughtAt?: Maybe<Scalars['BigInt']>;
   openedAt?: Maybe<Scalars['BigInt']>;
   claimedAt?: Maybe<Scalars['BigInt']>;
+  timesTraded: Scalars['BigInt'];
 };
 
 
@@ -1077,6 +1093,14 @@ export type Portal_Filter = {
   id_lte?: Maybe<Scalars['ID']>;
   id_in?: Maybe<Array<Scalars['ID']>>;
   id_not_in?: Maybe<Array<Scalars['ID']>>;
+  gotchiId?: Maybe<Scalars['BigInt']>;
+  gotchiId_not?: Maybe<Scalars['BigInt']>;
+  gotchiId_gt?: Maybe<Scalars['BigInt']>;
+  gotchiId_lt?: Maybe<Scalars['BigInt']>;
+  gotchiId_gte?: Maybe<Scalars['BigInt']>;
+  gotchiId_lte?: Maybe<Scalars['BigInt']>;
+  gotchiId_in?: Maybe<Array<Scalars['BigInt']>>;
+  gotchiId_not_in?: Maybe<Array<Scalars['BigInt']>>;
   buyer?: Maybe<Scalars['String']>;
   buyer_not?: Maybe<Scalars['String']>;
   buyer_gt?: Maybe<Scalars['String']>;
@@ -1153,10 +1177,19 @@ export type Portal_Filter = {
   claimedAt_lte?: Maybe<Scalars['BigInt']>;
   claimedAt_in?: Maybe<Array<Scalars['BigInt']>>;
   claimedAt_not_in?: Maybe<Array<Scalars['BigInt']>>;
+  timesTraded?: Maybe<Scalars['BigInt']>;
+  timesTraded_not?: Maybe<Scalars['BigInt']>;
+  timesTraded_gt?: Maybe<Scalars['BigInt']>;
+  timesTraded_lt?: Maybe<Scalars['BigInt']>;
+  timesTraded_gte?: Maybe<Scalars['BigInt']>;
+  timesTraded_lte?: Maybe<Scalars['BigInt']>;
+  timesTraded_in?: Maybe<Array<Scalars['BigInt']>>;
+  timesTraded_not_in?: Maybe<Array<Scalars['BigInt']>>;
 };
 
 export type Portal_OrderBy =
   | 'id'
+  | 'gotchiId'
   | 'buyer'
   | 'hauntId'
   | 'owner'
@@ -1165,7 +1198,8 @@ export type Portal_OrderBy =
   | 'status'
   | 'boughtAt'
   | 'openedAt'
-  | 'claimedAt';
+  | 'claimedAt'
+  | 'timesTraded';
 
 export type Query = {
   __typename?: 'Query';
@@ -2023,11 +2057,29 @@ export type Erc721ListingsQuery = (
   )> }
 );
 
+export type Erc1155ListingFilterQueryVariables = Exact<{
+  filter: Erc1155Listing_Filter;
+  orderBy: Erc1155Listing_OrderBy;
+  orderDirection: OrderDirection;
+  first: Scalars['Int'];
+  skip: Scalars['Int'];
+}>;
+
+
+export type Erc1155ListingFilterQuery = (
+  { __typename?: 'Query' }
+  & { erc1155Listings: Array<(
+    { __typename?: 'ERC1155Listing' }
+    & Pick<Erc1155Listing, 'id'>
+  )> }
+);
+
 export type Erc1155ListingsQueryVariables = Exact<{
   category: Scalars['BigInt'];
   rarityFilter: Scalars['BigInt'];
   orderBy: Erc1155Listing_OrderBy;
   orderDirection: OrderDirection;
+  itemTypes?: Maybe<Array<Scalars['BigInt']> | Scalars['BigInt']>;
   first: Scalars['Int'];
   skip: Scalars['Int'];
 }>;
@@ -2037,7 +2089,7 @@ export type Erc1155ListingsQuery = (
   { __typename?: 'Query' }
   & { erc1155Listings: Array<(
     { __typename?: 'ERC1155Listing' }
-    & Pick<Erc1155Listing, 'id' | 'cancelled' | 'sold' | 'erc1155TypeId' | 'erc1155TokenAddress' | 'category' | 'quantity' | 'priceInWei' | 'timeCreated' | 'seller' | 'rarityLevel'>
+    & Pick<Erc1155Listing, 'id' | 'cancelled' | 'sold' | 'erc1155TypeId' | 'erc1155TokenAddress' | 'category' | 'quantity' | 'priceInWei' | 'timeCreated' | 'timeLastPurchased' | 'seller' | 'rarityLevel'>
   )> }
 );
 
@@ -2069,7 +2121,7 @@ export type Erc721OwnerPurchasesQuery = (
     & Pick<Erc721Listing, 'id' | 'buyer' | 'tokenId' | 'category' | 'priceInWei' | 'seller' | 'timePurchased' | 'hauntId'>
     & { gotchi?: Maybe<(
       { __typename?: 'Aavegotchi' }
-      & Pick<Aavegotchi, 'id' | 'name' | 'collateral' | 'modifiedNumericTraits' | 'stakedAmount' | 'modifiedRarityScore' | 'baseRarityScore' | 'level'>
+      & Pick<Aavegotchi, 'id' | 'name' | 'collateral' | 'kinship' | 'modifiedNumericTraits' | 'stakedAmount' | 'experience' | 'modifiedRarityScore' | 'baseRarityScore' | 'level'>
       & { owner?: Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id'>
@@ -2103,7 +2155,7 @@ export type AavegotchiLeaderboardQuery = (
   { __typename?: 'Query' }
   & { aavegotchis: Array<(
     { __typename?: 'Aavegotchi' }
-    & Pick<Aavegotchi, 'id' | 'name' | 'baseRarityScore' | 'modifiedRarityScore' | 'numericTraits' | 'modifiedNumericTraits' | 'stakedAmount' | 'kinship' | 'experience' | 'level' | 'collateral' | 'hauntId'>
+    & Pick<Aavegotchi, 'id' | 'name' | 'baseRarityScore' | 'modifiedRarityScore' | 'withSetsRarityScore' | 'numericTraits' | 'equippedSetID' | 'equippedSetName' | 'modifiedNumericTraits' | 'withSetsNumericTraits' | 'stakedAmount' | 'kinship' | 'experience' | 'level' | 'collateral' | 'hauntId'>
     & { owner?: Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id'>
@@ -2121,35 +2173,35 @@ export type TopAavegotchisQuery = (
   { __typename?: 'Query' }
   & { top1000: Array<(
     { __typename?: 'Aavegotchi' }
-    & Pick<Aavegotchi, 'id' | 'name' | 'baseRarityScore' | 'modifiedRarityScore' | 'numericTraits' | 'modifiedNumericTraits' | 'stakedAmount' | 'kinship' | 'experience' | 'level' | 'collateral' | 'hauntId'>
+    & Pick<Aavegotchi, 'id' | 'name' | 'baseRarityScore' | 'modifiedRarityScore' | 'withSetsRarityScore' | 'numericTraits' | 'modifiedNumericTraits' | 'withSetsNumericTraits' | 'stakedAmount' | 'equippedWearables' | 'kinship' | 'equippedSetID' | 'equippedSetName' | 'experience' | 'level' | 'collateral' | 'hauntId' | 'lastInteracted'>
     & { owner?: Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id'>
     )> }
   )>, top2000: Array<(
     { __typename?: 'Aavegotchi' }
-    & Pick<Aavegotchi, 'id' | 'name' | 'baseRarityScore' | 'modifiedRarityScore' | 'numericTraits' | 'modifiedNumericTraits' | 'stakedAmount' | 'kinship' | 'experience' | 'level' | 'collateral' | 'hauntId'>
+    & Pick<Aavegotchi, 'id' | 'name' | 'baseRarityScore' | 'modifiedRarityScore' | 'withSetsRarityScore' | 'numericTraits' | 'modifiedNumericTraits' | 'withSetsNumericTraits' | 'stakedAmount' | 'equippedWearables' | 'kinship' | 'equippedSetID' | 'equippedSetName' | 'experience' | 'level' | 'collateral' | 'hauntId' | 'lastInteracted'>
     & { owner?: Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id'>
     )> }
   )>, top3000: Array<(
     { __typename?: 'Aavegotchi' }
-    & Pick<Aavegotchi, 'id' | 'name' | 'baseRarityScore' | 'modifiedRarityScore' | 'numericTraits' | 'modifiedNumericTraits' | 'stakedAmount' | 'kinship' | 'experience' | 'level' | 'collateral' | 'hauntId'>
+    & Pick<Aavegotchi, 'id' | 'name' | 'baseRarityScore' | 'modifiedRarityScore' | 'withSetsRarityScore' | 'numericTraits' | 'modifiedNumericTraits' | 'withSetsNumericTraits' | 'stakedAmount' | 'equippedWearables' | 'kinship' | 'equippedSetID' | 'equippedSetName' | 'experience' | 'level' | 'collateral' | 'hauntId' | 'lastInteracted'>
     & { owner?: Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id'>
     )> }
   )>, top4000: Array<(
     { __typename?: 'Aavegotchi' }
-    & Pick<Aavegotchi, 'id' | 'name' | 'baseRarityScore' | 'modifiedRarityScore' | 'numericTraits' | 'modifiedNumericTraits' | 'stakedAmount' | 'kinship' | 'experience' | 'level' | 'collateral' | 'hauntId'>
+    & Pick<Aavegotchi, 'id' | 'name' | 'baseRarityScore' | 'modifiedRarityScore' | 'withSetsRarityScore' | 'numericTraits' | 'modifiedNumericTraits' | 'withSetsNumericTraits' | 'stakedAmount' | 'equippedWearables' | 'kinship' | 'equippedSetID' | 'equippedSetName' | 'experience' | 'level' | 'collateral' | 'hauntId' | 'lastInteracted'>
     & { owner?: Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id'>
     )> }
   )>, top5000: Array<(
     { __typename?: 'Aavegotchi' }
-    & Pick<Aavegotchi, 'id' | 'name' | 'baseRarityScore' | 'modifiedRarityScore' | 'numericTraits' | 'modifiedNumericTraits' | 'stakedAmount' | 'kinship' | 'experience' | 'level' | 'collateral' | 'hauntId'>
+    & Pick<Aavegotchi, 'id' | 'name' | 'baseRarityScore' | 'modifiedRarityScore' | 'withSetsRarityScore' | 'numericTraits' | 'modifiedNumericTraits' | 'withSetsNumericTraits' | 'stakedAmount' | 'equippedWearables' | 'kinship' | 'equippedSetID' | 'equippedSetName' | 'experience' | 'level' | 'collateral' | 'hauntId' | 'lastInteracted'>
     & { owner?: Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id'>
@@ -2486,10 +2538,17 @@ export const Erc721ListingsDocument = gql`
   }
 }
     `;
+export const Erc1155ListingFilterDocument = gql`
+    query erc1155ListingFilter($filter: ERC1155Listing_filter!, $orderBy: ERC1155Listing_orderBy!, $orderDirection: OrderDirection!, $first: Int!, $skip: Int!) {
+  erc1155Listings(where: $filter) {
+    id
+  }
+}
+    `;
 export const Erc1155ListingsDocument = gql`
-    query erc1155Listings($category: BigInt!, $rarityFilter: BigInt!, $orderBy: ERC1155Listing_orderBy!, $orderDirection: OrderDirection!, $first: Int!, $skip: Int!) {
+    query erc1155Listings($category: BigInt!, $rarityFilter: BigInt!, $orderBy: ERC1155Listing_orderBy!, $orderDirection: OrderDirection!, $itemTypes: [BigInt!], $first: Int!, $skip: Int!) {
   erc1155Listings(
-    where: {category: $category, rarityLevel: $rarityFilter, priceInWei_lt: 10000000, cancelled: false, sold: false}
+    where: {category: $category, rarityLevel: $rarityFilter, erc1155TypeId_in: $itemTypes, priceInWei_lt: 10000000, cancelled: false, sold: false}
     orderBy: $orderBy
     orderDirection: $orderDirection
     first: $first
@@ -2505,6 +2564,7 @@ export const Erc1155ListingsDocument = gql`
     category
     priceInWei
     timeCreated
+    timeLastPurchased
     seller
     rarityLevel
   }
@@ -2553,8 +2613,10 @@ export const Erc721OwnerPurchasesDocument = gql`
       id
       name
       collateral
+      kinship
       modifiedNumericTraits
       stakedAmount
+      experience
       modifiedRarityScore
       baseRarityScore
       level
@@ -2568,8 +2630,7 @@ export const Erc721OwnerPurchasesDocument = gql`
 export const Erc1155OwnerPurchasesDocument = gql`
     query erc1155OwnerPurchases($category: BigInt!, $buyer: Bytes!) {
   erc1155Purchases(
-    where: {buyer: $buyer, category: $category, cancelled: false, sold: true}
-    orderBy: timeCreated
+    where: {buyer: $buyer, category: $category}
     orderDirection: desc
   ) {
     listingID
@@ -2595,8 +2656,12 @@ export const AavegotchiLeaderboardDocument = gql`
     name
     baseRarityScore
     modifiedRarityScore
+    withSetsRarityScore
     numericTraits
+    equippedSetID
+    equippedSetName
     modifiedNumericTraits
+    withSetsNumericTraits
     stakedAmount
     kinship
     experience
@@ -2621,14 +2686,20 @@ export const TopAavegotchisDocument = gql`
     name
     baseRarityScore
     modifiedRarityScore
+    withSetsRarityScore
     numericTraits
     modifiedNumericTraits
+    withSetsNumericTraits
     stakedAmount
+    equippedWearables
     kinship
+    equippedSetID
+    equippedSetName
     experience
     level
     collateral
     hauntId
+    lastInteracted
     owner {
       id
     }
@@ -2644,14 +2715,20 @@ export const TopAavegotchisDocument = gql`
     name
     baseRarityScore
     modifiedRarityScore
+    withSetsRarityScore
     numericTraits
     modifiedNumericTraits
+    withSetsNumericTraits
     stakedAmount
+    equippedWearables
     kinship
+    equippedSetID
+    equippedSetName
     experience
     level
     collateral
     hauntId
+    lastInteracted
     owner {
       id
     }
@@ -2667,14 +2744,20 @@ export const TopAavegotchisDocument = gql`
     name
     baseRarityScore
     modifiedRarityScore
+    withSetsRarityScore
     numericTraits
     modifiedNumericTraits
+    withSetsNumericTraits
     stakedAmount
+    equippedWearables
     kinship
+    equippedSetID
+    equippedSetName
     experience
     level
     collateral
     hauntId
+    lastInteracted
     owner {
       id
     }
@@ -2690,14 +2773,20 @@ export const TopAavegotchisDocument = gql`
     name
     baseRarityScore
     modifiedRarityScore
+    withSetsRarityScore
     numericTraits
     modifiedNumericTraits
+    withSetsNumericTraits
     stakedAmount
+    equippedWearables
     kinship
+    equippedSetID
+    equippedSetName
     experience
     level
     collateral
     hauntId
+    lastInteracted
     owner {
       id
     }
@@ -2713,14 +2802,20 @@ export const TopAavegotchisDocument = gql`
     name
     baseRarityScore
     modifiedRarityScore
+    withSetsRarityScore
     numericTraits
     modifiedNumericTraits
+    withSetsNumericTraits
     stakedAmount
+    equippedWearables
     kinship
+    equippedSetID
+    equippedSetName
     experience
     level
     collateral
     hauntId
+    lastInteracted
     owner {
       id
     }
@@ -2785,7 +2880,7 @@ export const Erc1155ActivityListingsDocument = gql`
     query erc1155ActivityListings($category: BigInt!) {
   erc1155Purchases(
     first: 150
-    where: {category: $category, sold: true, cancelled: false}
+    where: {category: $category}
     orderBy: timeLastPurchased
     orderDirection: desc
   ) {
@@ -2937,6 +3032,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     erc721Listings(variables: Erc721ListingsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc721ListingsQuery> {
       return withWrapper(() => client.request<Erc721ListingsQuery>(Erc721ListingsDocument, variables, requestHeaders));
+    },
+    erc1155ListingFilter(variables: Erc1155ListingFilterQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc1155ListingFilterQuery> {
+      return withWrapper(() => client.request<Erc1155ListingFilterQuery>(Erc1155ListingFilterDocument, variables, requestHeaders));
     },
     erc1155Listings(variables: Erc1155ListingsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Erc1155ListingsQuery> {
       return withWrapper(() => client.request<Erc1155ListingsQuery>(Erc1155ListingsDocument, variables, requestHeaders));
