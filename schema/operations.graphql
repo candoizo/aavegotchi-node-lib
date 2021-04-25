@@ -65,14 +65,17 @@ query erc721Listings(
 }
 
 query erc1155ListingFilter(
-  $filter: ERC1155Listing_filter
+  $filter: ERC1155Listing_filter!,
+  $orderBy: ERC1155Listing_orderBy!,
+  $orderDirection: OrderDirection!,
+  $first: Int!,
+  $skip: Int!
   ) {
     erc1155Listings(
       where: $filter
     ) {
       id
     }
-
 }
 
 query erc1155Listings(
@@ -108,6 +111,7 @@ query erc1155Listings(
     category
     priceInWei
     timeCreated
+    timeLastPurchased
     seller
     rarityLevel
   }
@@ -164,8 +168,10 @@ query erc721OwnerPurchases($category: BigInt!, $buyer: Bytes!) {
       id
       name
       collateral
+      kinship
       modifiedNumericTraits
       stakedAmount
+      experience
       modifiedRarityScore
       baseRarityScore
       level
@@ -178,8 +184,13 @@ query erc721OwnerPurchases($category: BigInt!, $buyer: Bytes!) {
 
 query erc1155OwnerPurchases($category: BigInt!, $buyer: Bytes!) {
   erc1155Purchases(
-    where: { buyer: $buyer, category: $category, cancelled: false, sold: true }
-    orderBy: timeCreated
+    where: {
+      buyer: $buyer,
+      category: $category,
+      # cancelled: false,
+      # sold: true
+    }
+    # orderBy: timeCreated
     orderDirection: desc
   ) {
     listingID
@@ -208,8 +219,12 @@ query aavegotchiLeaderboard(
     name
     baseRarityScore
     modifiedRarityScore
+    withSetsRarityScore
     numericTraits
+    equippedSetID
+    equippedSetName
     modifiedNumericTraits
+    withSetsNumericTraits
     stakedAmount
     kinship
     experience
@@ -236,14 +251,20 @@ query topAavegotchis(
     name
     baseRarityScore
     modifiedRarityScore
+    withSetsRarityScore
     numericTraits
     modifiedNumericTraits
+    withSetsNumericTraits
     stakedAmount
+    equippedWearables
     kinship
+    equippedSetID
+    equippedSetName
     experience
     level
     collateral
     hauntId
+    lastInteracted
     owner {
       id
     }
@@ -259,14 +280,20 @@ query topAavegotchis(
     name
     baseRarityScore
     modifiedRarityScore
+    withSetsRarityScore
     numericTraits
     modifiedNumericTraits
+    withSetsNumericTraits
     stakedAmount
+    equippedWearables
     kinship
+    equippedSetID
+    equippedSetName
     experience
     level
     collateral
     hauntId
+    lastInteracted
     owner {
       id
     }
@@ -282,14 +309,20 @@ query topAavegotchis(
     name
     baseRarityScore
     modifiedRarityScore
+    withSetsRarityScore
     numericTraits
     modifiedNumericTraits
+    withSetsNumericTraits
     stakedAmount
+    equippedWearables
     kinship
+    equippedSetID
+    equippedSetName
     experience
     level
     collateral
     hauntId
+    lastInteracted
     owner {
       id
     }
@@ -305,14 +338,20 @@ query topAavegotchis(
     name
     baseRarityScore
     modifiedRarityScore
+    withSetsRarityScore
     numericTraits
     modifiedNumericTraits
+    withSetsNumericTraits
     stakedAmount
+    equippedWearables
     kinship
+    equippedSetID
+    equippedSetName
     experience
     level
     collateral
     hauntId
+    lastInteracted
     owner {
       id
     }
@@ -328,14 +367,20 @@ query topAavegotchis(
     name
     baseRarityScore
     modifiedRarityScore
+    withSetsRarityScore
     numericTraits
     modifiedNumericTraits
+    withSetsNumericTraits
     stakedAmount
+    equippedWearables
     kinship
+    equippedSetID
+    equippedSetName
     experience
     level
     collateral
     hauntId
+    lastInteracted
     owner {
       id
     }
@@ -402,8 +447,8 @@ query erc1155ActivityListings($category: BigInt!) {
     first:150,
     where:{
       category:$category,
-      sold:true,
-      cancelled:false
+      # sold:true,
+      # cancelled:false
     },
     orderBy:timeLastPurchased,
     orderDirection:desc
