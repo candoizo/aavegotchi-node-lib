@@ -2630,7 +2630,7 @@ export const Erc721OwnerPurchasesDocument = gql`
 export const Erc1155OwnerPurchasesDocument = gql`
     query erc1155OwnerPurchases($category: BigInt!, $buyer: Bytes!) {
   erc1155Purchases(
-    where: {buyer: $buyer, category: $category}
+    where: {buyer: $buyer, category: $category, quantity_gt: 0}
     orderDirection: desc
   ) {
     listingID
@@ -2880,7 +2880,7 @@ export const Erc1155ActivityListingsDocument = gql`
     query erc1155ActivityListings($category: BigInt!) {
   erc1155Purchases(
     first: 150
-    where: {category: $category}
+    where: {category: $category, quantity_gt: 0}
     orderBy: timeLastPurchased
     orderDirection: desc
   ) {
