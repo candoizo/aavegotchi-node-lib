@@ -2118,10 +2118,10 @@ export type Erc721OwnerPurchasesQuery = (
   { __typename?: 'Query' }
   & { erc721Listings: Array<(
     { __typename?: 'ERC721Listing' }
-    & Pick<Erc721Listing, 'id' | 'buyer' | 'tokenId' | 'category' | 'priceInWei' | 'seller' | 'timePurchased' | 'hauntId'>
+    & Pick<Erc721Listing, 'id' | 'buyer' | 'tokenId' | 'category' | 'priceInWei' | 'seller' | 'timePurchased'>
     & { gotchi?: Maybe<(
       { __typename?: 'Aavegotchi' }
-      & Pick<Aavegotchi, 'id' | 'name' | 'collateral' | 'kinship' | 'modifiedNumericTraits' | 'stakedAmount' | 'experience' | 'modifiedRarityScore' | 'baseRarityScore' | 'level'>
+      & Pick<Aavegotchi, 'id' | 'name' | 'collateral' | 'hauntId' | 'kinship' | 'modifiedNumericTraits' | 'stakedAmount' | 'experience' | 'modifiedRarityScore' | 'baseRarityScore' | 'level'>
       & { owner?: Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id'>
@@ -2235,10 +2235,10 @@ export type Erc721ActivityListingsQuery = (
   { __typename?: 'Query' }
   & { erc721Listings: Array<(
     { __typename?: 'ERC721Listing' }
-    & Pick<Erc721Listing, 'id' | 'tokenId' | 'category' | 'priceInWei' | 'seller' | 'timePurchased' | 'hauntId' | 'kinship'>
+    & Pick<Erc721Listing, 'id' | 'tokenId' | 'category' | 'priceInWei' | 'seller' | 'timePurchased'>
     & { gotchi?: Maybe<(
       { __typename?: 'Aavegotchi' }
-      & Pick<Aavegotchi, 'id' | 'name' | 'collateral' | 'modifiedNumericTraits' | 'stakedAmount' | 'modifiedRarityScore' | 'baseRarityScore' | 'level' | 'experience'>
+      & Pick<Aavegotchi, 'id' | 'name' | 'collateral' | 'modifiedNumericTraits' | 'stakedAmount' | 'hauntId' | 'kinship' | 'modifiedRarityScore' | 'baseRarityScore' | 'level' | 'experience'>
       & { owner?: Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id'>
@@ -2548,7 +2548,7 @@ export const Erc1155ListingFilterDocument = gql`
 export const Erc1155ListingsDocument = gql`
     query erc1155Listings($category: BigInt!, $rarityFilter: BigInt!, $orderBy: ERC1155Listing_orderBy!, $orderDirection: OrderDirection!, $itemTypes: [BigInt!], $first: Int!, $skip: Int!) {
   erc1155Listings(
-    where: {category: $category, rarityLevel: $rarityFilter, erc1155TypeId_in: $itemTypes, priceInWei_lt: 10000000, cancelled: false, sold: false}
+    where: {category: $category, rarityLevel: $rarityFilter, erc1155TypeId_in: $itemTypes, priceInWei_lt: 10000000, cancelled: false, quantity_gt: 0}
     orderBy: $orderBy
     orderDirection: $orderDirection
     first: $first
@@ -2608,11 +2608,11 @@ export const Erc721OwnerPurchasesDocument = gql`
     priceInWei
     seller
     timePurchased
-    hauntId
     gotchi {
       id
       name
       collateral
+      hauntId
       kinship
       modifiedNumericTraits
       stakedAmount
@@ -2857,14 +2857,14 @@ export const Erc721ActivityListingsDocument = gql`
     priceInWei
     seller
     timePurchased
-    hauntId
-    kinship
     gotchi {
       id
       name
       collateral
       modifiedNumericTraits
       stakedAmount
+      hauntId
+      kinship
       modifiedRarityScore
       baseRarityScore
       level
