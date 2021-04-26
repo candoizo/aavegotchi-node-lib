@@ -10,3 +10,5 @@ blank_demo/
 src/*.js
 schema/staging
 scripts/
+gen/
+dist/

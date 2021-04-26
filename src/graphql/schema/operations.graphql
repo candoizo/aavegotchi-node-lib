@@ -94,7 +94,7 @@ query erc1155Listings(
       erc1155TypeId_in: $itemTypes
       priceInWei_lt: 10000000
       cancelled: false
-      sold: false
+      quantity_gt: 0
     }
     orderBy: $orderBy
     orderDirection: $orderDirection
@@ -163,11 +163,11 @@ query erc721OwnerPurchases($category: BigInt!, $buyer: Bytes!) {
     priceInWei
     seller
     timePurchased
-    hauntId
     gotchi {
       id
       name
       collateral
+      hauntId
       kinship
       modifiedNumericTraits
       stakedAmount
@@ -187,8 +187,7 @@ query erc1155OwnerPurchases($category: BigInt!, $buyer: Bytes!) {
     where: {
       buyer: $buyer,
       category: $category,
-      # cancelled: false,
-      # sold: true
+      quantity_gt: 0
     }
     # orderBy: timeCreated
     orderDirection: desc
@@ -423,14 +422,14 @@ query erc721ActivityListings($category: BigInt!) {
     priceInWei
     seller
     timePurchased
-    hauntId
-    kinship
     gotchi {
       id
       name
       collateral
       modifiedNumericTraits
       stakedAmount
+      hauntId
+      kinship
       modifiedRarityScore
       baseRarityScore
       level
@@ -446,9 +445,8 @@ query erc1155ActivityListings($category: BigInt!) {
   erc1155Purchases(
     first:150,
     where:{
-      category:$category,
-      # sold:true,
-      # cancelled:false
+      category:$category
+      quantity_gt: 0
     },
     orderBy:timeLastPurchased,
     orderDirection:desc
