@@ -1,13 +1,13 @@
 {
   "name": "@candoizo/aavegotchi-node-lib",
-  "version": "1.0.0-24",
+  "version": "1.0.0-27",
   "description": "awesome aavegotchi node library",
-  "main": "src/index.js",
+  "main": "dist/src/index.js",
   "types": "dist/gen.d.ts",
   "scripts": {
     "test": "mocha",
     "update": "ncu -u && rm -rf yarn.lock node_modules/ && yarn",
-    "bundle": "rm -rf dist/ && yarn graphql-codegen && tsc src/index.ts",
+    "bundle": "rm -rf dist gen && yarn graphql-codegen && tsc -P .",
     "release": "yarn bundle && yarn publish"
   },
   "repository": {
