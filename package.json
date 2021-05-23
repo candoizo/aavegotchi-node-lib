@@ -1,6 +1,6 @@
 {
   "name": "@candoizo/aavegotchi-node-lib",
-  "version": "1.0.0-32",
+  "version": "1.0.0-33",
   "description": "awesome aavegotchi node library",
   "main": "dist/src/index.js",
   "types": [
@@ -25,7 +25,7 @@
     "graphql-tag": "^2.12.4"
   },
   "files": [
-    "dist/*"
+    "dist/**/*"
   ],
   "devDependencies": {
     "@graphql-codegen/cli": "^1.21.4",
