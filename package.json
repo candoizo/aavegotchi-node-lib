@@ -1,6 +1,6 @@
 {
   "name": "@candoizo/aavegotchi-node-lib",
-  "version": "1.0.0-31",
+  "version": "1.0.0-32",
   "description": "awesome aavegotchi node library",
   "main": "dist/src/index.js",
   "types": [
@@ -9,7 +9,6 @@
   ],
   "scripts": {
     "test": "mocha",
-    "update": "ncu -u && rm -rf yarn.lock node_modules/ && yarn",
     "bundle": "rm -rf dist gen && yarn graphql-codegen && tsc -P .",
     "release": "yarn bundle && yarn publish"
   },
@@ -20,6 +19,7 @@
   "author": "candoizo",
   "license": "TBD",
   "dependencies": {
+    "ethers": "^5.2.0",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
     "graphql-tag": "^2.12.4"

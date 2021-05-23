@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "CC-BY-SA-4.0",
   "dependencies": {
-    "@candoizo/aavegotchi-node-lib": "^1.0.0-18"
+    "@candoizo/aavegotchi-node-lib": "^1.0.0-31"
   },
   "devDependencies": {
     "ts-node": "^9.1.1",
