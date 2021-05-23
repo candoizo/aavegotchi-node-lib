@@ -3,7 +3,11 @@ import gotchis from "./gotchis";
 import items from "./items";
 import players from "./players";
 
-export {
+export const ghstAddress = "";
+
+
+
+export default {
   gotchis,
   items,
   players

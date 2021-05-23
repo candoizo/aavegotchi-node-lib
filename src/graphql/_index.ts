@@ -19,7 +19,7 @@ function getBlock(block: number) {
   return new GraphQLClient(url);
 }
 
-export {
+export default {
   sdk,
   defaultSdk,
   getClient,

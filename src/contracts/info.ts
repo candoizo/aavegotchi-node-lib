@@ -1,5 +1,4 @@
 import aavegotchi_diamond from "./_common";
-import { utils } from "ethers";
 
 export default {
 

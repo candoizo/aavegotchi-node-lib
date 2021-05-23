@@ -1,6 +1,6 @@
 {
   "name": "@candoizo/aavegotchi-node-lib",
-  "version": "1.0.0-33",
+  "version": "1.0.0-37",
   "description": "awesome aavegotchi node library",
   "main": "dist/src/index.js",
   "types": [

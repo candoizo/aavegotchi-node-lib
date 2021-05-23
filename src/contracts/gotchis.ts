@@ -32,13 +32,12 @@ export default {
     aavegotchi_diamond.aavegotchi_diamond().interact(arg);
   },
 
-  setAavegotchiName(arg: Array<number>): void {
+  setAavegotchiName(tokenId: number, name: string): void {
 
-    if (arg.length == 0) throw new Error(
-      "Please supply the tokenId of the Aavegotchis"
-    );
-
-    aavegotchi_diamond.aavegotchi_diamond().interact(arg);
+    if (!name || name.length == 0) throw new Error(
+      "Must supply a new name."
+    )
+    aavegotchi_diamond.aavegotchi_diamond().setAavegotchiName(tokenId, name);
   },
 
 
