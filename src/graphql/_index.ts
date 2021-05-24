@@ -20,7 +20,7 @@ function getBlock(block: number) {
 }
 
 export default {
-  sdk,
+  ...defaultSdk(),
   defaultSdk,
   getClient,
   getBlock

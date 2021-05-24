@@ -1,5 +1,5 @@
-import * as contracts from "./contracts/_index";
-import * as graphql from "./graphql/_index";
+import contracts from "./contracts/_index";
+import graphql from "./graphql/_index";
 
 export {
   contracts,
