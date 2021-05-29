@@ -1,0 +1,44 @@
+query aavegotchiListing($id: ID!) {
+  erc721Listing(id:$id) {
+    category
+    erc721TokenAddress
+    tokenId
+    priceInWei
+    id
+    seller
+    timeCreated
+    timePurchased
+    cancelled
+    gotchi {
+      id
+      name
+      kinship
+      hauntId
+      collateral
+      modifiedNumericTraits
+      withSetsNumericTraits
+      stakedAmount
+      modifiedRarityScore
+      withSetsRarityScore
+      baseRarityScore
+      level
+      experience
+      timesTraded
+      numericTraits
+      equippedWearables
+      equippedSetID
+      equippedSetName
+      locked
+      minimumStake
+      escrow
+      lastInteracted
+      randomNumber
+      status
+      toNextLevel
+      usedSkillPoints
+      owner {
+        id
+      }
+    }
+  }
+}
