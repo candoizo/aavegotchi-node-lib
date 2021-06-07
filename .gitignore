@@ -1,6 +1,5 @@
 node_modules/
 yarn-error.log
-/.npmrc
 graphQueries.tsx
 *.tgz
 dist/*.js
@@ -14,3 +13,4 @@ gen/
 dist/
 secret.*
 docs/*.md
+*.wip
