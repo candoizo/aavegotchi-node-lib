@@ -1,12 +1,14 @@
 {
-  "name": "aavegotchi-node-sdk-test",
+  "name": "aavegotchi-sdk-demo",
   "version": "1.0.0",
   "main": "index.js",
   "license": "CC-BY-SA-4.0",
   "dependencies": {
-    "@candoizo/aavegotchi-node-lib": "^1.0.0-31"
+    "@aavegotchi/sdk": "^1.0.0-1a"
   },
   "devDependencies": {
+    "@types/debug": "^4.1.5",
+    "debug": "^4.3.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },

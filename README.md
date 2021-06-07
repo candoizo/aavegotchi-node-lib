@@ -1,9 +1,8 @@
 # aavegotchi-node-lib 👻📦
 
 ** Currently in alpha stage and subject to breaking changes **
-Latest documentation files can be found in [`docs`](./demo/index.ts), or at https://docs.aavegotchi.com following stable releases.
 
-A Node.js package for type-safe definitions from the official Aavegotchi GraphQL endpoints.
+A Node.js package for type-safe definitions from the official Aavegotchi GraphQL endpoints and .
 
 Clone this repo and try the [`demo`](./demo/index.ts) with: `cd demo/ && yarn && yarn test`
 
@@ -13,33 +12,32 @@ To install in a Node.js project: `yarn add @aavegotchi/sdk`.
 
 ### Typescript
 ```ts
-import { defaultSdk } from "@aavegotchi/sdk"
-const { lastTimePurchased, aavegotchiLeaderboard } = defaultSdk();
-
-async function main() {
-  let res = await lastTimePurchased({
-    itemID: 145
-  });
-  console.log(res);
-}
-
-main();
+import aavegotchiSdk from "@aavegotchi/sdk"
 ```
 ### Javascript
 ```js
-const aavegotchiNodeLib = require("@@aavegotchi/sdk");
-const { lastTimePurchased, aavegotchiLeaderboard } = aavegotchiNodeLib.defaultSdk();
-
-const main = async () => {
-  let res = await lastTimePurchased({
-    itemID: 145
-  });
-  console.log(res);
-}
-
-main()
+const aavegotchiSdk = require("@aavegotchi/sdk");
 ```
+
+# Documentation
+
+### Contracts
+
+#### `aavegotchiSdk.contracts`
+
+`diamond()` => ethers.Contract
+
+`facets()` => { [facetName]: ethers.Contract }
+
+### GraphQL
+
+#### `aavegotchiSdk.graphql`
+
+`url()`
+
+`client()`
 
 # External
 
+<https://docs.aavegotchi.com>
 <https://thegraph.com/explorer/subgraph/aavegotchi/aavegotchi-core-matic?version=current>

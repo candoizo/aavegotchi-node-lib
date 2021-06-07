@@ -1,6 +1,10 @@
 import { Contract, getDefaultProvider, providers } from "ethers";
 export const aavegotchiDiamondAddress = "0x86935F11C86623deC8a25696E1C19a8659CbF95d";
 import abi from "./aavegotchi-contracts/diamondABI/diamond.json";
+import requiredir from "require-dir";
+const r = requiredir("./facet_abis");
+const facet_names = Object.keys(r).map(x => x);
+
 
 export default {
 
@@ -19,61 +23,16 @@ export default {
     provider?: providers.Provider
   ): Object {
 
-    /* @fixme: thinking the abis need to be seperate json for each */
-    return {
-      diamond: new Contract (
+    let facets : Object;
+    facet_names.map(name => {
+      return facets[name] = new Contract (
         aavegotchiDiamondAddress,
-        abi,
+        r[name],
         provider || getDefaultProvider()
-      ),
-      AavegotchiFacet: new Contract (
-        aavegotchiDiamondAddress,
-        abi,
-        provider || getDefaultProvider()
-      ),
-      AavegotchiGameFacet: new Contract (
-        aavegotchiDiamondAddress,
-        abi,
-        provider || getDefaultProvider()
-      ),
-      CollateralFacet: new Contract (
-        aavegotchiDiamondAddress,
-        abi,
-        provider || getDefaultProvider()
-      ),
-      ERC721MarketplaceFacet: new Contract (
-        aavegotchiDiamondAddress,
-        abi,
-        provider || getDefaultProvider()
-      ),
-      ERC1155MarketplaceFacet: new Contract (
-        aavegotchiDiamondAddress,
-        abi,
-        provider || getDefaultProvider()
-      ),
-      EscrowFacet: new Contract (
-        aavegotchiDiamondAddress,
-        abi,
-        provider || getDefaultProvider()
-      ),
-      ItemsFacet: new Contract (
-        aavegotchiDiamondAddress,
-        abi,
-        provider || getDefaultProvider()
-      ),
-      ItemsTransferFacet: new Contract (
-        aavegotchiDiamondAddress,
-        abi,
-        provider || getDefaultProvider()
-      ),
-      SvgFacet: new Contract (
-        aavegotchiDiamondAddress,
-        abi,
-        provider || getDefaultProvider()
-      ),
-    };
+      )
+    });
+    return facets;
+
   },
-
-
 
 }

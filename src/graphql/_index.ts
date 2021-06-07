@@ -2,14 +2,14 @@ import { GraphQLClient } from 'graphql-request';
 import * as sdk from '../../gen/gen';
 const aavegotchi_main = 'https://api.thegraph.com/subgraphs/name/aavegotchi/aavegotchi-core-matic';
 
-function defaultSdk(client?: GraphQLClient) {
-  if (!client) {
-    return sdk.getSdk(getClient());
+function defaultSdk(arg?: GraphQLClient) {
+  if (!arg) {
+    return sdk.getSdk(client());
   }
-  else return sdk.getSdk(client);
+  else return sdk.getSdk(arg);
 }
 
-function getClient() {
+function client() {
   return new GraphQLClient(aavegotchi_main);
 }
 
@@ -22,6 +22,6 @@ function getBlock(block: number) {
 export default {
   ...defaultSdk(),
   defaultSdk,
-  getClient,
+  client,
   getBlock
 }

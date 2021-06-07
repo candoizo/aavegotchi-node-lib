@@ -1,22 +1,17 @@
-import { defaultSdk } from "@candoizo/aavegotchi-node-lib"
-const { items, lastTimePurchased, aavegotchiLeaderboard } = defaultSdk();
+import debug from "debug";
+const log = debug(`*`);
+import { contracts, graphql } from "@aavegotchi/sdk";
 
 async function main() {
 
-  let res = await lastTimePurchased({
-    itemID: 47
-  });
-  console.log(res);
+  log(contracts);
 
-  let res2 = await aavegotchiLeaderboard({
-    orderBy: "hauntId",
-    orderDirection: "asc",
-    first: 100
-  });
-  console.log(res2);
+  // let { AavegotchiFacet, ItemsFacet } = contracts.facets();
 
-  let ty = await items();
-  console.log(ty);
+  log(graphql);
+
+  // let { sortedAavegotchis } = graphql.defaultSdk();
+
 }
 
-main()
+main();
