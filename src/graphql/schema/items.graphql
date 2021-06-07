@@ -1,0 +1,64 @@
+query items {
+  itemTypes(
+    first:1000
+    orderBy: svgId
+  ) {
+    author
+    canBeTransferred
+    canPurchaseWithGhst
+    category
+    experienceBonus
+    ghstPrice
+    kinshipBonus
+    maxQuantity
+    minLevel
+    name
+    rarityScoreModifier
+    slotPositions
+    svgId
+    totalQuantity
+    traitModifiers
+  }
+}
+
+# more game-centrict
+query itemInfo($id: ID!) {
+  itemType(id: $id) {
+    id,
+    name,
+    ghstPrice,
+    rarityScoreModifier,
+    slotPositions
+  }
+}
+
+# full field request
+query itemMetadata($id: ID!) {
+  itemType(id: $id) {
+    author
+    canBeTransferred
+    canPurchaseWithGhst
+    category
+    experienceBonus
+    ghstPrice
+    kinshipBonus
+    maxQuantity
+    minLevel
+    name
+    rarityScoreModifier
+    slotPositions
+    svgId
+    totalQuantity
+    traitModifiers
+  }
+}
+
+query itemsNameSearch($string: String!) {
+  itemTypes(where: {name_contains: $string}) {
+    id,
+    name,
+    ghstPrice,
+    rarityScoreModifier,
+    slotPositions
+  }
+}

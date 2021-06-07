@@ -1,0 +1,29 @@
+# leaderboards
+query sortedAavegotchis(
+  $orderBy: Aavegotchi_orderBy!
+  $orderDirection: OrderDirection!
+  $first: Int!
+) {
+  aavegotchis(
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    first: $first
+    where: { baseRarityScore_gt: 0 }
+  ) {
+    id
+    name
+    baseRarityScore
+    modifiedRarityScore
+    numericTraits
+    modifiedNumericTraits
+    stakedAmount
+    kinship
+    experience
+    level
+    collateral
+    hauntId
+    owner {
+      id
+    }
+  }
+}

@@ -1,0 +1,77 @@
+# information about an aavegotchi / portal
+query aavegotchiStats($id: ID!) {
+  aavegotchi(id: $id) {
+    id,
+    name,
+    baseRarityScore,
+    modifiedRarityScore,
+    numericTraits,
+    modifiedNumericTraits,
+    stakedAmount,
+    kinship,
+    experience,
+    level
+    collateral
+    hauntId
+    owner {
+      id
+    }
+  }
+}
+
+query aavegotchiName($id: ID!) {
+  aavegotchi(id: $id) {
+    name,
+  }
+}
+
+query aavegotchiBirthBlock($id: ID!) {
+  aavegotchi(id: $id) {
+    claimedAt
+  }
+}
+
+query aavegotchiLevel($id: ID!) {
+  aavegotchi(id: $id) {
+    level
+  }
+}
+
+query aavegotchiKinship($id: ID!) {
+  aavegotchi(id: $id) {
+    kinship
+  }
+}
+
+query aavegotchiRarity($id: ID!) {
+  aavegotchi(id: $id) {
+    baseRarityScore,
+    modifiedRarityScore
+  }
+}
+
+query aavegotchiEquipped($id: ID!) {
+  aavegotchi(id: $id) {
+    equippedWearables
+  }
+}
+
+query aavegotchisNameSearch($string: String!) {
+  aavegotchis(where: {name_contains: $string}) {
+    id,
+    name,
+    baseRarityScore,
+    modifiedRarityScore,
+    numericTraits,
+    modifiedNumericTraits,
+    stakedAmount,
+    kinship,
+    experience,
+    level
+    collateral
+    hauntId
+    owner {
+      id
+    }
+  }
+}

@@ -1,0 +1,14 @@
+schema: https://api.thegraph.com/subgraphs/name/aavegotchi/aavegotchi-core-matic?version=current
+generates:
+  ./gen/:
+    documents: src/graphql/schema/*.graphql
+    preset: graphql-modules
+    presetConfig:
+      baseTypesPath: gen.ts # Where to create the complete schema types
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-graphql-request
+    config:
+      fetcher: graphql-request
+      defaultMapper: any

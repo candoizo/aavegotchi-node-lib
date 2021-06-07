@@ -1,0 +1,3 @@
+[submodule "src/contracts/aavegotchi-contracts"]
+	path = src/contracts/aavegotchi-contracts
+	url = https://github.com/aavegotchi/aavegotchi-contracts

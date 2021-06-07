@@ -1,0 +1,41 @@
+# potentially for character selection screens
+query userAavegotchis($id: ID!) {
+  user(id: $id) {
+    gotchisOwned {
+      id
+      name
+      level
+      baseRarityScore
+      modifiedRarityScore
+      numericTraits
+    }
+  }
+}
+
+# potentially for character selection screens
+query userRarestAavegotchi($id: ID!) {
+  user(id: $id) {
+    gotchisOwned {
+      id
+      name
+      level
+      baseRarityScore
+      modifiedRarityScore
+      numericTraits
+    }
+  }
+}
+
+# potentially for character selection screens
+query userLovedAavegotchi($id: ID!) {
+  user(id: $id) {
+    gotchisOwned {
+      id
+      name
+      level
+      baseRarityScore
+      modifiedRarityScore
+      numericTraits
+    }
+  }
+}
