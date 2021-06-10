@@ -1,8 +1,8 @@
-# aavegotchi-node-lib 👻📦
+# aavegotchi-sdk 👻📦
 
 ** Currently in alpha stage and subject to breaking changes **
 
-A Node.js package for type-safe definitions from the official Aavegotchi GraphQL endpoints and .
+A Node.js package for type-safe definitions using the Aavegotchi subgraph and Polygon contracts.
 
 Clone this repo and try the [`demo`](./demo/index.ts) with: `cd demo/ && yarn && yarn test`
 
@@ -25,7 +25,7 @@ const aavegotchiSdk = require("@aavegotchi/sdk");
 
 #### `aavegotchiSdk.contracts`
 
-`diamond()` => ethers.Contract
+`diamond()` => [ethers.Contract](https://docs.ethers.io/v5/api/contract/contract/)
 
 `facets()` => { [facetName]: ethers.Contract }
 
@@ -33,9 +33,9 @@ const aavegotchiSdk = require("@aavegotchi/sdk");
 
 #### `aavegotchiSdk.graphql`
 
-`url()`
+`url()` => [`https://api.thegraph.com/subgraphs/name/aavegotchi/aavegotchi-core-matic`](https://api.thegraph.com/subgraphs/name/aavegotchi/aavegotchi-core-matic)
 
-`client()`
+`client()` => [graphql-request.GraphQLClient](https://www.npmjs.com/package/graphql-request#examples)
 
 # External
 
