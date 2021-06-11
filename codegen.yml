@@ -4,7 +4,7 @@ generates:
     documents: src/graphql/schema/*.graphql
     preset: graphql-modules
     presetConfig:
-      baseTypesPath: gen.ts # Where to create the complete schema types
+      baseTypesPath: gen.ts
     plugins:
       - typescript
       - typescript-operations

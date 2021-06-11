@@ -19,15 +19,17 @@ import aavegotchiSdk from "@aavegotchi/sdk"
 const aavegotchiSdk = require("@aavegotchi/sdk");
 ```
 
-# Documentation
-
 ### Contracts
 
 #### `aavegotchiSdk.contracts`
 
 `diamond()` => [ethers.Contract](https://docs.ethers.io/v5/api/contract/contract/)
 
+Returns an ethers.Contract with all functions of every facet exposed.
+
 `facets()` => { [facetName]: ethers.Contract }
+
+Returns a dictionary of ethers.Contract named for each facet. [Related](https://docs.aavegotchi.com/overview/facets)
 
 ### GraphQL
 
@@ -37,7 +39,10 @@ const aavegotchiSdk = require("@aavegotchi/sdk");
 
 `client()` => [graphql-request.GraphQLClient](https://www.npmjs.com/package/graphql-request#examples)
 
+`defaultSdk()` => a set of some common functions
+
 # External
 
 <https://docs.aavegotchi.com>
+
 <https://thegraph.com/explorer/subgraph/aavegotchi/aavegotchi-core-matic?version=current>
