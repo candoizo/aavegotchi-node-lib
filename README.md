@@ -1,9 +1,8 @@
-# aavegotchi-node-lib 👻📦
+# aavegotchi-sdk 👻📦
 
 ** Currently in alpha stage and subject to breaking changes **
-Latest documentation files can be found in [`docs`](./demo/index.ts), or at https://docs.aavegotchi.com following stable releases.
 
-A Node.js package for type-safe definitions from the official Aavegotchi GraphQL endpoints.
+A Node.js package for type-safe definitions using the Aavegotchi subgraph and Polygon contracts.
 
 Clone this repo and try the [`demo`](./demo/index.ts) with: `cd demo/ && yarn && yarn test`
 
@@ -13,33 +12,37 @@ To install in a Node.js project: `yarn add @aavegotchi/sdk`.
 
 ### Typescript
 ```ts
-import { defaultSdk } from "@aavegotchi/sdk"
-const { lastTimePurchased, aavegotchiLeaderboard } = defaultSdk();
-
-async function main() {
-  let res = await lastTimePurchased({
-    itemID: 145
-  });
-  console.log(res);
-}
-
-main();
+import aavegotchiSdk from "@aavegotchi/sdk"
 ```
 ### Javascript
 ```js
-const aavegotchiNodeLib = require("@@aavegotchi/sdk");
-const { lastTimePurchased, aavegotchiLeaderboard } = aavegotchiNodeLib.defaultSdk();
-
-const main = async () => {
-  let res = await lastTimePurchased({
-    itemID: 145
-  });
-  console.log(res);
-}
-
-main()
+const aavegotchiSdk = require("@aavegotchi/sdk");
 ```
 
+### Contracts
+
+#### `aavegotchiSdk.contracts`
+
+`diamond()` => [ethers.Contract](https://docs.ethers.io/v5/api/contract/contract/)
+
+Returns an ethers.Contract with all functions of every facet exposed.
+
+`facets()` => { [facetName]: ethers.Contract }
+
+Returns a dictionary of ethers.Contract named for each facet. [Related](https://docs.aavegotchi.com/overview/facets)
+
+### GraphQL
+
+#### `aavegotchiSdk.graphql`
+
+`url()` => [`https://api.thegraph.com/subgraphs/name/aavegotchi/aavegotchi-core-matic`](https://api.thegraph.com/subgraphs/name/aavegotchi/aavegotchi-core-matic)
+
+`client()` => [graphql-request.GraphQLClient](https://www.npmjs.com/package/graphql-request#examples)
+
+`defaultSdk()` => a set of some common functions
+
 # External
+
+<https://docs.aavegotchi.com>
 
 <https://thegraph.com/explorer/subgraph/aavegotchi/aavegotchi-core-matic?version=current>

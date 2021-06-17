@@ -14,6 +14,7 @@
   },
   "include": [
     "./dist/*",
-    "./src/*"
+    "./src/*",
+    "./src/contracts/facet_abis/*.json"
   ]
 }

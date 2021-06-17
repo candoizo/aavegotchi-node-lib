@@ -14,3 +14,6 @@ dist/
 secret.*
 docs/*.md
 *.wip
+*.log
+cache/
+artifacts/
